@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-ear" name="a-Disney:ear exploded">
+    <output-path>$PROJECT_DIR$/classes/artifacts/a_Disney_ear_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="a-Disney/javaeeApplication/javaEEApplication" />
+    </root>
+  </artifact>
+</component>

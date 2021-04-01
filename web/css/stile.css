@@ -1,0 +1,688 @@
+@CHARSET "ISO-8859-1";
+.Mydropbtn {
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.Mydropbtn:hover, .Mydropbtn:focus {
+  background-color: write;/* #2980B9;*/
+}
+
+.Mydropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.Mydropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+ /* min-width: 30%;*/
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.Mydropdown-content p {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.Mydropdown-content p:hover {background-color: #ddd;}
+
+.show {display: block;}
+
+* {
+  box-sizing: border-box;
+}
+
+@font-face {
+	font-family: Waltograph;
+	src: url('fonts/WALTOGRAPH42.TTF');
+}
+
+#video {
+  max-width: 100%;
+  height: auto;
+}
+.lente{
+	 background-repeat: no-repeat;
+	 border: none;
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.alert {
+  padding: 20px;
+  background-color: #f44336;
+  color: white;
+}
+.alert.success {background-color: #4CAF50;}
+.warning {
+	 background-color: #ffff85;
+   	 padding: 20px;
+	 color: black;
+	 }
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
+.pageof {
+	width: 5%;	
+}
+
+.removeX{
+	height:20px;
+	width:20px;
+	border:none;
+	border-radius: 50%;
+}
+
+.img-magnifier-container {
+  position:relative;
+  box-sizing: border-box;
+  cursor: none;
+}
+
+.img-magnifier-glass {
+  position: absolute;
+  display: none;
+  border: 3px solid #000;
+  border-radius: 50%;
+  /*grandezza magnifier glass:*/
+  width: 100px;
+  height: 100px;
+}
+
+body {
+  font-family: Arial;
+  padding: 10px;
+
+}
+
+.homeImg {
+	display: block;
+	margin-top: 2.5%;
+  	margin-left: auto;
+  	margin-right: auto;
+  	width: 100%;
+}
+
+.header h1 {
+  font-size: 50px;
+}
+
+
+/* Create two unequal columns that floats next to each other */
+/* Left column */
+.leftcolumn {   
+  float: left;
+  width: 75%;
+}
+
+/* Right column */
+.rightcolumn {
+  float: left;
+  width: 25%;
+ /* background-color: #f1f1f1;*/
+  padding-left: 20px;
+}
+
+/* aggiunta effetti agli articoli */
+.card {
+ z-index:-1;
+ background-color: white;
+  padding: 20px;
+  margin-top: 20px;
+ border-radius:15px;/*bordo rotondo*/
+  filter:alpha(opacity=50);
+  -moz-opacity: 0.8;
+  opacity: 0.9;
+  cursor:pointer;
+  width:100%;
+  height:100%;
+}
+
+.y{
+	 overflow-y: scroll;
+}
+
+.x{
+	 overflow-x: scroll;
+}
+
+.google-maps {
+  position: relative;
+  padding-bottom: 75%; 
+  height: 0;
+  overflow: hidden;
+}
+.google-maps > iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Header immagine */
+ img {
+ max-width: 100%;
+ height: auto;
+}
+
+/*al passaggio del mouse deve essere bianco*/
+.card:hover {
+	background-color: white;
+	filter:alpha(opacity=100);
+	-moz-opacity: 1.0;
+	opacity: 1.0;
+	}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+ div .container {
+   width: 100%;
+ }
+
+
+ .nomeProdSconto{
+ height:auto;
+ }
+ 
+ 
+/*product card*/
+.productCard {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  width: 27%;
+  margin: 3%;
+  text-align: center;
+  font-family: arial;
+  float:left;
+  line-height: 20px;
+}
+
+.prezzo {
+  text-decoration: line-through;
+  color: grey;
+  font-size: small;
+}
+.sconto {
+  color: grey;
+  font-size: large;
+}
+
+.productCard button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #1E90FF/*#000*/;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+.productCard button:hover {
+  opacity: 0.7;
+}
+
+/*carrello*/
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+
+.text-center{
+	text-align: center;
+	font-size:90%;
+}
+
+
+div #img {
+  width: 50px;
+  height:50px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border-radius:50%;
+}
+
+h4{
+	font-weight:bold;
+}
+
+/*stilereg*/
+body {
+	background-repeat: repeat;
+
+}
+
+ .field2{
+	background-color : white;
+	margin-right: 20%;
+	margin-left: 20%;
+	margin-top: 40px;
+	border-width: 1%;
+	padding: 2%;
+	border-style: none;
+	border-color: blue;
+	border-radius:15px;
+	filter:alpha(opacity=50);
+  -moz-opacity: 0.9;
+  opacity: 0.9;
+	
+}
+
+fieldset, .field {
+	background-color : white;
+	margin-right: 30%;
+	margin-left: 30%;
+	margin-top: 40px;
+	border-width: 1%;
+	padding: 2%;
+	border-style: none;
+	border-color: blue;
+	border-radius:15px;
+	filter:alpha(opacity=50);
+  -moz-opacity: 0.9;
+  opacity: 0.9;
+	
+}
+h1, .h1disney{
+	font-family: Waltograph,Times, sans-serif;
+	font-size: 40px;
+	color: #120A8F;
+	text-align: center;
+}
+
+h2, .h2disney{
+	font-family: Verdana,Geneva,sans-serif;
+	font-size: 13px;
+	color: #120A8F;
+}
+
+.casella {
+	padding-left: 20px;
+}
+
+.submitter {
+	display: block;
+	margin: 0 auto;
+	width: 100px;
+}
+
+
+/*link*/
+fieldset a:link, fieldset a:visited ,.field a:link, .field  a:visited{
+  background-color: #1E90FF;
+  color: white;
+  padding: 15px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 5px 5px 5px 5px;
+}
+
+fieldset a:hover,fieldset a:active,.field a:hover, .field  a:active{
+  background-color: blue;
+   margin: 5px 5px 5px 5px;
+}
+/**/
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.button2 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #1E90FF;
+}
+
+.button2:hover {
+  background-color:#1E90FF;
+  color: white;
+}
+
+/*fine link*/
+/*styleGallery*/
+div.esterno {
+	width: 100%;
+	height: 1000px;
+}
+
+div.gallery {
+  border: 1px solid #ccc;
+  float: left;
+  width: 20%;
+  height: 25%;
+  padding: 2% 2% 2% 2%;
+}
+
+div.gallery:hover {
+  border: 1px solid #777;
+}
+
+div.gallery img {
+  width: 100%;
+  height: auto;
+}
+
+div.desc {
+  padding-left: 2%;
+  padding-left: 2%;
+  text-align: center;
+}
+
+
+.commento
+{
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 15px;/*non cambiare in percentuale perche fa il bordo rotondo*/
+  padding: 4%;
+  margin: 2% 0;
+}
+
+/*voto*/
+.heading {
+  font-size: 25px;
+  margin-right: 25px;
+}
+
+.fa {
+  font-size: 25px;
+}
+
+.checked {
+  color: orange;
+}
+
+/* Three column layout */
+.side {
+  float: left;
+  width: 15%;
+  margin-top:10px;
+}
+
+.middle {
+  margin-top:10px;
+  float: left;
+  width: 70%;
+}
+
+/* Place text to the right */
+.voto {
+  text-align: right;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/*voto*/
+.heading {
+  font-size: 25px;
+  margin-right: 25px;
+}
+
+.fa {
+  font-size: 25px;
+}
+
+.checked {
+  color: orange;
+}
+
+/* Three column layout */
+.side {
+  float: left;
+  width: 15%;
+  margin-top:10px;
+}
+
+.middle {
+  margin-top:10px;
+  float: left;
+  width: 70%;
+}
+
+/* Place text to the right */
+.voto {
+  text-align: right;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.Myvotazione{
+	 width: 100%;
+	
+}
+
+.acquista {
+/*  background-color: #f2f2f2;*/
+  padding: 5px 20px 15px 20px;
+  border: 1px solid lightgrey;
+  border-radius: 15px;
+}
+
+span.price {
+  float: right;
+  color: grey;
+}
+
+.carrello {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+  margin: 0 -16px;
+  
+}
+/*Checkout*/
+ .acquista {
+  padding: 5px 20px 15px 20px;
+}
+            	
+.myInput1{
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+#inputN{
+	width: 25%;
+}
+
+.myLabel {
+  margin-bottom: 10px;
+  display: block;
+}
+
+.icon-container {
+  margin-bottom: 20px;
+  padding: 7px 0;
+  font-size: 24px;
+}
+
+.btn {
+  background-color:#1E90FF;
+  color: white;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  width: 100%;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 17px;
+}
+
+.btn:hover {
+  background-color: #2196F3;
+}
+
+a {
+  color: #2196F3;
+}
+
+hr {
+  border: 1px solid lightgrey;
+}
+
+span.price {
+  float: right;
+  color: grey;
+}
+
+.ricerca{
+  width: 30%;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  padding: 12px 30px 12px 50px;
+  margin: 5px 5px 5px 5px;
+   background-repeat: no-repeat;
+   background-position: 2px 2px; 
+}
+
+.ricerca1, .Mydropdown-content{
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+ }
+
+.ricerca1:focus,  .Mydropdown-content {
+  width: 75%;
+}
+
+.imgSconto2 {
+	width: 65%;
+	text-align: center;
+}
+
+
+/* Responsive layout - con larghezza minore di 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 200px) {
+  	.topnav a {
+    float: none;
+    width: 100%;
+ 	 }
+ 	 a:link, a:visited  {
+     padding: 7px 11px;  
+  	}
+   	.button {
+   	padding: 7px 11px;  
+  	}
+}
+@media screen and (max-width: 800px) {
+ 	.productCard{
+ 	 width:100%; 
+ 	 height:auto;
+ 	 }
+ 	.nomeProdSconto{
+ 	height:auto;
+ 	}
+  	.leftcolumn, .rightcolumn {   
+    width: 100%;
+    padding: 0%;
+  	}
+  	fieldset, .field{
+    margin-right: 15%;
+	margin-left: 15%;
+	margin-top: 20px;
+  	}
+  	.field2{
+    margin-right: 10%;
+	margin-left: 10%;
+	margin-top: 20px;
+  	}
+  	 a:link, a:visited  {   
+  	padding: 9px 13px;  
+  	}
+  	.button {
+  	padding: 9px 13px;  
+  	}
+  	
+  	.ricerca{
+ 	 width: 55%;
+	}
+}
+
+@media screen and (max-width: 600px){
+	div.gallery {
+		width: 100%;
+ 		height: 5%;
+ 		float: none;
+	}
+	div.esterno {
+	width: 100%;
+	height: 50%;
+}
+}
+
+@media screen and (max-width: 400px) {
+  .side, .middle {
+    width: 100%;
+  }
+  .voto {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 710px) {
+  .capo{
+	clear:both;
+	}
+}
