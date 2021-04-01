@@ -23,7 +23,7 @@ import coreModels.model.ProductModelDS;
 public class ProductAdminControl extends HttpServlet {
 	private static final long serialVersionUID = 1000L;
     
-	static boolean isDataSource = true;
+	static boolean isDataSource = false;
 	
 	static ProductModel model;
 	

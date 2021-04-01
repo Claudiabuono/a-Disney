@@ -27,7 +27,7 @@ public abstract class CatalogServlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-	static boolean isDataSource = true;
+	static boolean isDataSource = false;
 	static ProductModel model;
 	
 	static {

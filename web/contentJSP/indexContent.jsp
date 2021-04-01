@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<img src="../../WebContent/images/disney.png" class = "homeImg">
+<img src="/images/disney.png" class = "homeImg">
 
  <section class="row">
   <section class="leftcolumn">
@@ -11,7 +11,7 @@
     <div class="card" id = "catalog">
     </div>
   </section>
-  <section class="rightcolumn" style="background-image: url('images/areg.gif');">
+  <section class="rightcolumn" style="background-image: url('/images/areg.gif');">
    
     <div class="card">
       <h3>Contatti</h3>
@@ -38,8 +38,8 @@
     </div>
     <div class="card">
       <h3>Social</h3>
-      <div><img src="../../WebContent/images/facebook.png" width="20" height="20" > <span>Facebook</span></div>
-   	  <div><img src="../../WebContent/images/instagram.png" width="20" height="20" > <span> Instagram</span></div>
+      <div><img src="/images/facebook.png" width="20" height="20" > <span>Facebook</span></div>
+   	  <div><img src="/images/instagram.png" width="20" height="20" > <span> Instagram</span></div>
     </div>
   </section>
 </section>

@@ -21,7 +21,7 @@ import coreModels.model.RecenzioneModelDS;
 public class RecenzioneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
-	static boolean isDataSource = true;
+	static boolean isDataSource = false;
 	static RecenzioneModel recenzione;
 	
 	static {

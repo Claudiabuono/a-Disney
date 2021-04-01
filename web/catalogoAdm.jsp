@@ -19,7 +19,7 @@ if(admin == null ? true : !admin.booleanValue()) {
  		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
  		<title>Catalogo</title>
 </head>
-<body>
+
 <body style="background-image: url('images/areg.gif');" >
 <%@include file = "contentJSP/contentCatalogoAdmin.jsp"%>
 <script type="text/javascript" src= "js/adminCatalog.js"></script>

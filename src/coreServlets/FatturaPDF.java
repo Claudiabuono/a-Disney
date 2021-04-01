@@ -39,7 +39,7 @@ import coreModels.model.FatturaModelDS;
 public class FatturaPDF extends HttpServlet {
 	private static final long serialVersionUID = 1L;
       
-	static boolean isDataSource = true;
+	static boolean isDataSource = false;
 	static FatturaModel model;
 	
 	static {

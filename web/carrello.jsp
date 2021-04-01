@@ -19,7 +19,7 @@
 		
 </head>
 <body style="background-image: url('images/areg.gif');" data-spy="scroll" data-target=".navbar" data-offset="50">
-<%@include file = "../WebContent/header2.jsp" %><br><br><br>
+<%@include file = "header2.jsp" %><br><br><br>
 
 <section class="card carrello">
 
@@ -29,7 +29,7 @@
 </div>
  </section>
  
-<%@include file = "../WebContent/footer2.jsp" %>
+<%@include file = "footer2.jsp" %>
 <script type="text/javascript" src= "js/carrello.js"></script>
 </body>
 </html>

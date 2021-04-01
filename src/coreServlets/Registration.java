@@ -20,7 +20,7 @@ import coreModels.model.RegisteredModelDS;
 public class Registration extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	static boolean isDataSource = true;
+	static boolean isDataSource = false;
 	static RegisteredModel model;
 	static
 	{

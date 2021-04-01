@@ -5,8 +5,8 @@
 	<div class="row ">
     	<div class="card x">
     	<div>
-    			<input type="date" class="ricerca"  name="da" placeholder="da data..." style="background-image: url('images/dateFrom.png')">
- 	    		<input type="date" class="ricerca" name="a" placeholder="a data..." style="background-image: url('images/dateTo.png')"> 
+    			<input type="date" class="ricerca"  name="da" placeholder="da data..." style="background-image: url('/images/dateFrom.png')">
+ 	    		<input type="date" class="ricerca" name="a" placeholder="a data..." style="background-image: url('/images/dateTo.png')">
     			<button id = "selector" class="button button2">Cerca</button>
     		
     	</div>

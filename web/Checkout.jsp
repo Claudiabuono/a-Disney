@@ -22,9 +22,9 @@ if ((User == null ? true : !User))
 	<title>Checkout</title>
 </head>
 <body style="background-image: url('images/areg.gif');" data-spy="scroll" data-target=".navbar" data-offset="50">
-		<%@include file = "../WebContent/header2.jsp" %><br>
+		<%@include file = "header2.jsp" %><br>
 		<%@include file = "contentJSP/checkoutContent.jsp" %>
-		<%@include file = "../WebContent/footer.jsp" %>
+		<%@include file = "footer.jsp" %>
 <script type="text/javascript" src= "js/credenziali.js"></script>
 
 </body>

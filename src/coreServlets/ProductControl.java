@@ -23,12 +23,12 @@ import coreModels.model.ProductModelDS;
 @WebServlet("/ProductControl")
 
 /*
- * Il filtro prenderÃ? i prodotti per categoria, nome, prezzo
+ * Il filtro prenderï¿½? i prodotti per categoria, nome, prezzo
  * */
 public class ProductControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	static boolean isDataSource = true;
+	static boolean isDataSource = false;
 	Gson parser = new GsonBuilder().registerTypeAdapter(Cart.class, new json.JsonBuilderCart()).create();
 	static ProductModel model;
 	
