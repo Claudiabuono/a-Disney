@@ -17,10 +17,9 @@
 </head>
 
 <body style="background-image: url('images/areg.gif');" data-spy="scroll" data-target=".navbar" data-offset="50">
- 
+
  <%@include file = "header2.jsp" %>
  <%@include file = "contentJSP/indexContent.jsp" %>
- 	
 <%@include file = "footer.jsp" %>
 <script type = "text/javascript">
 $(document).ready (function () {

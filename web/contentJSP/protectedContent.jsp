@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <div class="field2">
 	
-		<h3>Dati Personali </h3>
+		<%--@declare id="fname"--%><h3>Dati Personali </h3>
  		<label  class="myLabel" for="fname"><i class="fa fa-user"></i> Nome</label>
     	<input class="myInput1" type="text" id="name" name="firstname" value="${user.name}" placeholder="${user.name}" >
     	<div id= "nameWarning" class="alert"><span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span><strong>Errore!</strong> Nome non valido, deve essere costituito da soli caratteri e senza spazi bianchi</div>

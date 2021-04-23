@@ -50,7 +50,7 @@ if (cart == null) {
 	
 	%>
 					<tr id="<%=code%>" class="text-center">
-						<td class="product-remove"><button class="removeX" style="background-image: url('images/x.png')"></button>
+						<td class="product-remove"><button class="removeX" style="background-image: url('/images/x.png')"></button>
 						<td class="image-prod"><div id="img" style="background-image: url('<%=urlImage%>');"></div> </td>
 						<td class="product-name"><%=name%></td>
 						<td><%=priceUnit%></td>

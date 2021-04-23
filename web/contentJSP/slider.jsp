@@ -18,7 +18,7 @@
         <img src="images/Peluche.PNG" alt="Peluche" style="width:1000px; height:auto">
         <div class="carousel-caption">
           <h3>Peluche</h3>
-          <p>I peluche più morbidi e più coccolosi di Topolino, Mulan, Aladdin e Anna di Frozen.</p>
+          <p>I peluche pi? morbidi e pi? coccolosi di Topolino, Mulan, Aladdin e Anna di Frozen.</p>
         </div>
       </div>
 
@@ -39,7 +39,7 @@
       </div>
     
       <div class="item">
-        <img src="images/Bambini.PNG" alt="Bambini" style="width:1000px; height:auto"">
+        <img src="images/Bambini.PNG" alt="Bambini" style="width:1000px; height:auto" >
         <div class="carousel-caption">
           <h3>Abbigliamento Bambini</h3>
         </div>

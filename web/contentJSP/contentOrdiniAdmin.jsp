@@ -8,8 +8,8 @@
     
    <%@ include file = "UserSuggester.jsp" %>
  	 	
-        <input type="date" class="ricerca"  name="da" placeholder="da data..." style="background-image: url('images/dateFrom.png')">
- 	    <input type="date" class="ricerca" name="a" placeholder="a data..." style="background-image: url('images/dateTo.png')"> 
+        <input type="date" class="ricerca"  name="da" placeholder="da data..." style="background-image: url('/images/dateFrom.png')">
+ 	    <input type="date" class="ricerca" name="a" placeholder="a data..." style="background-image: url('/images/dateTo.png')">
 		<button class="button button2" id="search">Cerca</button>
 	 	<a class="button button2"  href= "../../WebContent/amministratore.jsp"> Indietro</a>
 		

@@ -1,7 +1,9 @@
 <%@page import="coreModels.beans.UserBean"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+</head>
 	
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
@@ -32,12 +34,12 @@
         Boolean isUser = session.getAttribute("isUser") == null ? false : (Boolean) session.getAttribute("isUser");
         
         if (isUser) {%>
-        	<li><%@ include file="contentJSP/ricerca.jsp" %></li>
+            <li><%@ include file="contentJSP/ricerca.jsp" %></li>
         	<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span>Welcome ${user.name}</span><span class="caret"></span></a>
             	<ul class="dropdown-menu">
             	<li><a href="protected-page.jsp">Area Personale</a>
             	<li><a href="UserManager?op=viewFatture">Visualizza Ordini</a></li>
-        		<li><a href="Logout">Logout</a></li>	
+        		<li><a href="Logout">Logout</a></li>
         		</ul>
         <%} else if (isAdmin) {%>
         	<li><a href="#"><span>Welcome </span>${user.name}</a></li>

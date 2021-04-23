@@ -8,7 +8,7 @@
 	
 	if (warning != null ? warning : false) {
 		%>
-		<div class="warning"><span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> <strong>Oops!</strong> La preghiamo di verificare che lei abbia un indirizzo di spedizione oppure che le quantita' dei prodotti voluti siano disponibili </div>
+		<%--@declare id="email"--%><%--@declare id="fname"--%><div class="warning"><span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> <strong>Oops!</strong> La preghiamo di verificare che lei abbia un indirizzo di spedizione oppure che le quantita' dei prodotti voluti siano disponibili </div>
 		
 	<%}
 %>
@@ -20,7 +20,7 @@
 		  <label class="myLabel" for="email"><i class="fa fa-envelope"></i> Email: ${user.login}</label>
 		   <%@ include file = "newAddress.jsp" %>
 		     <form action="checkout" method = "post">       			
-       		     <label class="myLabel" for="adr"><i class="fa fa-address-card-o"></i> Address</label>
+       		     <%--@declare id="adr"--%><label class="myLabel" for="adr"><i class="fa fa-address-card-o"></i> Address</label>
 				 <select name="address" id=address>
           		  <% if (addresses.size() > 0) {
           		 		 for(Adress address : addresses) {%>
