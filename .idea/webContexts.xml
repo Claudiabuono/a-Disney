@@ -8,6 +8,7 @@
         <entry key="file://$PROJECT_DIR$/web/contentJSP/contentCatalogoAdmin.jsp" value="file://$PROJECT_DIR$/web/contentJSP" />
         <entry key="file://$PROJECT_DIR$/web/contentJSP/indexContent.jsp" value="file://$PROJECT_DIR$/web" />
         <entry key="file://$PROJECT_DIR$/web/contentJSP/productViewContent.jsp" value="file://$PROJECT_DIR$/web/contentJSP" />
+        <entry key="file://$PROJECT_DIR$/web/contentJSP/ricerca.jsp" value="file://$PROJECT_DIR$/web/contentJSP" />
       </map>
     </option>
   </component>
