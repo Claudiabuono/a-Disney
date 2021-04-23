@@ -24,7 +24,8 @@ public class AddressModelDS extends AdressModel{
 	@Override
 	public void closeConnection(java.sql.Connection connector) throws java.sql.SQLException {
 		// TODO Auto-generated method stub
-		connector.close();
+		if (connector != null)
+			connector.close();
 	}
 
 	@Override

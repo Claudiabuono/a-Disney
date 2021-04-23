@@ -45,7 +45,7 @@ public class RecenzioneServlet extends HttpServlet {
 			
 				java.util.List<coreModels.beans.RecenzioneBean> list = recenzione.getComments(bean);
 				coreModels.beans.RecenzioneBean userComment = user == null ? null : recenzione.userComment(user, bean);
-				boolean payed = userComment == null ? user == null ? false : new coreModels.model.FatturaModelDS().hasPurchased(bean, user) :false;
+				boolean payed = userComment == null ? user == null ? false : new coreModels.model.FatturaModelDM().hasPurchased(bean, user) :false;
 				list.remove(userComment);
 				
 				request.setAttribute("voto", recenzione.mediumVote(bean));

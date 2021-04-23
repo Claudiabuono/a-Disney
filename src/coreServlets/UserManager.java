@@ -28,13 +28,13 @@ public class UserManager extends HttpServlet {
 	static FatturaModel fatt;
 	static
 	{
-		if (isDataSource) {
-			model = new RegisteredModelDS();
-			fatt = new FatturaModelDS();
-		} else {
+	//	if (isDataSource) {
+	//		model = new RegisteredModelDS();
+	//		fatt = new FatturaModelDS();
+	//	} else {
 			model = new RegisteredModelDM();
 			fatt = new FatturaModelDM();
-		}
+	//	}
 	}
 	
     /**

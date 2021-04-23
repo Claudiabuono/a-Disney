@@ -223,8 +223,8 @@ public abstract class FatturaModel {
 				
 				f.setCod(rs.getInt("codiceFattura"));
 				f.setProdotti(this.retrieveInvoiceOrders(f.getCod(), connection));
-				f.setUser(new coreModels.model.RegisteredModelDS().doRetrieveByKey(user.getLogin()));
-				f.setShipping(new AddressModelDS().doRetrieve(rs.getInt("Indirizzo")));
+				f.setUser(new coreModels.model.RegisteredModelDM().doRetrieveByKey(user.getLogin()));
+				f.setShipping(new AddressModelDM().doRetrieve(rs.getInt("Indirizzo")));
 				f.setDate(cl);
 			}
 
@@ -286,7 +286,7 @@ public abstract class FatturaModel {
 				
 				f.setCod(rs.getInt("codiceFattura"));
 				f.setProdotti(this.retrieveInvoiceOrders(f.getCod(), connection));
-				f.setShipping(new AddressModelDS().doRetrieve(rs.getInt("Indirizzo")));
+				f.setShipping(new AddressModelDM().doRetrieve(rs.getInt("Indirizzo")));
 				f.setDate(cl);
 				f.setUser(e);
 				
@@ -342,7 +342,7 @@ public abstract class FatturaModel {
 				RegisteredModel.setBean(rs, bean);
 				f.setCod(rs.getInt("codiceFattura"));
 				f.setProdotti(retrieveInvoiceOrders(f.getCod(), connection));
-				f.setShipping(new AddressModelDS().doRetrieve(rs.getInt("Indirizzo")));
+				f.setShipping(new AddressModelDM().doRetrieve(rs.getInt("Indirizzo")));
 				f.setDate(cl);
 				f.setUser(bean);
 				
