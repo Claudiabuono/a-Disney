@@ -24,7 +24,8 @@ if(admin == null ? true : !admin.booleanValue()) {
 	<h2>Cosa desideri effettuare?</h2> 
 	<a href="admin">Visualizzare ordini dei clienti</a> <br>	
 	<a href="admincat">Revisionare il catalogo</a> <br>	
-	<a href="AddProdottiAdm.jsp">Aggiungi nuovi prodotti</a> <br>	
+	<a href="AddProdottiAdm.jsp">Aggiungi nuovi prodotti</a> <br>
+
 	<a href="Logout">Logout</a><br>	
 	
 	

@@ -6,11 +6,7 @@
 			Boolean error = (Boolean) request.getAttribute("error");
 			if(error == null ? false : error.booleanValue()) {
 		%>
-		<div class="error">
-			<p>Warning<br>
-				username già esistenti
-			</p>
-		</div>
+
 		<%}%>
 
 		<h1 class="h1disney"> Account Disney </h1>

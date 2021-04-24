@@ -14,7 +14,7 @@ $(document).ready(function(){
 					$.each(json, function () {
 						
 						var row = '<tr id ="'+this.id+'" class = "text-center">'
-						+ '<td class="product-remove"><button class="removeX" style="background-image: url(\'images/x.png\')"></button></td>'
+						+ '<td class="product-remove"><button class="removeX" style="background-image: url(/images/x.png)"></button></td>'
 						+ '<td class="product-name"> <h4>Prodotto: '+this.name+'<span></span></h4><button  class="button button2 submitter" type="submit">Modifica</button></td>'
 						+ '<td><div id="img" style="background-image: url('+this.img+');"></div></td>'
 						+ '<td role = "price">'+this.price+'&#8364;</td>'
@@ -42,7 +42,7 @@ $(document).ready(function(){
 		function remove () {
 			var row = $(this).parents().filter("tr");
 			var code = $(row).attr("id");
-			
+
 			$.post("ProductAdminControl", {act: "delete", id : code})
 				.done(function () {
 					$(row).remove();
