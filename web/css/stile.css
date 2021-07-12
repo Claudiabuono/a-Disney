@@ -1,6 +1,6 @@
 @CHARSET "ISO-8859-1";
 .Mydropbtn {
-  color: white;
+  color: black;
   padding: 16px;
   font-size: 16px;
   border: none;
@@ -8,7 +8,7 @@
 }
 
 .Mydropbtn:hover, .Mydropbtn:focus {
-  background-color: write;/* #2980B9;*/
+  background-color: white;/* #2980B9;*/
 }
 
 .Mydropdown {
@@ -43,7 +43,7 @@
 
 @font-face {
 	font-family: Waltograph;
-	src: url('fonts/WALTOGRAPH42.TTF');
+	src: url('/fonts/WALTOGRAPH42.TTF');
 }
 
 #video {
@@ -293,7 +293,7 @@ body {
 	margin-right: 20%;
 	margin-left: 20%;
 	margin-top: 40px;
-	border-width: 1%;
+	border-width: 2px;
 	padding: 2%;
 	border-style: none;
 	border-color: blue;
@@ -309,7 +309,7 @@ fieldset, .field {
 	margin-right: 30%;
 	margin-left: 30%;
 	margin-top: 40px;
-	border-width: 1%;
+	border-width: 2px;
 	padding: 2%;
 	border-style: none;
 	border-color: blue;
