@@ -2,8 +2,8 @@ package coreServlets;
 
 import com.google.gson.Gson;
 import coreModels.beans.Adress;
-import coreModels.model.AddressModelDM;
-import coreModels.model.AddressModelDS;
+import coreModels.model.DM.AddressModelDM;
+import coreModels.model.DS.AddressModelDS;
 import coreModels.model.AdressModel;
 
 import javax.servlet.ServletException;

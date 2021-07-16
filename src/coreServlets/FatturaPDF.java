@@ -29,8 +29,8 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 import coreModels.beans.FatturaBean;
 import coreModels.model.FatturaModel;
-import coreModels.model.FatturaModelDM;
-import coreModels.model.FatturaModelDS;
+import coreModels.model.DM.FatturaModelDM;
+import coreModels.model.DS.FatturaModelDS;
 
 /**
  * Servlet implementation class FatturaPDF

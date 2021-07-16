@@ -1,17 +1,20 @@
-package coreModels.model;
+package coreModels.model.DS;
+
+import coreModels.model.RecensioneModel;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class AdminModelDS extends AdminModel{
+public class RecensioneModelDS extends RecensioneModel {
 	private static DataSource ds;
-	static
-	{
+
+	static {
 		try {
 			Context initCtx = new InitialContext();
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
+
 			ds = (DataSource) envCtx.lookup("jdbc/store");
 
 		} catch (NamingException e) {
@@ -19,15 +22,16 @@ public class AdminModelDS extends AdminModel{
 		}
 	}
 	
+	
 	@Override
-	protected java.sql.Connection getConnection() throws java.sql.SQLException {
+	public void closeConnection(java.sql.Connection connector) throws java.sql.SQLException {
 		// TODO Auto-generated method stub
-		return ds.getConnection();
+		connector.close();
 	}
 
 	@Override
-	protected void closeConnection(java.sql.Connection connector) throws java.sql.SQLException {
+	public java.sql.Connection getConnection() throws java.sql.SQLException {
 		// TODO Auto-generated method stub
-		connector.close();
+		return ds.getConnection();
 	}
 }

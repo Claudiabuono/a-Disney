@@ -25,5 +25,5 @@
 		</div><br>
 </section>
 <section>
-	<%@include file = "recenzione.jsp" %>
+	<%@include file = "recensione.jsp" %>
 </section>

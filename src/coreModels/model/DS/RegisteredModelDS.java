@@ -1,4 +1,6 @@
-package coreModels.model;
+package coreModels.model.DS;
+
+import coreModels.model.RegisteredModel;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;

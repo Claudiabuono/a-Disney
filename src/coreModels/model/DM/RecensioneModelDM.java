@@ -1,8 +1,9 @@
-package coreModels.model;
+package coreModels.model.DM;
 
 import coreModels.connector.DriverMaagerConnectionPool;
+import coreModels.model.RecensioneModel;
 
-public class RecenzioneModelDM extends RecenzioneModel{
+public class RecensioneModelDM extends RecensioneModel {
 	
 	@Override
 	public java.sql.Connection getConnection() throws java.sql.SQLException {

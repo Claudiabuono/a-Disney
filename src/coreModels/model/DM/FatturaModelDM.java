@@ -1,12 +1,12 @@
-package coreModels.model;
+package coreModels.model.DM;
 
 import coreModels.connector.DriverMaagerConnectionPool;
+import coreModels.model.FatturaModel;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class RegisteredModelDM extends RegisteredModel {
-
+public class FatturaModelDM extends FatturaModel {
 	@Override
 	public Connection getConnection() throws SQLException {
 		// TODO Auto-generated method stub
@@ -18,5 +18,4 @@ public class RegisteredModelDM extends RegisteredModel {
 		// TODO Auto-generated method stub
 		DriverMaagerConnectionPool.releaseConnection(connector);
 	}
-
 }

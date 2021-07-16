@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import coreModels.model.FatturaModel;
-import coreModels.model.FatturaModelDM;
-import coreModels.model.FatturaModelDS;
+import coreModels.model.DM.FatturaModelDM;
+import coreModels.model.DS.FatturaModelDS;
 
 /**
  * Servlet implementation class Checkout

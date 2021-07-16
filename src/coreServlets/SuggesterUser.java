@@ -16,8 +16,8 @@ import com.google.gson.GsonBuilder;
 import coreModels.beans.ProductBean;
 import coreModels.beans.Registered;
 import coreModels.model.RegisteredModel;
-import coreModels.model.RegisteredModelDM;
-import coreModels.model.RegisteredModelDS;
+import coreModels.model.DM.RegisteredModelDM;
+import coreModels.model.DS.RegisteredModelDS;
 
 /**
  * Servlet implementation class SuggesterUser

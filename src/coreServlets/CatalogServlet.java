@@ -12,8 +12,8 @@ import com.google.gson.GsonBuilder;
 import coreModels.beans.ProductBean;
 import coreModels.model.Paginator;
 import coreModels.model.ProductModel;
-import coreModels.model.ProductModelDM;
-import coreModels.model.ProductModelDS;
+import coreModels.model.DM.ProductModelDM;
+import coreModels.model.DS.ProductModelDS;
 
 /**
  * Servlet implementation class CatalogServlet

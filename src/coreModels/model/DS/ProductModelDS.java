@@ -1,11 +1,14 @@
-package coreModels.model;
+package coreModels.model.DS;
+
+import coreModels.model.ProductModel;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class RecenzioneModelDS extends RecenzioneModel{
+public class ProductModelDS extends ProductModel {
+
 	private static DataSource ds;
 
 	static {
@@ -22,14 +25,15 @@ public class RecenzioneModelDS extends RecenzioneModel{
 	
 	
 	@Override
-	public void closeConnection(java.sql.Connection connector) throws java.sql.SQLException {
+	protected void closeConnection(java.sql.Connection connector) throws java.sql.SQLException {
 		// TODO Auto-generated method stub
 		connector.close();
 	}
 
 	@Override
-	public java.sql.Connection getConnection() throws java.sql.SQLException {
+	protected java.sql.Connection getConnection() throws java.sql.SQLException {
 		// TODO Auto-generated method stub
 		return ds.getConnection();
 	}
+
 }

@@ -10,6 +10,8 @@ import coreModels.beans.FatturaBean;
 import coreModels.beans.Order;
 import coreModels.beans.ProductBean;
 import coreModels.beans.Registered;
+import coreModels.model.DM.AddressModelDM;
+import coreModels.model.DM.RegisteredModelDM;
 
 public abstract class FatturaModel {
 	
@@ -223,7 +225,7 @@ public abstract class FatturaModel {
 				
 				f.setCod(rs.getInt("codiceFattura"));
 				f.setProdotti(this.retrieveInvoiceOrders(f.getCod(), connection));
-				f.setUser(new coreModels.model.RegisteredModelDM().doRetrieveByKey(user.getLogin()));
+				f.setUser(new RegisteredModelDM().doRetrieveByKey(user.getLogin()));
 				f.setShipping(new AddressModelDM().doRetrieve(rs.getInt("Indirizzo")));
 				f.setDate(cl);
 			}

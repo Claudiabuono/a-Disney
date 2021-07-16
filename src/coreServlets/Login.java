@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import coreModels.beans.UserBean;
-import coreModels.model.AdminModelDM;
-import coreModels.model.AdminModelDS;
-import coreModels.model.RegisteredModelDM;
-import coreModels.model.RegisteredModelDS;
+import coreModels.model.DM.AdminModelDM;
+import coreModels.model.DS.AdminModelDS;
+import coreModels.model.DM.RegisteredModelDM;
+import coreModels.model.DS.RegisteredModelDS;
 import coreModels.model.UserModel;
 
 @WebServlet("/Login")

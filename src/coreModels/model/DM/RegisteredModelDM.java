@@ -1,11 +1,13 @@
-package coreModels.model;
+package coreModels.model.DM;
 
 import coreModels.connector.DriverMaagerConnectionPool;
+import coreModels.model.RegisteredModel;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class AddressModelDM extends AdressModel{
+public class RegisteredModelDM extends RegisteredModel {
+
 	@Override
 	public Connection getConnection() throws SQLException {
 		// TODO Auto-generated method stub
@@ -17,4 +19,5 @@ public class AddressModelDM extends AdressModel{
 		// TODO Auto-generated method stub
 		DriverMaagerConnectionPool.releaseConnection(connector);
 	}
+
 }

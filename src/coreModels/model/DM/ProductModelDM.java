@@ -1,6 +1,7 @@
-package coreModels.model;
+package coreModels.model.DM;
 
 import coreModels.connector.DriverMaagerConnectionPool;
+import coreModels.model.ProductModel;
 
 public class ProductModelDM extends ProductModel {
 

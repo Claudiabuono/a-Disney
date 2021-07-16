@@ -15,8 +15,8 @@ import coreModels.beans.Cart;
 import coreModels.beans.Order;
 import coreModels.beans.ProductBean;
 import coreModels.model.ProductModel;
-import coreModels.model.ProductModelDM;
-import coreModels.model.ProductModelDS;
+import coreModels.model.DM.ProductModelDM;
+import coreModels.model.DS.ProductModelDS;
 /**
  * Servlet implementation class ProductControl
  */

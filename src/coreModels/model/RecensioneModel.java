@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 import coreModels.beans.RecenzioneBean;
 
-public abstract class RecenzioneModel {
+public abstract class RecensioneModel {
 
 	public synchronized double mediumVote (coreModels.beans.ProductBean e) throws SQLException {
 		Connection connection = null;

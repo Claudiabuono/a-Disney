@@ -10,11 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import coreModels.model.FatturaModel;
-import coreModels.model.FatturaModelDM;
-import coreModels.model.FatturaModelDS;
+import coreModels.model.DM.FatturaModelDM;
 import coreModels.model.RegisteredModel;
-import coreModels.model.RegisteredModelDM;
-import coreModels.model.RegisteredModelDS;
+import coreModels.model.DM.RegisteredModelDM;
 
 /**
  * Servlet implementation class UserManager
