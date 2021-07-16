@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import = " coreModels.beans.ProductBean, coreModels.beans.RecenzioneBean"%>
+<%@ page import = " coreModels.beans.ProductBean, coreModels.beans.RecensioneBean"%>
 
 <% 
 	Double obj = (Double) request.getAttribute ("voto");
-	java.util.List<RecenzioneBean> recenzioni = (java.util.List<RecenzioneBean>) request.getAttribute("recenzioni");
-	RecenzioneBean userCommentate = (RecenzioneBean) request.getAttribute ("userComment");
+	java.util.List<RecensioneBean> recenzioni = (java.util.List<RecensioneBean>) request.getAttribute("recenzioni");
+	RecensioneBean userCommentate = (RecensioneBean) request.getAttribute ("userComment");
 	int vote = obj == null ? 0 : obj.intValue() > 5 ? 5 : obj.intValue();
 	
 	if ((recenzioni == null ? false : recenzioni.size() != 0) || (userCommentate == null ? false : true)) {

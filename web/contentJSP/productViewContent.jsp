@@ -3,7 +3,7 @@
     
     
 <%@ page import = "coreModels.beans.ProductBean" %>
-<%@ page import = "java.util.List,java.util.ArrayList, coreModels.beans.RecenzioneBean, java.util.Random"%>
+<%@ page import = "java.util.List,java.util.ArrayList, coreModels.beans.RecensioneBean, java.util.Random"%>
     
 <section class="card"  style="padding-bottom:90px;">
 	<div style="float:left; padding:20px " >

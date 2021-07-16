@@ -2,7 +2,7 @@ package coreModels.beans;
 
 import java.io.Serializable;
 
-public class RecenzioneBean implements Serializable{
+public class RecensioneBean implements Serializable{
 
 	@Override
 	public String toString() {
@@ -12,7 +12,14 @@ public class RecenzioneBean implements Serializable{
 	private String description;
 	private float valutazione;
 	private String name;
-	
+	public RecensioneBean(){}
+
+	public RecensioneBean(String description, float valutazione, String name){
+		this.name= name;
+		this.description= description;
+		this.valutazione= valutazione;
+	}
+
 	public String getDescription() {
 		return description;
 	}
@@ -47,7 +54,7 @@ public class RecenzioneBean implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		RecenzioneBean other = (RecenzioneBean) obj;
+		RecensioneBean other = (RecensioneBean) obj;
 		if (name == null) {
 			if (other.name != null)
 				return false;

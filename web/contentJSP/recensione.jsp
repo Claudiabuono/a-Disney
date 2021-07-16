@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import = "java.util.List, coreModels.beans.RecenzioneBean, java.util.Random, coreModels.beans.ProductBean"%>
+<%@ page import = "java.util.List, coreModels.beans.RecensioneBean, java.util.Random, coreModels.beans.ProductBean"%>
    		<div class="Myvotazione card">
    		<%
-   		List<RecenzioneBean> list =(List<RecenzioneBean>)  request.getAttribute("recenzioni");
-   		List<RecenzioneBean> listNew= new java.util.ArrayList<RecenzioneBean>();
+   		List<RecensioneBean> list =(List<RecensioneBean>)  request.getAttribute("recenzioni");
+   		List<RecensioneBean> listNew= new java.util.ArrayList<RecensioneBean>();
    		Boolean f=(Boolean) request.getAttribute("payed");
    		int size = 0;
    		
@@ -68,7 +68,7 @@
    						listNew = list;
    					%>
    					<h3 style="margin-top: 5%;">Ecco cosa ne pensano i nostri clienti...</h3>
-   		   			<% for (RecenzioneBean e : listNew) {
+   		   			<% for (RecensioneBean e : listNew) {
    		   				%>
    		   				
    		   				<div class=commento>

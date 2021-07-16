@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import coreModels.beans.ProductBean;
+import coreModels.beans.RecensioneBean;
 import coreModels.model.DM.FatturaModelDM;
 import coreModels.model.RecensioneModel;
 import coreModels.model.DM.RecensioneModelDM;
@@ -44,8 +45,8 @@ public class RecensioneServlet extends HttpServlet {
 		try {
 			if ("view".equalsIgnoreCase(action)) {
 			
-				java.util.List<coreModels.beans.RecenzioneBean> list = recenzione.getComments(bean);
-				coreModels.beans.RecenzioneBean userComment = user == null ? null : recenzione.userComment(user, bean);
+				java.util.List<RecensioneBean> list = recenzione.getComments(bean);
+				RecensioneBean userComment = user == null ? null : recenzione.userComment(user, bean);
 				boolean payed = userComment == null ? user == null ? false : new FatturaModelDM().hasPurchased(bean, user) :false;
 				list.remove(userComment);
 				

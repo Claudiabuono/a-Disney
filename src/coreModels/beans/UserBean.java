@@ -7,6 +7,11 @@ public class UserBean implements Serializable {
 	private static final long serialVersionUID = -1495405198295313698L;
 	private String login;
 	private String password;
+	public UserBean(){ }
+	public UserBean(String login, String password){
+        this.login= login;
+        this.password= password;
+	}
 
 	public String getLogin() {
 		return login;

@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import coreModels.beans.RecenzioneBean;
+import coreModels.beans.RecensioneBean;
 
 public abstract class RecensioneModel {
 
@@ -35,10 +35,10 @@ public abstract class RecensioneModel {
 		return vote;
 	}
 	
-	public synchronized RecenzioneBean userComment (coreModels.beans.Registered e, coreModels.beans.ProductBean p) throws SQLException {
+	public synchronized RecensioneBean userComment (coreModels.beans.Registered e, coreModels.beans.ProductBean p) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		RecenzioneBean bean = null;
+		RecensioneBean bean = null;
 		
 		try {
 			connection = getConnection();
@@ -49,7 +49,7 @@ public abstract class RecensioneModel {
 			ResultSet rs = preparedStatement.executeQuery();
 			
 			if (rs.next()) {
-				bean = new RecenzioneBean();
+				bean = new RecensioneBean();
 				
 				bean.setName(rs.getString("cognome") +" " +rs.getString("nome"));
 				bean.setDescription(rs.getString("descrizioneRecenzione"));
@@ -68,11 +68,11 @@ public abstract class RecensioneModel {
 		return bean;
 	}
 	
-	public synchronized java.util.List<RecenzioneBean> getComments (coreModels.beans.ProductBean e) throws SQLException {
+	public synchronized java.util.List<RecensioneBean> getComments (coreModels.beans.ProductBean e) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		java.util.ArrayList<RecenzioneBean> comments = new java.util.ArrayList<RecenzioneBean>();
+		java.util.ArrayList<RecensioneBean> comments = new java.util.ArrayList<RecensioneBean>();
 
 		try {
 			connection = getConnection();
@@ -82,7 +82,7 @@ public abstract class RecensioneModel {
 			ResultSet rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
-				RecenzioneBean bean = new RecenzioneBean ();
+				RecensioneBean bean = new RecensioneBean();
 				
 				bean.setName(rs.getString("cognome") +" " +rs.getString("nome"));
 				bean.setDescription(rs.getString("descrizioneRecenzione"));
@@ -127,6 +127,37 @@ public abstract class RecensioneModel {
 			}
 		}
 	}
+//no test
+	public synchronized java.util.List<Integer> getVoti (coreModels.beans.ProductBean e) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		java.util.ArrayList<Integer> voti = new java.util.ArrayList<Integer>();
+
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(selectSQLvoti);
+			preparedStatement.setInt(1, e.getCode());
+
+			ResultSet rs = preparedStatement.executeQuery();
+            System.out.println(rs);
+			while (rs.next()) {
+				System.out.println(rs.getInt(0));
+				int voto= rs.getInt(0);
+				voti.add(voto);
+			}
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					closeConnection(connection);
+			}
+		}
+		return voti;
+	}
 	
 	protected abstract void closeConnection(Connection connector) throws SQLException;
 	protected abstract Connection getConnection () throws SQLException;
@@ -135,4 +166,6 @@ public abstract class RecensioneModel {
 	private static final String insertSQL = "INSERT INTO recenzione values (?, ?, ?, ?)";
 	private static final String verify = "SELECT * FROM recenzione JOIN registrato on utente = loginA WHERE utente = ? AND prodottoR = ?";
 	private static final String selectSQL = "SELECT * FROM recenzione JOIN registrato on utente = loginA WHERE prodottoR = ?";
+	private static final String selectSQLvoti = "SELECT valutazione FROM recenzione where prodottoR= ?";
+
 }
