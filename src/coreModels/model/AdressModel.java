@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import coreModels.beans.Adress;
+import coreModels.connector.DriverMaagerConnectionPool;
 
 public abstract class AdressModel {
 

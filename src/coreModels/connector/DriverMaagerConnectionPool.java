@@ -1,4 +1,4 @@
-package coreModels.model;
+package coreModels.connector;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

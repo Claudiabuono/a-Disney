@@ -1,5 +1,7 @@
 package coreModels.model;
 
+import coreModels.connector.DriverMaagerConnectionPool;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 

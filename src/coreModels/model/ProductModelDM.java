@@ -1,5 +1,7 @@
 package coreModels.model;
 
+import coreModels.connector.DriverMaagerConnectionPool;
+
 public class ProductModelDM extends ProductModel {
 
 	@Override
