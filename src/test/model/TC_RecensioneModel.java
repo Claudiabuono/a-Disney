@@ -11,8 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class TC_RecensioneModel {
     RecensioneModel recensione;
@@ -23,17 +22,7 @@ public class TC_RecensioneModel {
     }
 
     private ProductBean getprodotto(){
-        String nome= "Cuscino Tamburello";
-        String descrizione= "Cuscino di stoffa riempito con morbida lana, tale da garandire comfort e relax";
-        String personaggio= "Bambi";
-        String url= "images/coniglioCuscino.PNG";
-        String tipo="cuscino";
-        int categoria=0;
-        int quantity= 0;
-        double price= 18.00;
-        double iva=5.00;
-        double sconto=35.00;
-        ProductBean prodotto= new ProductBean (nome,descrizione,personaggio,url,tipo,categoria,quantity,price,iva,sconto);
+        ProductBean prodotto= new ProductBean (3);
         return prodotto;
     }
     private Registered getUtente(){
@@ -52,8 +41,8 @@ public class TC_RecensioneModel {
     @Test
     void testUserComment()throws SQLException {
         RecensioneBean recensioneBean= recensione.userComment(getUtente(),getprodotto());
-        RecensioneBean oracolo= new RecensioneBean("bello", 5, "rossella@alice.it");
+        RecensioneBean oracolo= new RecensioneBean("bello", 5, "buono rossela");
         assertEquals(oracolo, recensioneBean);
     }
-  //  public synchronized RecenzioneBean userComment (coreModels.beans.Registered e, coreModels.beans.ProductBean p) throws SQLException {
+
 }
