@@ -59,39 +59,43 @@ public abstract class RegisteredModel extends UserModel {
 		return bean;
 	}
 	
-	public void registration(Registered e) throws SQLException {
+	public boolean registration(Registered e) throws SQLException {
 		// TODO Auto-generated method stub
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-	
+		int result = 0;
 		try
 		{
 			connection = getConnection();
 			preparedStatement = connection.prepareStatement(insertSQL);
-			
+
 			preparedStatement.setString(1, e.getLogin());
 			preparedStatement.setString(2, e.getPassword());
 			preparedStatement.setString(3, e.getName());
 			preparedStatement.setString(4, e.getCognome());
-			
-			preparedStatement.executeUpdate();
+
+			result = preparedStatement.executeUpdate();
 		} 
 		finally 
 		{
 			try {
-				if (preparedStatement != null)
+				if (preparedStatement != null) {
 					preparedStatement.close();
+
+				}
 			} finally {
 				if (connection != null)
 					closeConnection(connection);
+
 			}
 		}
+		return (result != 0);
 	}
 	
-	public void doModify (Registered bean, String name, String surname, String login, String pass) throws SQLException {
+	public boolean doModify (Registered bean, String name, String surname, String login, String pass) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		
+		int result = 0;
 		try
 		{
 			connection = getConnection();
@@ -102,9 +106,9 @@ public abstract class RegisteredModel extends UserModel {
 			preparedStatement.setString(3, name);
 			preparedStatement.setString(4, surname);
 			preparedStatement.setString(5, bean.getLogin());
-			
-			
-			preparedStatement.executeUpdate();
+
+
+			result = preparedStatement.executeUpdate();
 		} 
 		finally 
 		{
@@ -114,8 +118,10 @@ public abstract class RegisteredModel extends UserModel {
 			} finally {
 				if (connection != null)
 					closeConnection(connection);
+
 			}
 		}
+		return (result != 0);
 	}
 	
 	public synchronized ArrayList<Registered> doRetrieveBySearch(String search) throws SQLException {

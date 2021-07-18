@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
+import java.util.*;
 
 
 public class TC_RecensioneModel {
@@ -22,27 +23,38 @@ public class TC_RecensioneModel {
     }
 
     private ProductBean getprodotto(){
-        ProductBean prodotto= new ProductBean (3);
+        ProductBean prodotto= new ProductBean (10);
         return prodotto;
     }
     private Registered getUtente(){
-        String username= "rossella@alice.it";
-        String password= "rossellabuono";
-        String nome= "rossela";
-        String cognome= "buono";
+        String username= "rosalia@libero.it";
+        String password= "rosalia";
+        String nome= "rosalia";
+        String cognome= "capozzolo";
         Registered utente= new Registered(nome,cognome,username,password);
         return utente;
     }
     @Test
     void testMediumVote () throws SQLException {
         double media= recensione.mediumVote(getprodotto());
-        assertEquals(4.5, media);
+        assertEquals(4.0, media);
     }
     @Test
     void testUserComment()throws SQLException {
         RecensioneBean recensioneBean= recensione.userComment(getUtente(),getprodotto());
-        RecensioneBean oracolo= new RecensioneBean("bello", 5, "buono rossela");
+        RecensioneBean oracolo= new RecensioneBean("Prodotto curato nei minimi dettagli", 4, "capozzolo rosalia");
         assertEquals(oracolo, recensioneBean);
+    }
+
+    @Test
+    void testGetComments()throws SQLException{
+        List<RecensioneBean> listRecensione= recensione.getComments (getprodotto());
+        List<RecensioneBean> oracolo= new ArrayList<>();
+        RecensioneBean r1= new RecensioneBean("Buona qualità e consegna in tempo", 4, "russo matteo");
+        RecensioneBean r2= new RecensioneBean("Prodotto curato nei minimi dettagli", 4, "capozzolo rosalia");
+        oracolo.add(r1);
+        oracolo.add(r2);
+        assertEquals(oracolo, listRecensione);
     }
 
 }

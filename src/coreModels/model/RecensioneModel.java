@@ -127,37 +127,7 @@ public abstract class RecensioneModel {
 			}
 		}
 	}
-//no test
-	public synchronized java.util.List<Integer> getVoti (coreModels.beans.ProductBean e) throws SQLException {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
 
-		java.util.ArrayList<Integer> voti = new java.util.ArrayList<Integer>();
-
-		try {
-			connection = getConnection();
-			preparedStatement = connection.prepareStatement(selectSQLvoti);
-			preparedStatement.setInt(1, e.getCode());
-
-			ResultSet rs = preparedStatement.executeQuery();
-            System.out.println(rs);
-			while (rs.next()) {
-				System.out.println(rs.getInt(0));
-				int voto= rs.getInt(0);
-				voti.add(voto);
-			}
-
-		} finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} finally {
-				if (connection != null)
-					closeConnection(connection);
-			}
-		}
-		return voti;
-	}
 	
 	protected abstract void closeConnection(Connection connector) throws SQLException;
 	protected abstract Connection getConnection () throws SQLException;
@@ -166,6 +136,5 @@ public abstract class RecensioneModel {
 	private static final String insertSQL = "INSERT INTO recenzione values (?, ?, ?, ?)";
 	private static final String verify = "SELECT * FROM recenzione JOIN registrato on utente = loginA WHERE utente = ? AND prodottoR = ?";
 	private static final String selectSQL = "SELECT * FROM recenzione JOIN registrato on utente = loginA WHERE prodottoR = ?";
-	private static final String selectSQLvoti = "SELECT valutazione FROM recenzione where prodottoR= ?";
 
 }

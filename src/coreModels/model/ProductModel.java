@@ -58,26 +58,29 @@ public abstract class ProductModel {
 		return SQLlist;
 	}
 
-	public synchronized void doSave(ProductBean product) throws SQLException {
+	public synchronized boolean doSave(ProductBean product) throws SQLException {
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-
+		int result = 0;
 		try {
 			connection = getConnection();
 			preparedStatement = connection.prepareStatement(insertSQL);
 			prepareInsertStatement(preparedStatement, product);
 
-			preparedStatement.executeUpdate();
+			result =preparedStatement.executeUpdate();
 		} finally {
 			try {
-				if (preparedStatement != null)
+				if (preparedStatement != null) {
 					preparedStatement.close();
+
+				}
 			} finally {
 				if (connection != null)
 					closeConnection(connection);
+
 			}
-		}
+		}return (result != 0);
 	}
 	
 	public synchronized ProductBean doRetrieveByKey(int code, Boolean acquistabile) throws SQLException {
