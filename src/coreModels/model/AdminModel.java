@@ -11,7 +11,7 @@ import coreModels.beans.UserBean;
 public abstract class AdminModel extends UserModel{
 
 	@Override
-	protected UserBean doRetrieveByKey(String user) throws SQLException {
+	public UserBean doRetrieveByKey(String user) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		UserBean bean = null;

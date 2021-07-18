@@ -1,9 +1,17 @@
 package coreModels.beans;
 
 import java.math.RoundingMode;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class FatturaBean implements java.io.Serializable{
 
+	public FatturaBean(){}
+	public FatturaBean(Registered user, GregorianCalendar date, int cod){
+		this.user=user;
+		this.date=date;
+		this.cod=cod;
+	}
 	private static final long serialVersionUID = -7048837643544538726L;
 	private java.util.List <coreModels.beans.Order> prodotti;
 	private int cod;

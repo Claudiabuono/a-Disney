@@ -2,6 +2,17 @@ package coreModels.beans;
 
 public class Adress implements java.io.Serializable {
 
+	public Adress(){}
+
+	public Adress(String street, int nCv,int CAP, String province, String citta ){
+		this.street=street;
+		this.nCv=nCv;
+		this.CAP=CAP;
+		this.province=province;
+		this.citta=citta;
+	}
+
+
 	private static final long serialVersionUID = 6021946553406606291L;
 	private String nation;
 	private String street;
@@ -10,7 +21,8 @@ public class Adress implements java.io.Serializable {
 	private String province;
 	private String citta;
 	private int codice;
-	
+
+
 	public String getNation() {
 		return nation;
 	}
@@ -53,7 +65,8 @@ public class Adress implements java.io.Serializable {
 	public void setCodice(int codice) {
 		this.codice = codice;
 	}
-	
+
+
 	public String toString (){
 		return "Indirizzo: "+street+", "+nCv +"; CAP: " +CAP +" citta: " +citta;
 	}
