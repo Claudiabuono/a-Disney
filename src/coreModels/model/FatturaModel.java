@@ -37,10 +37,11 @@ public abstract class FatturaModel {
 	//codiceFattura, registrato, dataFattura, Indirizzo
 	//fattura, prodotto, prezzoAp, quantita, ivaAp, scontoAp
 	
-	public void doSave (FatturaBean f) throws Exception {
+	public boolean doSave (FatturaBean f) throws Exception {
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null, insert = null;
+		int result=0;
 		java.util.Date da = new java.util.Date();
 
 		try {
@@ -51,7 +52,7 @@ public abstract class FatturaModel {
 				preparedStatement.setString(1, f.getUser().getLogin());
 				preparedStatement.setDate(2, new java.sql.Date(da.getTime()));
 				preparedStatement.setInt(3, f.getShipping().getCodice());
-				preparedStatement.executeUpdate();
+				result= preparedStatement.executeUpdate();
 		
 				ResultSet rs = preparedStatement.getGeneratedKeys();
 			
@@ -83,10 +84,10 @@ public abstract class FatturaModel {
 				if (connection != null)
 					closeConnection(connection);
 			}
-		}
+		}return(result !=0);
 	}
 	
-	private boolean updateQtyProducts(List<Order> prodotti, Connection connection) throws java.sql.SQLException {
+	public boolean updateQtyProducts(List<Order> prodotti, Connection connection) throws java.sql.SQLException {
 		PreparedStatement preparedStatement = null;
 		String updateProd = "UPDATE prodotto SET quantita = quantita - ? where codice = ?";
 		int cont = 0;
@@ -164,6 +165,7 @@ public abstract class FatturaModel {
 		try {
 			connection = getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL + " ORDER BY fattura");
+			preparedStatement.setString(1, e.getLogin());
 			ResultSet rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
@@ -186,7 +188,7 @@ public abstract class FatturaModel {
 	}
 	
 	//"SELECT FROM * " +ORDER_TABLE +" WHERE fattura = ?";
-	private java.util.List<Order> retrieveInvoiceOrders (int fattura, Connection connection) throws java.sql.SQLException {
+	public java.util.List<Order> retrieveInvoiceOrders (int fattura, Connection connection) throws java.sql.SQLException {
 		PreparedStatement preparedStatement = null;
 		java.util.List<Order> list = new java.util.ArrayList<Order>();
 		

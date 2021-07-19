@@ -61,10 +61,10 @@ public class TC_AdressModel {
 
     @Test
     void doDelete() throws SQLException{
-        boolean b= address.doDelete(3);
-        assertEquals(true, b);
-
+        Boolean flag= address.doDelete("matteo@alice.it");
+        assertEquals(true, flag);
     }
+
 
     @Test
     void doRetrieveAll() throws SQLException{

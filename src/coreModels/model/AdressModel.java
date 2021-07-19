@@ -73,7 +73,7 @@ public abstract class AdressModel {
 		
 	}
 
-	public boolean doDelete(int code) throws SQLException {
+	public boolean doDelete(String code) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -82,7 +82,7 @@ public abstract class AdressModel {
 		try {
 			connection = DriverMaagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(deleteSQL);
-			preparedStatement.setInt(1, code);
+			preparedStatement.setString(1, code);
 
 			result = preparedStatement.executeUpdate();
 
