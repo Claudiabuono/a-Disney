@@ -15,11 +15,27 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.*;
 public class TC_UserModel {
-    UserModel userReg, userAdmin;
+    UserModel userReg;
 
     @BeforeEach
     void setUp() throws Exception {
         userReg = new RegisteredModelDM();
-        userAdmin = new AdminModelDM();
     }
+
+    private UserBean getUser(){
+        UserBean utente= new Registered("rosalia", "capozzolo", "rosalia@libero.it", "rosalia");
+        return utente;
+    }
+
+    @Test
+    void testDoesExist() throws SQLException{
+        Boolean flag= userReg.doesExist(getUser());
+        assertEquals(true,flag);
+    }
+    @Test
+    void testLogin () throws SQLException{
+        UserBean utente= userReg.login("rosalia@libero.it", "rosalia");
+        assertEquals("rosalia@libero.it",utente.getLogin());
+    }
+
 }
