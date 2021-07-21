@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import coreModels.model.DM.FatturaModelDM;
 import coreModels.model.DM.RegisteredModelDM;
 import coreModels.model.DS.FatturaModelDS;
+import coreModels.model.FatturaModel;
 import coreModels.model.Paginator;
 
 /**
@@ -35,7 +36,7 @@ public class AdminManager extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Boolean isAdmin = (Boolean) request.getSession().getAttribute("isAdmin");
 		
@@ -76,4 +77,7 @@ public class AdminManager extends HttpServlet {
 		doGet(request, response);
 	}
 
+    public void setFatturaModel(FatturaModel fatturaDao) {
+		this.model=fatturaDao;
+    }
 }

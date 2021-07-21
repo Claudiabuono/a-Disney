@@ -25,7 +25,7 @@ public class Billing extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		coreModels.beans.Cart cart = request.getSession().getAttribute("cart") == null ? new coreModels.beans.Cart() : (coreModels.beans.Cart) request.getSession().getAttribute("cart");
 		

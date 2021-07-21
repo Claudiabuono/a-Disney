@@ -34,7 +34,7 @@ public class AddressOperations extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	@SuppressWarnings("unchecked")
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		try {
 			int op = Integer.parseInt(request.getParameter("operation"));
@@ -96,4 +96,7 @@ public class AddressOperations extends HttpServlet {
 		doGet(request, response);
 	}
 
+	public void setAdressModel(AdressModel addressDao) {
+		this.model= addressDao;
+	}
 }
