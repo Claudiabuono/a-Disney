@@ -13,6 +13,7 @@ import coreModels.beans.ProductBean;
 import coreModels.model.ProductModel;
 import coreModels.model.DM.ProductModelDM;
 import coreModels.model.DS.ProductModelDS;
+import coreModels.model.UserModel;
 
 /**
  * Servlet implementation class IndexServlet
@@ -35,7 +36,7 @@ public class IndexServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//index servlet deve caricare una lista di prodotti in sconto
 		try {
 			List<ProductBean> list = model.doRetrieveByDiscount(30, true);
@@ -55,9 +56,10 @@ public class IndexServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
+	public void setProductModel(ProductModel productDao) { this.model= productDao;}
 }
