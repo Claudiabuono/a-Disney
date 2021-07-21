@@ -41,8 +41,10 @@ public class Login extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void setUserModel(UserModel userDao) {
+		this.utente= userDao;
+	}
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		boolean paying = session.getAttribute("wasPaying") == null ? false : (Boolean) session.getAttribute("wasPaying");
 		String username = request.getParameter("username");
@@ -73,13 +75,13 @@ public class Login extends HttpServlet {
 			response.sendRedirect("error.jsp");
 			e.printStackTrace();
 		} catch (Exception e) {
-			request.setAttribute("warning", new Boolean (true));
 			getServletContext().getRequestDispatcher(response.encodeURL("/Login.jsp")).forward(request, response);
 		}
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
+
 
 }
