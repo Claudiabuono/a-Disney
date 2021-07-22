@@ -44,7 +44,7 @@ public class CartServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Cart cart = (Cart) request.getSession().getAttribute("cart");
 		
@@ -69,7 +69,8 @@ public class CartServlet extends HttpServlet {
 			
 			request.getSession().setAttribute("cart", cart);
 			getServletContext().getRequestDispatcher("/contentJSP/cartContent.jsp").forward(request, response);
-		}
+
+	}
 	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -77,4 +78,7 @@ public class CartServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
+	public void setProductModel(ProductModel prodottoDao) {
+		this.model=prodottoDao;
+	}
 }

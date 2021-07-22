@@ -41,7 +41,7 @@ public class Checkout extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Boolean isUser = (Boolean) request.getSession().getAttribute("isUser");
 		
 		if (isUser == null ? false : !isUser)
@@ -91,4 +91,7 @@ public class Checkout extends HttpServlet {
 		doGet(request, response);
 	}
 
+	public void setFatturaModel(FatturaModel fatturaDao) {
+		this.model=fatturaDao;
+	}
 }

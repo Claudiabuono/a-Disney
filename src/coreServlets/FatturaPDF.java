@@ -64,7 +64,7 @@ public class FatturaPDF extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Boolean isUser = (Boolean) session.getAttribute("isUser"), isAdmin = (Boolean) session.getAttribute("isAdmin");
 		
@@ -256,4 +256,7 @@ public class FatturaPDF extends HttpServlet {
 		doGet(request, response);
 	}
 
+	public void setFatturaModel(FatturaModel fatturaDao) {
+		this.model= fatturaDao;
+	}
 }

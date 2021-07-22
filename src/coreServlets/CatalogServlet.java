@@ -44,7 +44,7 @@ public abstract class CatalogServlet extends HttpServlet {
 		return s == null || s.trim() == "";
 	}
     
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String category = request.getParameter("ctgy");
 		String search = request.getParameter("srch");
 		java.util.List<ProductBean> list = null;
@@ -90,4 +90,7 @@ public abstract class CatalogServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
+	public void setProductModel(ProductModel prodottoDao) {
+		this.model= prodottoDao;
+	}
 }
