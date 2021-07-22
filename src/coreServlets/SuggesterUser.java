@@ -15,6 +15,7 @@ import com.google.gson.GsonBuilder;
 
 import coreModels.beans.ProductBean;
 import coreModels.beans.Registered;
+import coreModels.model.ProductModel;
 import coreModels.model.RegisteredModel;
 import coreModels.model.DM.RegisteredModelDM;
 import coreModels.model.DS.RegisteredModelDS;
@@ -55,5 +56,8 @@ public class SuggesterUser extends HttpServlet {
 			e.printStackTrace();
 		}
 		
+	}
+
+	public void setProductModel(ProductModel productDao) {
 	}
 }

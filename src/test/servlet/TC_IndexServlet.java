@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -40,6 +43,8 @@ public class TC_IndexServlet extends Mockito{
         PrintWriter writer = new PrintWriter(stringWriter);
         when(response.getWriter()).thenReturn(writer);
 
+        List<ProductBean> list= new ArrayList<>();
+        when(productDao.doRetrieveByDiscount(30, true)).thenReturn(list);
         servlet.setProductModel(productDao);
 
         assertThrows(Exception.class, ()->servlet.doPost(request, response));

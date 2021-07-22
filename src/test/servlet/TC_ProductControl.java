@@ -1,9 +1,9 @@
 package test.servlet;
 
+import coreModels.beans.RecensioneBean;
 import coreModels.model.ProductModel;
-import coreServlets.IndexServlet;
-import coreServlets.Logout;
-import org.junit.jupiter.api.BeforeAll;
+import coreModels.model.UserModel;
+import coreServlets.ProductControl;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -13,23 +13,20 @@ import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class TC_Logout extends Mockito {
+public class TC_ProductControl extends Mockito {
     private static final long serialVersionUID = 1L;
 
-    static private Logout servlet;
-    @BeforeAll
-    public static void init () {
-        servlet = new Logout();
-    }
-
-    @Test //TCS
-    public void testLogout() throws Exception {
+    static ProductControl servlet;
+/*
+    @Test //TCS Campo voto vuoto
+    public void testAddC() throws Exception {
         HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
         HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
+        ProductModel productDao= Mockito.mock(ProductModel.class);
 
+        when(request.getParameter("act")).thenReturn("addC");
 
         HttpSession session = Mockito.mock(HttpSession.class);
         when(request.getSession()).thenReturn(session);
@@ -38,9 +35,12 @@ public class TC_Logout extends Mockito {
         PrintWriter writer = new PrintWriter(stringWriter);
         when(response.getWriter()).thenReturn(writer);
 
-        servlet.doGet(request, response);
+        RecensioneBean recensioneBean = new RecensioneBean("Prodotto curato nei minimi dettagli", 0, "rosalia");
+        when(userDao.login("","rosa")).thenReturn(userBean);
+        servlet.setRecensioneModel(recensioneDao);
 
-        String result = stringWriter.getBuffer().toString().trim();
-        assertEquals("jsp/index.jsp", result);
+        assertThrows(Exception.class, ()->servlet.doPost(request, response));
     }
+
+ */
 }

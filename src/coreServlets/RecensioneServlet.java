@@ -15,6 +15,7 @@ import coreModels.model.DM.FatturaModelDM;
 import coreModels.model.RecensioneModel;
 import coreModels.model.DM.RecensioneModelDM;
 import coreModels.model.DS.RecensioneModelDS;
+import coreModels.model.UserModel;
 
 /**
  * Servlet implementation class RecenzioneServlet
@@ -70,9 +71,12 @@ public class RecensioneServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+	}
+
+	public void setRecensioneModel(RecensioneModel recensioneDao) {
 	}
 
 }

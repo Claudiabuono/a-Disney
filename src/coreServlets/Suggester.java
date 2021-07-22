@@ -58,4 +58,6 @@ public class Suggester extends HttpServlet {
 		
 	}
 
+	public void setProductModel(ProductModel productDao) {
+	}
 }
