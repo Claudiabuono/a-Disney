@@ -13,6 +13,7 @@ import coreModels.model.UserModel;
 import coreServlets.Login;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -90,12 +91,14 @@ public class TC_Login extends Mockito {
         PrintWriter writer = new PrintWriter(stringWriter);
         when(response.getWriter()).thenReturn(writer);
 
-        UserBean userBean = new Registered("rosa", "capo","rosa@libero.it" ,"rosa1234" );
+        UserBean userBean = new Registered("rosa", "capo","rosa@libero.it" ,"" );
         when(userDao.login("rosa@libero.it","")).thenReturn(userBean);
         servlet.setUserModel(userDao);
 
-        String result = stringWriter.getBuffer().toString().trim();
-        assertNotNull(result);
+        ArgumentCaptor<String> captor= ArgumentCaptor.forClass(String.class);
+        servlet.doPost(request, response);
+        verify(response).encodeURL(captor.capture());
+        assertEquals("/Login.jsp",captor.getValue());
     }
 
     @Test //TCS4
@@ -114,12 +117,14 @@ public class TC_Login extends Mockito {
         PrintWriter writer = new PrintWriter(stringWriter);
         when(response.getWriter()).thenReturn(writer);
 
-        UserBean userBean = new Registered("rosa", "capo","rosa@libero.it" ,"rosa1234" );
+        UserBean userBean = new Registered("rosa", "capo","rosalia" ,"rosalia" );
         when(userDao.login("rosalia","rosalia")).thenReturn(userBean);
         servlet.setUserModel(userDao);
 
-        String result = stringWriter.getBuffer().toString().trim();
-        assertNotNull(result);
+        ArgumentCaptor<String> captor= ArgumentCaptor.forClass(String.class);
+        servlet.doPost(request, response);
+        verify(response).encodeURL(captor.capture());
+        assertEquals("/Login.jsp",captor.getValue());
     }
 
     @Test //TCS5
@@ -141,10 +146,11 @@ public class TC_Login extends Mockito {
         UserBean userBean = new Registered("rosalia", "capozzolo","rosalia@libero.it" ,"rosalia" );
         when(userDao.login("rosalia@libero.it","rosalia")).thenReturn(userBean);
         servlet.setUserModel(userDao);
-        servlet.doPost(request, response);
 
-        String result = stringWriter.getBuffer().toString().trim();
-        assertNotNull(result);
+        ArgumentCaptor<String> captor= ArgumentCaptor.forClass(String.class);
+        servlet.doPost(request, response);
+        verify(response).encodeURL(captor.capture());
+        assertEquals("index.jsp",captor.getValue());
     }
 
 }

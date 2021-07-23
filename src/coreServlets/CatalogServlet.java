@@ -2,6 +2,7 @@ package coreServlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -63,10 +64,14 @@ public abstract class CatalogServlet extends HttpServlet {
 			else {
 				list = model.doRetrieveAll(true);
 			}
-			coreModels.model.Paginator<ProductBean> pager = new coreModels.model.Paginator<ProductBean>(numEl, pgNumber);
-			Paginator<ProductBean>.Pair obj = pager.paginate(list);
-			list = obj.pagedList;
-			request.setAttribute("maxPg", obj.maxPg);
+			if(list!=null && list.size()>0)
+			{
+				coreModels.model.Paginator<ProductBean> pager = new coreModels.model.Paginator<ProductBean>(numEl, pgNumber);
+				Paginator<ProductBean>.Pair obj = pager.paginate(list);
+				list = obj.pagedList;
+				request.setAttribute("maxPg", obj.maxPg);
+			}
+
 		} catch (SQLException e) {
 			response.sendRedirect(response.encodeURL("error.jsp"));
 			e.printStackTrace();
@@ -78,7 +83,9 @@ public abstract class CatalogServlet extends HttpServlet {
 			response.setContentType("text/html");
 			request.setAttribute("list", list);
 			request.setAttribute("sizeInput", size);
-			request.getRequestDispatcher(response.encodeURL(URL)).forward(request, response);
+			RequestDispatcher rs= request.getRequestDispatcher(response.encodeURL(URL));
+			rs.forward(request, response);
+
 		}
 		else {
 			response.setContentType("application/json");

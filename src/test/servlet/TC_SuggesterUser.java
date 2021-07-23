@@ -1,7 +1,9 @@
 package test.servlet;
 
 import coreModels.beans.ProductBean;
+import coreModels.beans.Registered;
 import coreModels.model.ProductModel;
+import coreModels.model.RegisteredModel;
 import coreServlets.Suggester;
 import coreServlets.SuggesterUser;
 import org.junit.jupiter.api.BeforeAll;
@@ -16,6 +18,7 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class TC_SuggesterUser extends Mockito {
@@ -35,9 +38,8 @@ public class TC_SuggesterUser extends Mockito {
     public void testSuggesterUser() throws Exception {
         HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
         HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
-        ProductModel productDao= Mockito.mock(ProductModel.class);
-
-        when(request.getParameter("srch")).thenReturn("");
+        RegisteredModel dao= Mockito.mock(RegisteredModel.class);
+        when(request.getParameter("srch")).thenReturn("rosalia@libero.it");
 
         HttpSession session = Mockito.mock(HttpSession.class);
         when(request.getSession()).thenReturn(session);
@@ -46,11 +48,14 @@ public class TC_SuggesterUser extends Mockito {
         PrintWriter writer = new PrintWriter(stringWriter);
         when(response.getWriter()).thenReturn(writer);
 
-        List<ProductBean> list= new ArrayList<>();
-        when(productDao.doRetrieveBySearch("Aurora", true)).thenReturn(list);
-        servlet.setProductModel(productDao);
+        List<Registered> list= new ArrayList<>();
+        Registered e = new Registered("rosalia", "capozzolo", "rosalia@libero.it", "rosalia");
+        list.add(e);
+        when(dao.doRetrieveBySearch("rosalia@libero.it")).thenReturn((ArrayList<Registered>) list);
+        servlet.setProductModel(dao);
 
+        servlet.service(request, response);
         String result = stringWriter.getBuffer().toString().trim();
-        assertNotNull(result);
+        assertEquals("[{\"name\":\"rosalia\",\"cognome\":\"capozzolo\",\"login\":\"rosalia@libero.it\",\"password\":\"rosalia\"}]",result);
     }
 }

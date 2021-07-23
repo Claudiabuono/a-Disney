@@ -19,8 +19,8 @@ public class TC_ProductControl extends Mockito {
     private static final long serialVersionUID = 1L;
 
     static ProductControl servlet;
-/*
-    @Test //TCS Campo voto vuoto
+
+  /*  @Test //TCS Campo voto vuoto
     public void testAddC() throws Exception {
         HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
         HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
@@ -40,7 +40,7 @@ public class TC_ProductControl extends Mockito {
         servlet.setRecensioneModel(recensioneDao);
 
         assertThrows(Exception.class, ()->servlet.doPost(request, response));
-    }
+    }*/
 
- */
+
 }

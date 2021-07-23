@@ -70,7 +70,13 @@ public class Login extends HttpServlet {
 					session.removeAttribute("cart");
 				} else throw new Exception();
 			}
-			response.sendRedirect(response.encodeURL(page));
+			if(password.equals("")||!username.contains("@")) {
+				response.sendRedirect(response.encodeURL("/Login.jsp"));
+			}else{
+				response.sendRedirect(response.encodeURL(page));
+			}
+
+
 		} catch (SQLException e) {
 			response.sendRedirect("error.jsp");
 			e.printStackTrace();

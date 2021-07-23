@@ -10,6 +10,7 @@ import coreModels.model.FatturaModel;
 import coreServlets.AdminManager;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeAll;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -33,14 +34,11 @@ public class TC_AdminManager extends Mockito {
         HttpSession session = Mockito.mock(HttpSession.class);
         when(request.getSession()).thenReturn(session);
 
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter writer = new PrintWriter(stringWriter);
-        when(response.getWriter()).thenReturn(writer);
-
         servlet.setFatturaModel(fatturaDao);
-        servlet.doGet(request, response);
 
-        String result = stringWriter.getBuffer().toString().trim();
-        assertNotNull(result);
+        ArgumentCaptor<String> captor= ArgumentCaptor.forClass(String.class);
+        servlet.doGet(request, response);
+        verify(response).encodeURL(captor.capture());
+        assertEquals("/Ordini.jsp",captor.getValue());
     }
 }

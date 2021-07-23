@@ -24,4 +24,16 @@ public class Registered extends UserBean{
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
 	}
+	public String getLogin() {
+		return super.getLogin();
+	}
+	public void setLogin(String login) {
+		super.setLogin(login);
+	}
+	public String getPassword() {
+		return super.getPassword();
+	}
+	public void setPassword(String password) {
+		super.setPassword(password);
+	}
 }

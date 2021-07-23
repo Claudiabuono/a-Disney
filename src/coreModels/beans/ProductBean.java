@@ -36,7 +36,7 @@ public class ProductBean implements Serializable {
 		this.category= categoria;
 		this.qty= quantity;
 		this.discount= sconto;
-	//	this.price=(BigDecimal) price;
+	//	this.price=price;
 		this.iva= iva;
 		this.discount= sconto;
 	}

@@ -1,9 +1,14 @@
 package test.servlet;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,6 +19,7 @@ import coreServlets.CatalogServlet;
 import coreServlets.ConsumerCatalog;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -41,10 +47,11 @@ public class TC_CatalogServlet  extends Mockito{
 
         List<ProductBean> lista=new ArrayList<>();
         when(prodottoDao.doRetrieveByCategory(0)).thenReturn(lista);
-        Paginator p= new Paginator(4,1);
-        Paginator<ProductBean>.Pair obj = null;
-        when(p.paginate(lista)).thenReturn(obj);
         servlet.setProductModel(prodottoDao);
+
+        RequestDispatcher rd = mock(RequestDispatcher.class);
+        when(request.getRequestDispatcher(eq("Catalogo.jsp"))).thenReturn(rd);
+
         servlet.doGet(request, response);
 
         String result = stringWriter.getBuffer().toString().trim();
@@ -55,7 +62,6 @@ public class TC_CatalogServlet  extends Mockito{
         HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
         HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
         ProductModel prodottoDao= Mockito.mock(ProductModel.class);
-
 
         when(request.getParameter("ctgy")).thenReturn("");
         when(request.getParameter("srch")).thenReturn("Alice");
@@ -69,11 +75,17 @@ public class TC_CatalogServlet  extends Mockito{
         List<ProductBean> lista=new ArrayList<>();
         when(prodottoDao.doRetrieveBySearch("Alice",true)).thenReturn(lista);
         servlet.setProductModel(prodottoDao);
+
+        RequestDispatcher rd = mock(RequestDispatcher.class);
+        when(response.encodeURL("Catalogo.jsp")).thenReturn("Catalogo.jsp");
+        when(request.getRequestDispatcher(eq("Catalogo.jsp"))).thenReturn(rd);
+
+        ArgumentCaptor<String> captor= ArgumentCaptor.forClass(String.class);
         servlet.doGet(request, response);
 
-
-        String result = stringWriter.getBuffer().toString().trim();
-        assertNotNull(result);
+        verify(rd).forward(request, response);
+        verify(response).encodeURL(captor.capture());
+        assertEquals("Catalogo.jsp",captor.getValue());
     }
 
     @Test
@@ -95,6 +107,10 @@ public class TC_CatalogServlet  extends Mockito{
         List<ProductBean> lista=new ArrayList<>();
         when(prodottoDao.doRetrieveAll(true)).thenReturn(lista);
         servlet.setProductModel(prodottoDao);
+
+        RequestDispatcher rd = mock(RequestDispatcher.class);
+        when(request.getRequestDispatcher(eq("Catalogo.jsp"))).thenReturn(rd);
+
         servlet.doGet(request, response);
 
 
