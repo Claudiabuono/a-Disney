@@ -39,7 +39,7 @@ public class ProductControl extends HttpServlet {
 			model = new ProductModelDM();
 	}
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String action = request.getParameter("act");
 		
@@ -103,5 +103,9 @@ public class ProductControl extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+	}
+
+	public void setProductModel(ProductModel productDao) {
+		this.model= productDao;
 	}
 }
