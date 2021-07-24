@@ -45,16 +45,25 @@ public class AddressOperations extends HttpServlet {
 				request.getSession().setAttribute("addresses", model.doRetrieveAll(user.getLogin()));
 			} else if (op == 1 && user != null) {
 				//operazione di inserimento
+				String cap= request.getParameter("cap");
+				String citta=request.getParameter("citta");
+				String stato= request.getParameter("stato");
+				String ncv= request.getParameter("ncv");
+				String provincia= request.getParameter("provincia");
+				String via= request.getParameter("via");
+				if(cap.length()<5 || citta.contains("[0-9]+") || stato.contains("[0-9]+") || provincia.contains("[0-9]+") || via.contains("[0-9]+")){
+					response.sendRedirect(response.encodeURL("error.jsp"));
+				}
+
 				Adress bean = new Adress ();
-				
-				bean.setCAP(Integer.parseInt(request.getParameter("cap")));
-				bean.setCitta(request.getParameter("citta"));
-				bean.setNation(request.getParameter("stato"));
-				bean.setnCv(Integer.parseInt(request.getParameter("ncv")));
-				bean.setProvince(request.getParameter("provincia"));
-				bean.setStreet(request.getParameter("via"));
+				bean.setCAP(Integer.parseInt(cap));
+				bean.setCitta(citta);
+				bean.setNation(stato);
+				bean.setnCv(Integer.parseInt(ncv));
+				bean.setProvince(provincia);
+				bean.setStreet(via);
 				bean.setCodice(model.doSave(bean, user));
-				
+
 				if (ad != null) {
 					ad.put(bean.getCodice(), bean);
 					request.getSession().setAttribute("addresses", ad);
@@ -74,7 +83,9 @@ public class AddressOperations extends HttpServlet {
 				bean.setProvince(request.getParameter("provincia"));
 				bean.setStreet(request.getParameter("via"));
 				
-				model.doModify(Integer.parseInt(request.getParameter("code")), bean);
+				Boolean flag= model.doModify(Integer.parseInt(request.getParameter("code")), bean);
+				request.getSession().setAttribute("flagModifica", flag);
+
 			} else if (op == 3 && user != null) {
 				//operazione di cancellazione (cambiare con string e stringa deve essere l'email di registrato)
 				//model.doDelete(Integer.parseInt(request.getParameter("code")));

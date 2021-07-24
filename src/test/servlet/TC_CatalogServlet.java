@@ -5,10 +5,7 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -62,6 +59,7 @@ public class TC_CatalogServlet  extends Mockito{
         HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
         HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
         ProductModel prodottoDao= Mockito.mock(ProductModel.class);
+        ServletContext sc= Mockito.mock( ServletContext.class);
 
         when(request.getParameter("ctgy")).thenReturn("");
         when(request.getParameter("srch")).thenReturn("Alice");
@@ -77,9 +75,7 @@ public class TC_CatalogServlet  extends Mockito{
         servlet.setProductModel(prodottoDao);
 
         RequestDispatcher rd = mock(RequestDispatcher.class);
-        when(response.encodeURL("Catalogo.jsp")).thenReturn("Catalogo.jsp");
-        when(request.getRequestDispatcher(eq("Catalogo.jsp"))).thenReturn(rd);
-
+        when(sc.getRequestDispatcher("Catalogo.jsp")).thenReturn(rd);
         ArgumentCaptor<String> captor= ArgumentCaptor.forClass(String.class);
         servlet.doGet(request, response);
 
