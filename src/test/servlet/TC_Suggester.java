@@ -1,47 +1,58 @@
 package test.servlet;
 
 import coreModels.beans.ProductBean;
+import coreModels.model.Paginator;
+import coreModels.model.Pair;
 import coreModels.model.ProductModel;
-import coreServlets.IndexServlet;
-import coreServlets.Suggester;
-import org.junit.jupiter.api.BeforeAll;
+import coreModels.model.RegisteredModel;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
-import org.mockito.Mockito;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-public class TC_Suggester extends Mockito {
+public class TC_Suggester  {
 
-    private static final long serialVersionUID = 1L;
-    static boolean isDataSource = false;
+    @Mock
+    HttpServletRequest request;
 
-    static ProductBean product;
-    static private Suggester servlet;
+    @Mock
+    HttpServletResponse response;
 
+    @Mock
+    HttpSession session;
 
-    @BeforeAll
-    public static void init () {
-        servlet = new Suggester();
+    @Mock
+    ProductModel productDao;
+
+    @InjectMocks
+    coreServlets.Suggester servlet;
+
+    @BeforeEach
+    public void setUp() throws Exception {
+        MockitoAnnotations.initMocks(this);
     }
 
     @Test //TCS
     public void testSuggester() throws Exception {
-        HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
-        HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
-        ProductModel productDao= Mockito.mock(ProductModel.class);
+
         when(request.getParameter("srch")).thenReturn("peluche");
 
-        HttpSession session = Mockito.mock(HttpSession.class);
         when(request.getSession()).thenReturn(session);
 
         StringWriter stringWriter = new StringWriter();
@@ -52,7 +63,6 @@ public class TC_Suggester extends Mockito {
         ProductBean b= new ProductBean ("prova", " prova", "prova ", "prova", "prova", 0, 6, 10, 20,8);
         b.setPrice(45);
         list.add(b);
-        servlet.setProductModel(productDao);
         when(productDao.doRetrieveBySearch("peluche", true)).thenReturn(list);
 
         servlet.service(request, response);

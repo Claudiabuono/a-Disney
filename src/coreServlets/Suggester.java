@@ -58,8 +58,4 @@ public class Suggester extends HttpServlet {
 		
 	}
 
-	public void setProductModel(ProductModel productDao) {
-		this.model= productDao;
-		this.parser= new GsonBuilder().registerTypeAdapter(ProductBean.class, new json.JsonBuilderProd()).create();
-	}
 }
