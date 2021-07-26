@@ -1,40 +1,64 @@
 package test.servlet;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import coreModels.beans.Cart;
 import coreModels.beans.Order;
 import coreModels.beans.ProductBean;
+import coreModels.model.Paginator;
+import coreModels.model.Pair;
 import coreModels.model.ProductModel;
-import coreServlets.CartServlet;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
-import org.mockito.Mockito;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
-import static org.junit.jupiter.api.Assertions.*;
-public class TC_CartServlet extends Mockito{
-    static private CartServlet servlet;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
-    @BeforeAll
-    public static void init () {
-        servlet = new CartServlet();
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+public class TC_CartServlet{
+
+    @Mock
+    HttpServletRequest request;
+
+    @Mock
+    HttpServletResponse response;
+
+    @Mock
+    HttpSession session;
+
+    @Mock
+    ProductModel prodottoDao;
+
+    @Mock
+    RequestDispatcher rd;
+
+    @Mock
+    ServletContext servletContext;
+
+    @Mock
+    ServletConfig config;
+
+    @InjectMocks
+    coreServlets.CartServlet servlet;
+
+    @BeforeEach
+    public void setUp() throws Exception {
+        MockitoAnnotations.initMocks(this);
     }
 
     @Test
     public void testCartServlet() throws Exception {
-        HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
-        HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
-        ProductModel prodottoDao= Mockito.mock(ProductModel.class);
-
-        HttpSession session = Mockito.mock(HttpSession.class);
         when(request.getSession()).thenReturn(session);
 
         Cart c= new Cart();
@@ -42,16 +66,15 @@ public class TC_CartServlet extends Mockito{
         prodotto.setCode(3);
         c.addOrder(new Order(prodotto,4));
 
-        when(request.getSession().getAttribute("cart")).thenReturn(c);
+        when(session.getAttribute("cart")).thenReturn(c);
         List<ProductBean> list= new ArrayList<>();
         when(prodottoDao.doRetrieveList(c.getCodes(), true)).thenReturn(list);
 
-        RequestDispatcher rd = mock(RequestDispatcher.class);
-        when(request.getServletContext().getRequestDispatcher("/contentJSP/cartContent.jsp")).thenReturn(rd);
-
-        servlet.setProductModel(prodottoDao);
 
         ArgumentCaptor<String> captor= ArgumentCaptor.forClass(String.class);
+        servlet.init(config);
+        when(request.getServletContext()).thenReturn(servletContext);
+        when(servletContext.getRequestDispatcher("/contentJSP/cartContent.jsp")).thenReturn(rd);
         servlet.doGet(request, response);
         verify(response).encodeURL(captor.capture());
         assertEquals("/contentJSP/cartContent.jsp",captor.getValue());

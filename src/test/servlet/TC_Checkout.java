@@ -1,53 +1,67 @@
 package test.servlet;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.util.HashMap;
-import java.util.Map;
+import coreModels.beans.*;
+import coreModels.model.FatturaModel;
+import coreModels.model.Paginator;
+import coreModels.model.Pair;
+import coreModels.model.ProductModel;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import coreModels.beans.Adress;
-import coreModels.beans.Cart;
-import coreModels.beans.Order;
-import coreModels.beans.ProductBean;
-import coreModels.model.FatturaModel;
-import coreServlets.Checkout;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Mockito;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-import static org.junit.jupiter.api.Assertions.*;
-public class TC_Checkout extends Mockito{
-    static private Checkout servlet;
+public class TC_Checkout {
+    @Mock
+    HttpServletRequest request;
 
-    @BeforeAll
-    public static void init () {
-       servlet = new Checkout();
+    @Mock
+    HttpServletResponse response;
+
+    @Mock
+    FatturaModel fatturaDao;
+
+    @Mock
+    HttpSession session;
+
+    @InjectMocks
+    coreServlets.Checkout servlet;
+
+    @BeforeEach
+    public void setUp() throws Exception {
+        MockitoAnnotations.initMocks(this);
     }
 
     @Test
-    public void testCheckout1() throws Exception {
-        HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
-        HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
-        FatturaModel fatturaDao= Mockito.mock(FatturaModel.class);
-
-        HttpSession session = Mockito.mock(HttpSession.class);
-        when(request.getSession()).thenReturn(session);
+    public void testCheckout1() throws Exception {//deve andare in thanks ma non va, per eccezione
+       when(request.getSession()).thenReturn(session);
+        when(session.getAttribute("isUser")).thenReturn(true);
 
         Cart c= new Cart();
         ProductBean prodotto= new ProductBean();
         prodotto.setCode(3);
         c.addOrder(new Order(prodotto,4));
         Map<Integer, Adress> addresses= new HashMap<>();
-        when(request.getSession().getAttribute("cart")).thenReturn(c);
+        when(session.getAttribute("cart")).thenReturn(c);
         when(request.getParameter("address")).thenReturn("2");
-        when(request.getSession().getAttribute("addresses")).thenReturn(addresses);
-
-         servlet.setFatturaModel(fatturaDao);
+        when(session.getAttribute("addresses")).thenReturn(addresses);
+        Registered e= new Registered();
+        when(session.getAttribute("user")).thenReturn(e);
 
         ArgumentCaptor<String> captor= ArgumentCaptor.forClass(String.class);
         servlet.doGet(request, response);
@@ -56,19 +70,14 @@ public class TC_Checkout extends Mockito{
     }
     @Test
     public void testCheckout2() throws Exception {
-        HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
-        HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
-        FatturaModel fatturaDao= Mockito.mock(FatturaModel.class);
 
-        HttpSession session = Mockito.mock(HttpSession.class);
         when(request.getSession()).thenReturn(session);
+        when(session.getAttribute("isUser")).thenReturn(true);
         Cart c= new Cart();
         when(request.getSession().getAttribute("cart")).thenReturn(c);
         Map<Integer, Adress> addresses= new HashMap<>();
         when(request.getParameter("address")).thenReturn("2");
         when(request.getSession().getAttribute("addresses")).thenReturn(addresses);
-
-        servlet.setFatturaModel(fatturaDao);
 
         ArgumentCaptor<String> captor= ArgumentCaptor.forClass(String.class);
         servlet.doGet(request, response);
