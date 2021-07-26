@@ -5,17 +5,21 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import coreModels.beans.FatturaBean;
 import coreModels.model.DM.FatturaModelDM;
 import coreModels.model.DM.RegisteredModelDM;
 import coreModels.model.DS.FatturaModelDS;
 import coreModels.model.FatturaModel;
 import coreModels.model.Paginator;
+import coreModels.model.Pair;
 
 /**
  * Servlet implementation class AdminManager
@@ -53,14 +57,17 @@ public class AdminManager extends HttpServlet {
 				java.util.Date a = par2 == null || "".equals(par2) ? null : format.parse(par2);
 				
 				coreModels.model.Paginator<coreModels.beans.FatturaBean> pager = new coreModels.model.Paginator<coreModels.beans.FatturaBean>(10, pg == null ? 1 : Integer.parseInt(pg) );
-				Paginator<coreModels.beans.FatturaBean>.Pair obj = pager.paginate(login == null || "".equals(login) ? model.retrieveInvoices(da, a) : model.retrieveInvoices(new RegisteredModelDM().doRetrieveByKey(login), da, a));
+				Pair<FatturaBean> obj = pager.paginate(login == null || "".equals(login) ? model.retrieveInvoices(da, a) : model.retrieveInvoices(new RegisteredModelDM().doRetrieveByKey(login), da, a));
 				
 				request.setAttribute("maxPg", obj.maxPg);
 				request.setAttribute("fatture", obj.pagedList);
 				
-				if (request.getHeader("x-requested-with") == null)
-					getServletContext().getRequestDispatcher(response.encodeURL("/Ordini.jsp")).forward(request, response);
-				else getServletContext().getRequestDispatcher(response.encodeURL("/contentJSP/tableOrdersadmin.jsp")).forward(request, response);
+				if (request.getHeader("x-requested-with") == null){
+					ServletContext servletContext = getServletContext();
+					RequestDispatcher dispatcher = servletContext.getRequestDispatcher(response.encodeURL("/Ordini.jsp"));
+					dispatcher.forward(request, response);
+				}
+					else getServletContext().getRequestDispatcher(response.encodeURL("/contentJSP/tableOrdersadmin.jsp")).forward(request, response);
 			} catch (ParseException | SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

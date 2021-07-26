@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 public class ConsumerCatalog extends CatalogServlet {
 	private static final long serialVersionUID = 1L;
 
+
 	public void init(javax.servlet.ServletConfig config) throws ServletException {
 		super.init(config);
 

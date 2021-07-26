@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import coreModels.beans.FatturaBean;
 import coreModels.model.FatturaModel;
 import coreModels.model.DM.FatturaModelDM;
 import coreModels.model.RegisteredModel;
@@ -43,7 +44,7 @@ public class UserManager extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
     
-    private coreModels.model.Paginator<coreModels.beans.FatturaBean>.Pair paginate (java.util.List <coreModels.beans.FatturaBean> list, int pgNumber) {
+    private coreModels.model.Pair<FatturaBean> paginate (java.util.List <coreModels.beans.FatturaBean> list, int pgNumber) {
     	coreModels.model.Paginator<coreModels.beans.FatturaBean> pager = new coreModels.model.Paginator<coreModels.beans.FatturaBean>(10, pgNumber);
 		return pager.paginate(list);
     }
@@ -73,7 +74,7 @@ public class UserManager extends HttpServlet {
 					String pg = request.getParameter("pg");
 					
 					if(request.getHeader("x-requested-with") == null) {
-						coreModels.model.Paginator<coreModels.beans.FatturaBean>.Pair obj = this.paginate(fatt.retrieveInvoices(bean, null, null), pg == null ? 1 : Integer.parseInt(pg));						
+						coreModels.model.Pair<FatturaBean> obj = this.paginate(fatt.retrieveInvoices(bean, null, null), pg == null ? 1 : Integer.parseInt(pg));
 						request.setAttribute("fatture", obj.pagedList);
 						request.setAttribute("maxPg", obj.maxPg);
 						
@@ -86,7 +87,7 @@ public class UserManager extends HttpServlet {
 						java.util.Date da = par1 == null || "".equals(par1) ? null : format.parse(par1);
 						java.util.Date a = par2 == null || "".equals(par2)? null : format.parse(par2);
 						
-						coreModels.model.Paginator<coreModels.beans.FatturaBean>.Pair obj = this.paginate(fatt.retrieveInvoices(bean, da, a), pg == null ? 1 : Integer.parseInt(pg));
+						coreModels.model.Pair<FatturaBean> obj = this.paginate(fatt.retrieveInvoices(bean, da, a), pg == null ? 1 : Integer.parseInt(pg));
 						
 						request.setAttribute("fatture", obj.pagedList);
 						request.setAttribute("maxPg", obj.maxPg);

@@ -12,6 +12,7 @@ import com.google.gson.GsonBuilder;
 
 import coreModels.beans.ProductBean;
 import coreModels.model.Paginator;
+import coreModels.model.Pair;
 import coreModels.model.ProductModel;
 import coreModels.model.DM.ProductModelDM;
 import coreModels.model.DS.ProductModelDS;
@@ -22,7 +23,7 @@ import coreModels.model.DS.ProductModelDS;
 @WebServlet("/CatalogServlet")
 public abstract class CatalogServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+	//= "Catalogo.jsp"  = 20
     protected String URL;
     protected int numEl;
     /**
@@ -67,7 +68,7 @@ public abstract class CatalogServlet extends HttpServlet {
 			if(list!=null && list.size()>0)
 			{
 				coreModels.model.Paginator<ProductBean> pager = new coreModels.model.Paginator<ProductBean>(numEl, pgNumber);
-				Paginator<ProductBean>.Pair obj = pager.paginate(list);
+				Pair<ProductBean> obj = pager.paginate(list);
 				list = obj.pagedList;
 				request.setAttribute("maxPg", obj.maxPg);
 			}

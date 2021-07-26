@@ -19,7 +19,7 @@ public class Paginator <E> {
 		page = pg;
 	}
 	
-	public Pair paginate (java.util.List<E> list){
+	public Pair<E> paginate (java.util.List<E> list){
 		java.util.List<E> pagedList = null;
 		int start = numEl * (page - 1);
 		int size = list.size();
@@ -31,15 +31,5 @@ public class Paginator <E> {
 			pagedList = list.subList(start, size);
 			
 		return new Pair (pagedList, maxPg);
-	}
-	
-	public class Pair {
-		public java.util.List<E> pagedList;
-		public int maxPg;
-		
-		Pair (java.util.List<E> list, int max){
-			maxPg = max;
-			pagedList = list;
-		}
 	}
 }
