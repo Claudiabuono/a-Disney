@@ -1,99 +1,76 @@
 package test.servlet;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
+import coreModels.beans.Registered;
+import coreModels.beans.UserBean;
+import coreModels.model.UserModel;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import coreModels.beans.Registered;
-import coreModels.beans.UserBean;
-import coreModels.model.UserModel;
-import coreServlets.Login;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Mockito;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-import static org.junit.jupiter.api.Assertions.*;
+public class TC_Login{
+    @Mock
+    HttpServletRequest request;
 
-public class TC_Login extends Mockito {
+    @Mock
+    HttpServletResponse response;
 
-    static private Login servlet;
-    static UserBean user;
+    @Mock
+    HttpSession session;
 
-    @BeforeAll
-    public static void init () {
-        user = new Registered();
-        servlet = new Login();
+    @Mock
+    UserBean user;
 
-        user.setLogin("rosalia@libero.it");
-        user.setPassword("rosalia");
+    @Mock
+    UserModel userDao;
+
+    @InjectMocks
+    coreServlets.Login servlet;
+
+    @BeforeEach
+    public void setUp() throws Exception {
+        MockitoAnnotations.initMocks(this);
     }
+
     @Test //TCS1
     public void testLogin1() throws Exception {
-        HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
-        HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
-        UserModel userDao= Mockito.mock(UserModel.class);
-
         when(request.getParameter("username")).thenReturn("rosa@libero.it");
         when(request.getParameter("password")).thenReturn("rosa1234");
-
-        HttpSession session = Mockito.mock(HttpSession.class);
         when(request.getSession()).thenReturn(session);
-
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter writer = new PrintWriter(stringWriter);
-        when(response.getWriter()).thenReturn(writer);
 
         UserBean userBean = new Registered("rosa", "capo","rosa@libero.it" ,"rosa1234" );
         when(userDao.login("rosa@libero.it","rosa")).thenReturn(userBean);
-        servlet.setUserModel(userDao);
 
         assertThrows(Exception.class, ()->servlet.doPost(request, response));
     }
     @Test //TCS2
     public void testLogin2() throws Exception {
-        HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
-        HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
-        UserModel userDao= Mockito.mock(UserModel.class);
-
         when(request.getParameter("username")).thenReturn("");
         when(request.getParameter("password")).thenReturn("rosa1234");
-
-        HttpSession session = Mockito.mock(HttpSession.class);
         when(request.getSession()).thenReturn(session);
-
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter writer = new PrintWriter(stringWriter);
-        when(response.getWriter()).thenReturn(writer);
-
         UserBean userBean = new Registered("rosa", "capo","rosa@libero.it" ,"rosa1234" );
         when(userDao.login("","rosa")).thenReturn(userBean);
-        servlet.setUserModel(userDao);
 
         assertThrows(Exception.class, ()->servlet.doPost(request, response));
     }
     @Test //TCS3
     public void testLogin3() throws Exception {
-        HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
-        HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
-        UserModel userDao= Mockito.mock(UserModel.class);
-
         when(request.getParameter("username")).thenReturn("rosa@libero.it");
         when(request.getParameter("password")).thenReturn("");
-
-        HttpSession session = Mockito.mock(HttpSession.class);
         when(request.getSession()).thenReturn(session);
-
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter writer = new PrintWriter(stringWriter);
-        when(response.getWriter()).thenReturn(writer);
-
         UserBean userBean = new Registered("rosa", "capo","rosa@libero.it" ,"" );
         when(userDao.login("rosa@libero.it","")).thenReturn(userBean);
-        servlet.setUserModel(userDao);
 
         ArgumentCaptor<String> captor= ArgumentCaptor.forClass(String.class);
         servlet.doPost(request, response);
@@ -103,24 +80,10 @@ public class TC_Login extends Mockito {
 
     @Test //TCS4
     public void testLogin4() throws Exception {
-        HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
-        HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
-        UserModel userDao= Mockito.mock(UserModel.class);
-
         when(request.getParameter("username")).thenReturn("rosalia");
         when(request.getParameter("password")).thenReturn("rosalia");
-
-        HttpSession session = Mockito.mock(HttpSession.class);
         when(request.getSession()).thenReturn(session);
-
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter writer = new PrintWriter(stringWriter);
-        when(response.getWriter()).thenReturn(writer);
-
-        UserBean userBean = new Registered("rosa", "capo","rosalia" ,"rosalia" );
-        when(userDao.login("rosalia","rosalia")).thenReturn(userBean);
-        servlet.setUserModel(userDao);
-
+        when(response.encodeURL("/Login.jsp")).thenReturn("/Login.jsp");
         ArgumentCaptor<String> captor= ArgumentCaptor.forClass(String.class);
         servlet.doPost(request, response);
         verify(response).encodeURL(captor.capture());
@@ -129,23 +92,12 @@ public class TC_Login extends Mockito {
 
     @Test //TCS5
     public void testLogin5() throws Exception {
-        HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
-        HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
-        UserModel userDao= Mockito.mock(UserModel.class);
-
         when(request.getParameter("username")).thenReturn("rosalia@libero.it");
         when(request.getParameter("password")).thenReturn("rosalia");
-
-        HttpSession session = Mockito.mock(HttpSession.class);
         when(request.getSession()).thenReturn(session);
-
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter writer = new PrintWriter(stringWriter);
-        when(response.getWriter()).thenReturn(writer);
 
         UserBean userBean = new Registered("rosalia", "capozzolo","rosalia@libero.it" ,"rosalia" );
         when(userDao.login("rosalia@libero.it","rosalia")).thenReturn(userBean);
-        servlet.setUserModel(userDao);
 
         ArgumentCaptor<String> captor= ArgumentCaptor.forClass(String.class);
         servlet.doPost(request, response);

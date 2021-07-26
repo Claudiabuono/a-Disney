@@ -51,6 +51,9 @@ public class Login extends HttpServlet {
 		String password = request.getParameter("password");
 		String page = new String();
 
+		if(password.equals("")||!username.contains("@")) {
+			response.sendRedirect(response.encodeURL("/Login.jsp"));
+		}
 		try {
 			UserBean user = utente.login(username, password);
 			if (user != null){ 
@@ -70,11 +73,8 @@ public class Login extends HttpServlet {
 					session.removeAttribute("cart");
 				} else throw new Exception();
 			}
-			if(password.equals("")||!username.contains("@")) {
-				response.sendRedirect(response.encodeURL("/Login.jsp"));
-			}else{
-				response.sendRedirect(response.encodeURL(page));
-			}
+			response.sendRedirect(response.encodeURL(page));
+
 
 
 		} catch (SQLException e) {
