@@ -105,7 +105,4 @@ public class ProductControl extends HttpServlet {
 		doGet(request, response);
 	}
 
-	public void setProductModel(ProductModel productDao) {
-		this.model= productDao;
-	}
 }

@@ -91,10 +91,8 @@ public class ProductAdminControl extends HttpServlet {
 			}
 			catch (SQLException e) {
 				response.sendRedirect(response.encodeURL("error.jsp"));
-				e.printStackTrace();
 			}
 			catch (java.lang.NumberFormatException e){
-				e.printStackTrace();
 				response.sendError(406);
 			}
 	}
@@ -107,5 +105,5 @@ public class ProductAdminControl extends HttpServlet {
 		doGet(request, response);
 	}
 
-	public void setProductModel(ProductModel productDao) { this.model= productDao;}
+
 }

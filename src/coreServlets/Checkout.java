@@ -75,11 +75,12 @@ public class Checkout extends HttpServlet {
 		}
 		catch (NumberFormatException w) {
 			request.setAttribute("warning", true);
-			getServletContext().getRequestDispatcher(response.encodeURL("/Billing")).forward(request, response);
+			request.getRequestDispatcher(response.encodeURL("/Billing")).forward(request, response);
 		}
 		catch (Exception e) {
+			e.printStackTrace();
 			request.setAttribute("warning", true);
-			getServletContext().getRequestDispatcher(response.encodeURL("/Billing")).forward(request, response);
+			request.getRequestDispatcher(response.encodeURL("/Billing")).forward(request, response);
 		}
 	}
 

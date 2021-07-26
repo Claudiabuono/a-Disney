@@ -52,10 +52,6 @@ public class TC_AdminManager {
     @Mock
     FatturaModel fatturaDao;
 
-    @Mock
-    ServletContext servletContext;
-
-
     @InjectMocks
     coreServlets.AdminManager servlet;
 
@@ -86,14 +82,14 @@ public class TC_AdminManager {
         when(fatturaDao.retrieveInvoices(da, a)).thenReturn(list);
         when(fatturaDao.retrieveInvoices(r, da, a)).thenReturn(list);
         when(paginator.paginate(list)).thenReturn(pair1);
-        when(response.encodeURL("/contentJSP/tableOrdersadmin.jsp")).thenReturn("/contentJSP/tableOrdersadmin.jsp");
+        when(response.encodeURL("/Ordini.jsp")).thenReturn("/Ordini.jsp");
 
-        when(servletContext.getRequestDispatcher("/contentJSP/tableOrdersadmin.jsp")).thenReturn(rd);
+        when(request.getRequestDispatcher("/Ordini.jsp")).thenReturn(rd);
 
         ArgumentCaptor<String> captor= ArgumentCaptor.forClass(String.class);
         servlet.doGet(request, response);
         verify(rd).forward(request, response);
         verify(response).encodeURL(captor.capture());
-        assertEquals("/contentJSP/tableOrdersadmin.jsp",captor.getValue());
+        assertEquals("/Ordini.jsp",captor.getValue());
     }
 }

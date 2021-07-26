@@ -50,7 +50,7 @@ public class IndexServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		getServletContext().getRequestDispatcher("/contentJSP/ProductCard.jsp").forward(request, response);
+		request.getRequestDispatcher("/contentJSP/ProductCard.jsp").forward(request, response);
 	}
 
 	/**
@@ -61,5 +61,4 @@ public class IndexServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
-	public void setProductModel(ProductModel productDao) { this.model= productDao;}
 }

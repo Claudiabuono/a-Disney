@@ -51,9 +51,7 @@ public class Login extends HttpServlet {
 		String password = request.getParameter("password");
 		String page = new String();
 
-		if(password.equals("")||!username.contains("@")) {
-			response.sendRedirect(response.encodeURL("/Login.jsp"));
-		}
+
 		try {
 			UserBean user = utente.login(username, password);
 			if (user != null){ 
@@ -81,7 +79,7 @@ public class Login extends HttpServlet {
 			response.sendRedirect("error.jsp");
 			e.printStackTrace();
 		} catch (Exception e) {
-			getServletContext().getRequestDispatcher(response.encodeURL("/Login.jsp")).forward(request, response);
+			request.getRequestDispatcher(response.encodeURL("/Login.jsp")).forward(request, response);
 		}
 	}
 

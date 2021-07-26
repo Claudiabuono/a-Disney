@@ -10,6 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -34,6 +35,9 @@ public class TC_Login{
 
     @Mock
     UserModel userDao;
+
+    @Mock
+    RequestDispatcher rd;
 
     @InjectMocks
     coreServlets.Login servlet;
@@ -71,6 +75,8 @@ public class TC_Login{
         when(request.getSession()).thenReturn(session);
         UserBean userBean = new Registered("rosa", "capo","rosa@libero.it" ,"" );
         when(userDao.login("rosa@libero.it","")).thenReturn(userBean);
+        when(response.encodeURL("/Login.jsp")).thenReturn("/Login.jsp");
+        when(request.getRequestDispatcher("/Login.jsp")).thenReturn(rd);
 
         ArgumentCaptor<String> captor= ArgumentCaptor.forClass(String.class);
         servlet.doPost(request, response);
@@ -84,6 +90,10 @@ public class TC_Login{
         when(request.getParameter("password")).thenReturn("rosalia");
         when(request.getSession()).thenReturn(session);
         when(response.encodeURL("/Login.jsp")).thenReturn("/Login.jsp");
+
+        when(response.encodeURL("/Login.jsp")).thenReturn("/Login.jsp");
+        when(request.getRequestDispatcher("/Login.jsp")).thenReturn(rd);
+
         ArgumentCaptor<String> captor= ArgumentCaptor.forClass(String.class);
         servlet.doPost(request, response);
         verify(response).encodeURL(captor.capture());

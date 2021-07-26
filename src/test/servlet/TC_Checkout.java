@@ -37,6 +37,12 @@ public class TC_Checkout {
     FatturaModel fatturaDao;
 
     @Mock
+    FatturaBean fatturaBean;
+
+    @Mock
+    RequestDispatcher rd;
+
+    @Mock
     HttpSession session;
 
     @InjectMocks
@@ -48,7 +54,7 @@ public class TC_Checkout {
     }
 
     @Test
-    public void testCheckout1() throws Exception {//deve andare in thanks ma non va, per eccezione
+    public void testCheckout1() throws Exception {
        when(request.getSession()).thenReturn(session);
         when(session.getAttribute("isUser")).thenReturn(true);
 
@@ -62,11 +68,13 @@ public class TC_Checkout {
         when(session.getAttribute("addresses")).thenReturn(addresses);
         Registered e= new Registered();
         when(session.getAttribute("user")).thenReturn(e);
+        when(response.encodeURL("/Billing")).thenReturn("/Billing");
+        when(request.getRequestDispatcher("/Billing")).thenReturn(rd);
 
         ArgumentCaptor<String> captor= ArgumentCaptor.forClass(String.class);
         servlet.doGet(request, response);
-        verify(response).sendRedirect(captor.capture());
-        assertEquals("Thanks.jsp",captor.getValue());
+        verify(response).encodeURL(captor.capture());
+        assertEquals("/Billing",captor.getValue());
     }
     @Test
     public void testCheckout2() throws Exception {
@@ -74,14 +82,41 @@ public class TC_Checkout {
         when(request.getSession()).thenReturn(session);
         when(session.getAttribute("isUser")).thenReturn(true);
         Cart c= new Cart();
-        when(request.getSession().getAttribute("cart")).thenReturn(c);
+        when(session.getAttribute("cart")).thenReturn(c);
         Map<Integer, Adress> addresses= new HashMap<>();
         when(request.getParameter("address")).thenReturn("2");
-        when(request.getSession().getAttribute("addresses")).thenReturn(addresses);
+        when(session.getAttribute("addresses")).thenReturn(addresses);
 
         ArgumentCaptor<String> captor= ArgumentCaptor.forClass(String.class);
         servlet.doGet(request, response);
         verify(response).encodeURL(captor.capture());
         assertEquals("error.jsp",captor.getValue());
+    }
+
+    @Test
+    public void testCheckout3() throws Exception {
+        when(request.getSession()).thenReturn(session);
+        when(session.getAttribute("isUser")).thenReturn(true);
+
+        Cart c= new Cart();
+        ProductBean prodotto= new ProductBean();
+        prodotto.setCode(3);
+        c.addOrder(new Order(prodotto,4));
+        Map<Integer, Adress> addresses= new HashMap<>();
+        Adress a= new Adress();
+        a.setCodice(2);
+        when(session.getAttribute("addresses")).thenReturn(addresses);
+        when(session.getAttribute("cart")).thenReturn(c);
+        when(request.getParameter("address")).thenReturn("0");
+        when(addresses.get(0)).thenReturn(a);
+        Registered e= new Registered();
+        when(session.getAttribute("user")).thenReturn(e);
+        when(response.encodeURL("Thanks.jsp")).thenReturn("Thanks.jsp");
+
+
+        ArgumentCaptor<String> captor= ArgumentCaptor.forClass(String.class);
+        servlet.doGet(request, response);
+        verify(response).sendRedirect(captor.capture());
+        assertEquals("Thanks.jsp",captor.getValue());
     }
 }

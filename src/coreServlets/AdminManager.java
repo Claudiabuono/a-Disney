@@ -63,11 +63,9 @@ public class AdminManager extends HttpServlet {
 				request.setAttribute("fatture", obj.pagedList);
 				
 				if (request.getHeader("x-requested-with") == null){
-					ServletContext servletContext = getServletContext();
-					RequestDispatcher dispatcher = servletContext.getRequestDispatcher(response.encodeURL("/Ordini.jsp"));
-					dispatcher.forward(request, response);
+					request.getRequestDispatcher(response.encodeURL("/Ordini.jsp")).forward(request, response);
 				}
-					else getServletContext().getRequestDispatcher(response.encodeURL("/contentJSP/tableOrdersadmin.jsp")).forward(request, response);
+					else request.getRequestDispatcher(response.encodeURL("/contentJSP/tableOrdersadmin.jsp")).forward(request, response);
 			} catch (ParseException | SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

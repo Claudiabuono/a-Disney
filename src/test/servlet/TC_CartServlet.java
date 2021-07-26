@@ -43,12 +43,6 @@ public class TC_CartServlet{
     @Mock
     RequestDispatcher rd;
 
-    @Mock
-    ServletContext servletContext;
-
-    @Mock
-    ServletConfig config;
-
     @InjectMocks
     coreServlets.CartServlet servlet;
 
@@ -72,12 +66,9 @@ public class TC_CartServlet{
 
 
         ArgumentCaptor<String> captor= ArgumentCaptor.forClass(String.class);
-        servlet.init(config);
-        when(request.getServletContext()).thenReturn(servletContext);
-        when(servletContext.getRequestDispatcher("/contentJSP/cartContent.jsp")).thenReturn(rd);
+        when(request.getRequestDispatcher("/contentJSP/cartContent.jsp")).thenReturn(rd);
         servlet.doGet(request, response);
-        verify(response).encodeURL(captor.capture());
+        verify(request).getRequestDispatcher(captor.capture());
         assertEquals("/contentJSP/cartContent.jsp",captor.getValue());
-
-    }
+     }
 }

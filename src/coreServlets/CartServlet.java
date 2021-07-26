@@ -68,7 +68,7 @@ public class CartServlet extends HttpServlet {
 			}
 			
 			request.getSession().setAttribute("cart", cart);
-			getServletContext().getRequestDispatcher("/contentJSP/cartContent.jsp").forward(request, response);
+			request.getRequestDispatcher("/contentJSP/cartContent.jsp").forward(request, response);
 
 	}
 	
@@ -78,7 +78,5 @@ public class CartServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
-	public void setProductModel(ProductModel prodottoDao) {
-		this.model=prodottoDao;
-	}
+
 }
