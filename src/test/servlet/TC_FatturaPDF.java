@@ -1,12 +1,9 @@
 package test.servlet;
 
+import coreModels.beans.Adress;
 import coreModels.beans.FatturaBean;
-import coreModels.beans.ProductBean;
 import coreModels.beans.Registered;
 import coreModels.model.FatturaModel;
-import coreModels.model.Paginator;
-import coreModels.model.Pair;
-import coreModels.model.ProductModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -14,21 +11,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
+
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -63,20 +52,27 @@ public class TC_FatturaPDF {
 
     @Test
     public void testFatturaPDF() throws Exception {
-        when(request.getParameter("id")).thenReturn("1");
-        when(request.getParameter("search")).thenReturn("rosalia@libero.it");
         when(request.getSession()).thenReturn(session);
+        when(request.getParameter("id")).thenReturn("1");
+        when(session.getAttribute("isUser")).thenReturn(null);
+        when(session.getAttribute("isAdmin")).thenReturn(true);
+        when(request.getParameter("search")).thenReturn("rosalia@libero.it");
+        Registered userBean = new Registered("rosalia", "capozzolo", "rosalia@libero.it", "rosalia");
+        when(session.getAttribute("user")).thenReturn(userBean);
+        when(response.getOutputStream()).thenReturn(myOutputStream);
 
-       when(response.getOutputStream()).thenReturn(myOutputStream);
-
-        Registered userBean = new Registered();
+        Registered r= new Registered();
+        r.setLogin("rosalia@libero.it");
         FatturaBean f= new FatturaBean();
         f.setCod(2);
         f.setDate(new GregorianCalendar(2020,5,8));
-        when(fatturaDao.retrieveInvoice(userBean, 1)).thenReturn(f);
+        f.setShipping(new Adress("via roma", 4,84567, "Salerno", "Felitto"));
+        f.setUser(userBean);
+        when(fatturaDao.retrieveInvoice(r, 2)).thenReturn(f);
+        when(fattura.getUser()).thenReturn(userBean);
 
         servlet.doGet(request, response);
-        ArgumentCaptor<byte[]> valueCapture = null;
+      ArgumentCaptor<byte[]> valueCapture =ArgumentCaptor.forClass(byte[].class);
         verify(myOutputStream).write(valueCapture.capture());
         byte[] writtenData = valueCapture.getValue();
         assertNotNull(writtenData);

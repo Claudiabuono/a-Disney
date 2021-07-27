@@ -76,7 +76,6 @@ public class RecensioneServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
-	public void setRecensioneModel(RecensioneModel recensioneDao) {
-	}
+
 
 }

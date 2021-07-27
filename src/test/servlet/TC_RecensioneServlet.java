@@ -3,17 +3,17 @@ package test.servlet;
 import coreModels.beans.ProductBean;
 import coreModels.beans.RecensioneBean;
 import coreModels.beans.Registered;
-import coreModels.beans.UserBean;
-import coreModels.model.DM.FatturaModelDM;
-import coreModels.model.FatturaModel;
-import coreModels.model.RecensioneModel;
-import coreModels.model.UserModel;
+import coreModels.model.*;
 import coreServlets.RecensioneServlet;
-import coreServlets.Suggester;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+import org.mockito.ArgumentCaptor;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -23,28 +23,40 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-public class TC_RecensioneServlet extends Mockito {
+public class TC_RecensioneServlet {
 
-    static RecensioneModel recensione;
-    static FatturaModel fattura;
-    static RecensioneServlet servlet;
+    @Mock
+    HttpServletRequest request;
 
+    @Mock
+    HttpServletResponse response;
 
-    @BeforeAll
-    public static void init () {
-        servlet = new RecensioneServlet();
+    @Mock
+    HttpSession session;
+
+    @Mock
+    RecensioneModel recensioneDao;
+
+    @Mock
+    FatturaModel fatturaDao;
+
+    @Mock
+    UserModel userDao;
+
+    @InjectMocks
+    RecensioneServlet servlet;
+
+    @BeforeEach
+    public void setUp() throws Exception {
+        MockitoAnnotations.initMocks(this);
     }
+
     @Test //TCS
     public void testRecensioneView() throws Exception {
-        HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
-        HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
-        RecensioneModel recensioneDao= Mockito.mock(RecensioneModel.class);
-        FatturaModel fatturaDao= Mockito.mock(FatturaModel.class);
-        HttpSession session = Mockito.mock(HttpSession.class);
         when(request.getSession()).thenReturn(session);
-
         when(request.getParameter("act")).thenReturn("view");
         ProductBean b= new ProductBean ("prova", " prova", "prova ", "prova", "prova", 0, 6, 10, 20,8);
         b.setPrice(45);
@@ -58,39 +70,39 @@ public class TC_RecensioneServlet extends Mockito {
         when(recensioneDao.getComments(b)).thenReturn(list);
         when(recensioneDao.userComment(r, b)).thenReturn(recensioneBean);
         when(fatturaDao.hasPurchased(b, r)).thenReturn(true);
-
-        servlet.setRecensioneModel(recensioneDao);
+        when(recensioneDao.mediumVote(b)).thenReturn(4.5);
         servlet.doGet(request,response);
 
         boolean l= (boolean) request.getAttribute("payed");
         assertEquals(true,l);
 
     }
-/*
-    @Test //TCS Campo voto vuoto
+
+    @Test
     public void testRecensione2() throws Exception {
-        HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
-        HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
-        UserModel userDao= Mockito.mock(UserModel.class);
-
-        when(request.getParameter("act")).thenReturn("view");
-        when(request.getParameter("product")).thenReturn(" ");
-        when(request.getParameter("vote")).thenReturn(" ");
-        when(request.getParameter("comment")).thenReturn("Prodotto curato nei minimi dettagli");
-
-        HttpSession session = Mockito.mock(HttpSession.class);
+        ProductBean b= new ProductBean (3);
+        b.setPrice(45);
+        Registered r= new Registered();
+        r.setLogin("bleo@gmail.com");
         when(request.getSession()).thenReturn(session);
+        when(request.getParameter("act")).thenReturn("insert");
+        when(request.getAttribute("product")).thenReturn(b);
+        when(session.getAttribute("user")).thenReturn(r);
+        when(request.getParameter("vote")).thenReturn("2");
+        when(request.getParameter("comment")).thenReturn("Prodotto curato nei minimi dettagli");
+        when(request.getParameter("id")).thenReturn("3");
 
         StringWriter stringWriter = new StringWriter();
         PrintWriter writer = new PrintWriter(stringWriter);
         when(response.getWriter()).thenReturn(writer);
+        ArgumentCaptor<ProductBean> captor= ArgumentCaptor.forClass(ProductBean.class);
 
-        RecensioneBean recensioneBean = new RecensioneBean("Prodotto curato nei minimi dettagli", 0, "rosalia");
-        when(userDao.login("","rosa")).thenReturn(userBean);
-        servlet.setRecensioneModel(recensioneDao);
+        servlet.doPost(request, response);
+        verify(recensioneDao).newComment(r,captor.capture(), "Prodotto curato nei minimi dettagli",3);
+        assertEquals(b,captor.getValue());
 
-        assertThrows(Exception.class, ()->servlet.doPost(request, response));
+
     }
 
-*/
+
 }
