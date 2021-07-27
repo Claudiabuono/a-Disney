@@ -1,5 +1,9 @@
 package test.servlet;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import coreModels.beans.ProductBean;
 import coreModels.beans.Registered;
 import coreModels.model.RegisteredModel;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,6 +36,12 @@ public class TC_SuggesterUser {
 
     @Mock
     RegisteredModel registeredDao;
+
+    @Mock
+    ProductBean productBean;
+
+   @Mock
+    Gson g;
 
     @InjectMocks
     coreServlets.SuggesterUser servlet;

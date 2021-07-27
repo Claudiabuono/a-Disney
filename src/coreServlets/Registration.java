@@ -52,7 +52,7 @@ public class Registration extends HttpServlet {
 		} catch (java.sql.SQLIntegrityConstraintViolationException e) {
 			// TODO: handle exception
 			request.setAttribute("error", true);
-			getServletContext().getRequestDispatcher(response.encodeURL("/registration.jsp")).forward(request, response);
+			request.getRequestDispatcher(response.encodeURL("/registration.jsp")).forward(request, response);
 			return;
 		} 
 		catch (SQLException e) {
@@ -69,8 +69,5 @@ public class Registration extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-	}
-
-	public void setUserModel(RegisteredModel userDao) {
 	}
 }

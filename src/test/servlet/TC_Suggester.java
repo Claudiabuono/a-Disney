@@ -50,9 +50,7 @@ public class TC_Suggester  {
 
     @Test //TCS
     public void testSuggester() throws Exception {
-
         when(request.getParameter("srch")).thenReturn("peluche");
-
         when(request.getSession()).thenReturn(session);
 
         StringWriter stringWriter = new StringWriter();

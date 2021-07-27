@@ -52,7 +52,7 @@ public class UserManager extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		/*
 		 * modifica password, modifica dell'email, operazioni su indirizzi, retrieval degli ordini
@@ -78,7 +78,7 @@ public class UserManager extends HttpServlet {
 						request.setAttribute("fatture", obj.pagedList);
 						request.setAttribute("maxPg", obj.maxPg);
 						
-						getServletContext().getRequestDispatcher(response.encodeURL("/OrdiniUtente.jsp")).forward(request, response);
+						request.getRequestDispatcher(response.encodeURL("/OrdiniUtente.jsp")).forward(request, response);
 					} else {
 						
 						SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd");
@@ -92,7 +92,7 @@ public class UserManager extends HttpServlet {
 						request.setAttribute("fatture", obj.pagedList);
 						request.setAttribute("maxPg", obj.maxPg);
 						
-						getServletContext().getRequestDispatcher(response.encodeURL("/contentJSP/tableOrdiniUtente.jsp")).forward(request, response);
+						request.getRequestDispatcher(response.encodeURL("/contentJSP/tableOrdiniUtente.jsp")).forward(request, response);
 					}
 				}
 		
@@ -106,7 +106,7 @@ public class UserManager extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
