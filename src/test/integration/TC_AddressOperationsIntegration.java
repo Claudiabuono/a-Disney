@@ -1,4 +1,5 @@
-package test.servlet;
+package test.integration;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.HashMap;
@@ -22,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class TC_AddressOperations {
+public class TC_AddressOperationsIntegration {
     @Mock
     HttpServletRequest request;
 
@@ -32,24 +33,6 @@ public class TC_AddressOperations {
     @Mock
     HttpSession session;
 
-    @Mock
-    AdressModel addressDao;
-
-    @Mock
-    Address a;
-
-    @Mock
-    Adress bean;
-
-    @Mock
-    Map<Integer,Adress> ad;
-
-    @Mock
-    Registered user;
-
-    @Mock
-    Registered r;
-
     @InjectMocks
     coreServlets.AddressOperations servlet;
 
@@ -57,21 +40,27 @@ public class TC_AddressOperations {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
     }
-
     @Test //Op0
     public void testAddressOperation0() throws Exception {
+        Map<Integer,Adress> ad= new HashMap<>();
+        ad.put(1,new Adress("via roma", 5,67875,"Roma", "Roma"));
+        Registered r= new Registered();
+
         when(request.getParameter("operation")).thenReturn("0");
         when(request.getSession()).thenReturn(session);
         when(request.getSession().getAttribute("user")).thenReturn(r);
         when(request.getSession().getAttribute("addresses")).thenReturn(ad);
-        when(addressDao.doRetrieveAll("rosalia@libero.it")).thenReturn(ad);
         servlet.doGet(request, response);
 
         Map<Integer,Adress> valoreReale= (Map<Integer,Adress>) request.getSession().getAttribute("addresses");
         assertEquals(ad.toString(), valoreReale.toString());
- }
+    }
     @Test //Op1 TCS18
     public void testAddressOperation1_TCS18() throws Exception {
+        Map<Integer,Adress> ad= new HashMap<>();
+        ad.put(1,new Adress("via roma", 5,67875,"Roma", "Roma"));
+        Registered r= new Registered();
+
         when(request.getSession()).thenReturn(session);
         when(request.getParameter("operation")).thenReturn("1");
         when(session.getAttribute("user")).thenReturn(r);
@@ -82,7 +71,6 @@ public class TC_AddressOperations {
         when(request.getParameter("ncv")).thenReturn("7");
         when(request.getParameter("provincia")).thenReturn("Salerno");
         when(request.getParameter("via")).thenReturn("via tommasini");
-        when(addressDao.doSave(bean,  user)).thenReturn(1);
 
         ArgumentCaptor<String> captor= ArgumentCaptor.forClass(String.class);
         servlet.doGet(request, response);
@@ -105,7 +93,6 @@ public class TC_AddressOperations {
         PrintWriter writer = new PrintWriter(stringWriter);
         when(response.getWriter()).thenReturn(writer);
 
-        when(addressDao.doSave(bean,  user));
         servlet.doGet(request, response);
 
         String result = stringWriter.getBuffer().toString().trim();
@@ -140,3 +127,4 @@ public class TC_AddressOperations {
         assertEquals(true,flag);
     }*/
 }
+
