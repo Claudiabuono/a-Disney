@@ -1,16 +1,19 @@
-package test.servlet;
+package test.integration;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
 import coreModels.beans.ProductBean;
-import coreModels.beans.Registered;
+import coreModels.model.Paginator;
+import coreModels.model.Pair;
+import coreModels.model.ProductModel;
 import coreModels.model.RegisteredModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -19,12 +22,12 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class TC_SuggesterUser {
+public class TC_SuggesterIntegration {
 
     @Mock
     HttpServletRequest request;
@@ -35,19 +38,8 @@ public class TC_SuggesterUser {
     @Mock
     HttpSession session;
 
-    @Mock
-    RegisteredModel registeredDao;
-
-    @Mock
-    ProductBean productBean;
-
-   @Mock
-    ArrayList<Registered> list;
-
-
-
     @InjectMocks
-    coreServlets.SuggesterUser servlet;
+    coreServlets.Suggester servlet;
 
     @BeforeEach
     public void setUp() throws Exception {
@@ -55,17 +47,17 @@ public class TC_SuggesterUser {
     }
 
     @Test //TCS
-    public void testSuggesterUser() throws Exception {
-        when(request.getParameter("srch")).thenReturn("rosalia@libero.it");
-        when(request.getSession()).thenReturn(session);
-        when(registeredDao.doRetrieveBySearch("rosalia@libero.it")).thenReturn(list);
+    public void testSuggester() throws Exception {
+        when(request.getParameter("srch")).thenReturn("rosalia@libero.com");
 
         StringWriter stringWriter = new StringWriter();
         PrintWriter writer = new PrintWriter(stringWriter);
         when(response.getWriter()).thenReturn(writer);
+
         servlet.init();
         servlet.service(request, response);
         String result = stringWriter.getBuffer().toString().trim();
         assertNotNull(result);
+
     }
 }

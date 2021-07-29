@@ -1,4 +1,5 @@
-package test.servlet;
+package test.integration;
+
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -21,8 +22,6 @@ import coreModels.model.AdressModel;
 import coreModels.model.FatturaModel;
 import coreModels.model.RegisteredModel;
 import coreServlets.AddressOperations;
-import coreServlets.UserManager;
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,8 +31,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-
-public class TC_UserManager  {
+public class TC_UserManagerIntegration {
 
     @Mock
     HttpServletRequest request;
@@ -45,22 +43,7 @@ public class TC_UserManager  {
     HttpSession session;
 
     @Mock
-    RegisteredModel registeredDao;
-
-    @Mock
-    FatturaModel fatturaDao;
-
-    @Mock
-    List<FatturaBean> list;
-
-    @Mock
     RequestDispatcher rd;
-
-    @Mock
-    FatturaBean f;
-
-    @Mock
-    Registered userBean;
 
     @InjectMocks
     coreServlets.UserManager servlet;
@@ -68,12 +51,12 @@ public class TC_UserManager  {
     @BeforeEach
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-
     }
-
 
     @Test //TCS5
     public void test1() throws Exception {
+        Registered userBean= new Registered("rosalia", "capozzolo", "rosalia@libero.it", "rosalia");
+
         when(request.getSession()).thenReturn(session);
         when(request.getParameter("op")).thenReturn("modCred");
         when(request.getSession().getAttribute("user")).thenReturn(userBean);
@@ -83,9 +66,7 @@ public class TC_UserManager  {
         when(request.getParameter("pass")).thenReturn("rosalia");
 
         servlet.doPost(request, response);
-
-        verify(registeredDao).doModify(userBean, "rosalia", "capozzolo","rosalia@libero.it", "rosalia" );
-
+        //aggiungere verifica
     }
 
     @Test
@@ -93,7 +74,6 @@ public class TC_UserManager  {
         when(request.getSession()).thenReturn(session);
         when(request.getParameter("op")).thenReturn("viewFatture");
         when(request.getParameter("pg")).thenReturn("1");
-        when(fatturaDao.retrieveInvoices(userBean, null, null)).thenReturn(list);
         when(response.encodeURL("/OrdiniUtente.jsp")).thenReturn("/OrdiniUtente.jsp");
         when(request.getRequestDispatcher("/OrdiniUtente.jsp")).thenReturn(rd);
 

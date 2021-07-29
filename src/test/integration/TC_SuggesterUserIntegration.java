@@ -1,4 +1,4 @@
-package test.servlet;
+package test.integration;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -19,12 +19,11 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 
-public class TC_SuggesterUser {
+public class TC_SuggesterUserIntegration {
 
     @Mock
     HttpServletRequest request;
@@ -34,17 +33,6 @@ public class TC_SuggesterUser {
 
     @Mock
     HttpSession session;
-
-    @Mock
-    RegisteredModel registeredDao;
-
-    @Mock
-    ProductBean productBean;
-
-   @Mock
-    ArrayList<Registered> list;
-
-
 
     @InjectMocks
     coreServlets.SuggesterUser servlet;
@@ -58,7 +46,6 @@ public class TC_SuggesterUser {
     public void testSuggesterUser() throws Exception {
         when(request.getParameter("srch")).thenReturn("rosalia@libero.it");
         when(request.getSession()).thenReturn(session);
-        when(registeredDao.doRetrieveBySearch("rosalia@libero.it")).thenReturn(list);
 
         StringWriter stringWriter = new StringWriter();
         PrintWriter writer = new PrintWriter(stringWriter);

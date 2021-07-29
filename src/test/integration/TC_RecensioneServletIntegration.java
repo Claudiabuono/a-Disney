@@ -1,4 +1,4 @@
-package test.servlet;
+package test.integration;
 
 import coreModels.beans.ProductBean;
 import coreModels.beans.RecensioneBean;
@@ -23,11 +23,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class TC_RecensioneServlet {
+public class TC_RecensioneServletIntegration {
 
     @Mock
     HttpServletRequest request;
@@ -37,27 +36,6 @@ public class TC_RecensioneServlet {
 
     @Mock
     HttpSession session;
-
-    @Mock
-    RecensioneModel recensioneDao;
-
-    @Mock
-    FatturaModel fatturaDao;
-
-    @Mock
-    UserModel userDao;
-
-    @Mock
-    Registered r;
-
-    @Mock
-    ProductBean b;
-
-    @Mock
-    List<RecensioneBean> list;
-
-    @Mock
-    RecensioneBean recensioneBean;
 
     @InjectMocks
     RecensioneServlet servlet;
@@ -69,14 +47,13 @@ public class TC_RecensioneServlet {
 
     @Test //TCS
     public void testRecensioneView() throws Exception {
+        ProductBean b= new ProductBean();
+        Registered r= new Registered();
         when(request.getSession()).thenReturn(session);
         when(request.getParameter("act")).thenReturn("view");
         when(request.getAttribute("product")).thenReturn(b);
         when(request.getSession().getAttribute("user")).thenReturn(r);
-        when(recensioneDao.getComments(b)).thenReturn(list);
-        when(recensioneDao.userComment(r, b)).thenReturn(recensioneBean);
-        when(fatturaDao.hasPurchased(b, r)).thenReturn(true);
-        when(recensioneDao.mediumVote(b)).thenReturn(4.5);
+
 
         servlet.doGet(request,response);
         verify(request).setAttribute("payed", false);
@@ -84,6 +61,8 @@ public class TC_RecensioneServlet {
 
     @Test
     public void testRecensione2() throws Exception {
+        ProductBean b= new ProductBean();
+        Registered r= new Registered();
         when(request.getSession()).thenReturn(session);
         when(request.getParameter("act")).thenReturn("insert");
         when(request.getAttribute("product")).thenReturn(b);
@@ -91,13 +70,10 @@ public class TC_RecensioneServlet {
         when(request.getParameter("vote")).thenReturn("2");
         when(request.getParameter("comment")).thenReturn("Prodotto curato nei minimi dettagli");
         when(request.getParameter("id")).thenReturn("3");
-        when(r.getLogin()).thenReturn("annacuore1@ciao.it");
+
+        //when(r.getLogin()).thenReturn("giulia@libero.com");
 
         servlet.doPost(request, response);
-
         //verify(recensioneDao).newComment(r,b, "Prodotto curato nei minimi dettagli",3);
-
-        assertTrue(recensioneDao.newComment(r,b, "Prodotto curato nei minimi dettagli",3));
     }
-
 }

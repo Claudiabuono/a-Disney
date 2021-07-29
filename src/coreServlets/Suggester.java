@@ -31,12 +31,8 @@ public class Suggester extends HttpServlet {
      */
 	@Override
 	public void init() {
-		if (new java.util.Random().nextBoolean())
 			model= new ProductModelDM();
-		else
-			model= new ProductModelDS();
-		
-		parser = new GsonBuilder().registerTypeAdapter(ProductBean.class, new json.JsonBuilderProd()).create();
+			parser = new GsonBuilder().registerTypeAdapter(ProductBean.class, new json.JsonBuilderProd()).create();
 	}
 
 	@Override

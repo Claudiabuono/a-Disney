@@ -1,4 +1,5 @@
-package test.servlet;
+package test.integration;
+
 
 import coreModels.beans.ProductBean;
 import coreModels.model.Paginator;
@@ -24,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class TC_IndexServlet{
+public class TC_IndexServletIntegration {
 
     @Mock
     HttpServletRequest request;
@@ -36,13 +37,8 @@ public class TC_IndexServlet{
     HttpSession session;
 
     @Mock
-    ProductModel productDao;
-
-    @Mock
     RequestDispatcher rd;
 
-    @Mock
-    List<ProductBean> list;
 
     @InjectMocks
     coreServlets.IndexServlet servlet;
@@ -55,14 +51,11 @@ public class TC_IndexServlet{
     @Test //TCS
     public void testIndexServlet() throws Exception {
         when(request.getSession()).thenReturn(session);
-        when(productDao.doRetrieveByDiscount(30, true)).thenReturn(list);
-
         assertThrows(Exception.class, ()->servlet.doPost(request, response));
     }
     @Test //TCS
     public void testIndexServlet2() throws Exception {
         when(request.getSession()).thenReturn(session);
-        when(productDao.doRetrieveByDiscount(30, true)).thenReturn(list);
         when(request.getRequestDispatcher("/contentJSP/ProductCard.jsp")).thenReturn(rd);
 
         ArgumentCaptor<String> captor= ArgumentCaptor.forClass(String.class);

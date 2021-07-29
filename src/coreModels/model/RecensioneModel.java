@@ -103,10 +103,10 @@ public abstract class RecensioneModel {
 	}
 	
 	//prodottoR, utente, descrizioneRecenzione, valutazione
-	public synchronized void newComment (coreModels.beans.Registered e, coreModels.beans.ProductBean p, String comment, float valutation) throws SQLException {
+	public synchronized boolean newComment (coreModels.beans.Registered e, coreModels.beans.ProductBean p, String comment, float valutation) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		
+		int result=0;
 		try {
 			connection = getConnection();
 			preparedStatement = connection.prepareStatement(insertSQL);
@@ -115,7 +115,8 @@ public abstract class RecensioneModel {
 			preparedStatement.setString(3, comment);
 			preparedStatement.setFloat(4, valutation);
 
-			preparedStatement.executeUpdate();
+			result=preparedStatement.executeUpdate();
+
 
 		} finally {
 			try {
@@ -126,6 +127,7 @@ public abstract class RecensioneModel {
 					closeConnection(connection);
 			}
 		}
+		return (result!= 0);
 	}
 
 	
