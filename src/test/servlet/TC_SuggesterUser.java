@@ -41,7 +41,9 @@ public class TC_SuggesterUser {
     ProductBean productBean;
 
    @Mock
-    Gson g;
+    ArrayList<Registered> list;
+
+
 
     @InjectMocks
     coreServlets.SuggesterUser servlet;
@@ -55,15 +57,12 @@ public class TC_SuggesterUser {
     public void testSuggesterUser() throws Exception {
         when(request.getParameter("srch")).thenReturn("rosalia@libero.it");
         when(request.getSession()).thenReturn(session);
+        when(registeredDao.doRetrieveBySearch("rosalia@libero.it")).thenReturn(list);
 
         StringWriter stringWriter = new StringWriter();
         PrintWriter writer = new PrintWriter(stringWriter);
         when(response.getWriter()).thenReturn(writer);
 
-        List<Registered> list= new ArrayList<>();
-        Registered e = new Registered("rosalia", "capozzolo", "rosalia@libero.it", "rosalia");
-        list.add(e);
-        when(registeredDao.doRetrieveBySearch("rosalia@libero.it")).thenReturn((ArrayList<Registered>) list);
         servlet.service(request, response);
         String result = stringWriter.getBuffer().toString().trim();
         assertEquals("[{\"name\":\"rosalia\",\"cognome\":\"capozzolo\",\"login\":\"rosalia@libero.it\",\"password\":\"rosalia\"}]",result);

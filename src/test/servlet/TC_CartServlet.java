@@ -43,6 +43,15 @@ public class TC_CartServlet{
     @Mock
     RequestDispatcher rd;
 
+    @Mock
+    Cart c;
+
+    @Mock
+    ProductBean prodotto;
+
+    @Mock
+    List<ProductBean> list;
+
     @InjectMocks
     coreServlets.CartServlet servlet;
 
@@ -53,18 +62,11 @@ public class TC_CartServlet{
 
     @Test
     public void testCartServlet() throws Exception {
+        int[] t= new int[4];
         when(request.getSession()).thenReturn(session);
-
-        Cart c= new Cart();
-        ProductBean prodotto= new ProductBean();
-        prodotto.setCode(3);
-        c.addOrder(new Order(prodotto,4));
-
         when(session.getAttribute("cart")).thenReturn(c);
-        List<ProductBean> list= new ArrayList<>();
-        when(prodottoDao.doRetrieveList(c.getCodes(), true)).thenReturn(list);
-
-
+        when(c.getCodes()).thenReturn(t);
+        when(prodottoDao.doRetrieveList(t, true)).thenReturn(list);
         ArgumentCaptor<String> captor= ArgumentCaptor.forClass(String.class);
         when(request.getRequestDispatcher("/contentJSP/cartContent.jsp")).thenReturn(rd);
         servlet.doGet(request, response);

@@ -37,6 +37,9 @@ public class TC_FatturaPDF {
     FatturaBean fattura;
 
     @Mock
+    Registered userBean;
+
+    @Mock
     ServletOutputStream myOutputStream;
 
     @Mock
@@ -54,25 +57,18 @@ public class TC_FatturaPDF {
     public void testFatturaPDF() throws Exception {
         when(request.getSession()).thenReturn(session);
         when(request.getParameter("id")).thenReturn("1");
-        when(session.getAttribute("isUser")).thenReturn(null);
-        when(session.getAttribute("isAdmin")).thenReturn(true);
+        when(session.getAttribute("isUser")).thenReturn(true);
+        when(session.getAttribute("isAdmin")).thenReturn(false);
         when(request.getParameter("search")).thenReturn("rosalia@libero.it");
-        Registered userBean = new Registered("rosalia", "capozzolo", "rosalia@libero.it", "rosalia");
         when(session.getAttribute("user")).thenReturn(userBean);
         when(response.getOutputStream()).thenReturn(myOutputStream);
-
-        Registered r= new Registered();
-        r.setLogin("rosalia@libero.it");
-        FatturaBean f= new FatturaBean();
-        f.setCod(2);
-        f.setDate(new GregorianCalendar(2020,5,8));
-        f.setShipping(new Adress("via roma", 4,84567, "Salerno", "Felitto"));
-        f.setUser(userBean);
-        when(fatturaDao.retrieveInvoice(r, 2)).thenReturn(f);
+        when(fatturaDao.retrieveInvoice(userBean, 2)).thenReturn(fattura);
         when(fattura.getUser()).thenReturn(userBean);
+        when(userBean.getCognome()).thenReturn("capozzolo");
+        when(userBean.getName()).thenReturn("rosalia");
 
         servlet.doGet(request, response);
-      ArgumentCaptor<byte[]> valueCapture =ArgumentCaptor.forClass(byte[].class);
+        ArgumentCaptor<byte[]> valueCapture =ArgumentCaptor.forClass(byte[].class);
         verify(myOutputStream).write(valueCapture.capture());
         byte[] writtenData = valueCapture.getValue();
         assertNotNull(writtenData);

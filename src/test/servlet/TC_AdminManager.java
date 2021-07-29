@@ -50,7 +50,16 @@ public class TC_AdminManager {
     RequestDispatcher rd;
 
     @Mock
+    FatturaBean e;
+
+    @Mock
     FatturaModel fatturaDao;
+
+    @Mock
+    List<FatturaBean> list;
+
+    @Mock
+    Registered r;
 
     @InjectMocks
     coreServlets.AdminManager servlet;
@@ -63,27 +72,20 @@ public class TC_AdminManager {
     @Test
     public void testAdminManager() throws Exception
     {
+        // SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd");
+        Date da= new Date(2020,8,1);
+        Date a= new Date(2020,8,4);
+
         when(request.getSession()).thenReturn(session);
         when(session.getAttribute("isAdmin")).thenReturn(true);
         when(request.getParameter("search")).thenReturn("rosalia@libero.it");
         when(request.getParameter("da")).thenReturn("2020-8-1");
         when(request.getParameter("a")).thenReturn("2020-8-4");
         when(request.getParameter("pg")).thenReturn("1");
-        SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd");
-        Date da= new Date(2020,8,1);
-        Date a= new Date(2020,8,4);
-
-
-        List<FatturaBean> list= new ArrayList<>();
-        FatturaBean e= new FatturaBean();
-        list.add(e);
-        Registered r= new Registered();
-        r.setLogin("rosalia@libero.it");
         when(fatturaDao.retrieveInvoices(da, a)).thenReturn(list);
         when(fatturaDao.retrieveInvoices(r, da, a)).thenReturn(list);
         when(paginator.paginate(list)).thenReturn(pair1);
         when(response.encodeURL("/Ordini.jsp")).thenReturn("/Ordini.jsp");
-
         when(request.getRequestDispatcher("/Ordini.jsp")).thenReturn(rd);
 
         ArgumentCaptor<String> captor= ArgumentCaptor.forClass(String.class);

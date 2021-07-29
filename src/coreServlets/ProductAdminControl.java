@@ -37,7 +37,7 @@ public class ProductAdminControl extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Boolean isAdmin = (Boolean) request.getSession().getAttribute("isAdmin");
 		String action = request.getParameter("act");
@@ -45,8 +45,8 @@ public class ProductAdminControl extends HttpServlet {
 		try {
 			if (action != null && (isAdmin == null ? false : isAdmin)) {
 					if (action.equalsIgnoreCase("delete")) {
-						int id = Integer.parseInt(request.getParameter("id"));
-						model.doDelete(id);
+						//int id = Integer.parseInt(request.getParameter("id"));
+						model.doDelete(Integer.parseInt(request.getParameter("id")));
 					} else if (action.equalsIgnoreCase("insert")) {
 						ProductBean bean = new ProductBean();
 						

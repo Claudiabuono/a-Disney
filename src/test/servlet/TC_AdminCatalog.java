@@ -48,6 +48,9 @@ public class TC_AdminCatalog {
     @Mock
     ServletConfig sc;
 
+    @Mock
+    List<ProductBean> lista;
+
     @InjectMocks
     coreServlets.AdminCatalog servlet;
 
@@ -63,10 +66,6 @@ public class TC_AdminCatalog {
         when(request.getParameter("ctgy")).thenReturn("0");
         when(request.getParameter("srch")).thenReturn("");
         when(request.getParameter("pg")).thenReturn("1");
-
-        List<ProductBean> lista=new ArrayList<>();
-        ProductBean b= new ProductBean ("prova", "prova", "prova", "prova", "prova", 0, 6, 10, 20,8);
-        lista.add(b);
         when(prodottoDao.doRetrieveByCategory(0)).thenReturn(lista);
         when(p.paginate(lista)).thenReturn(pair);
         when(response.encodeURL("catalogoAdm.jsp")).thenReturn("catalogoAdm.jsp");
@@ -87,16 +86,11 @@ public class TC_AdminCatalog {
         when(request.getParameter("ctgy")).thenReturn("");
         when(request.getParameter("srch")).thenReturn("Alice");
         when(request.getParameter("pg")).thenReturn("1");
-
-        List<ProductBean> lista=new ArrayList<>();
-        ProductBean b= new ProductBean ("prova", "prova", "Alice", "prova", "prova", 0, 6, 10, 20,8);
-        lista.add(b);
-
         when(prodottoDao.doRetrieveBySearch("Alice",true)).thenReturn(lista);
         when(p.paginate(lista)).thenReturn(pair);
         when(response.encodeURL("catalogoAdm.jsp")).thenReturn("catalogoAdm.jsp");
-
         when(request.getRequestDispatcher("catalogoAdm.jsp")).thenReturn(rd);
+
         ArgumentCaptor<String> captor= ArgumentCaptor.forClass(String.class);
         servlet.init(sc);
         servlet.doGet(request, response);
@@ -113,11 +107,6 @@ public class TC_AdminCatalog {
         when(request.getParameter("ctgy")).thenReturn("");
         when(request.getParameter("srch")).thenReturn("");
         when(request.getParameter("pg")).thenReturn("1");
-
-        List<ProductBean> lista=new ArrayList<>();
-        ProductBean b= new ProductBean ("prova", "prova", "Alice", "prova", "prova", 0, 6, 10, 20,8);
-        lista.add(b);
-
         when(prodottoDao.doRetrieveAll(true)).thenReturn(lista);
         when(p.paginate(lista)).thenReturn(pair);
         when(response.encodeURL("catalogoAdm.jsp")).thenReturn("catalogoAdm.jsp");
@@ -137,7 +126,7 @@ public class TC_AdminCatalog {
         when(request.getSession()).thenReturn(session);
         when(session.getAttribute("isAdmin")).thenReturn(false);
 
-       ArgumentCaptor<String> captor= ArgumentCaptor.forClass(String.class);
+        ArgumentCaptor<String> captor= ArgumentCaptor.forClass(String.class);
         servlet.init(sc);
         servlet.doGet(request, response);
 

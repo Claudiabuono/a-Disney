@@ -43,6 +43,12 @@ public class TC_ProductControl{
     @Mock
     RequestDispatcher rd;
 
+    @Mock
+    ProductBean b;
+
+    @Mock
+    Cart c;
+
     @InjectMocks
     coreServlets.ProductControl servlet;
 
@@ -53,8 +59,7 @@ public class TC_ProductControl{
 
     @Test //TCS
     public void testAddC() throws Exception {
-       when(request.getSession()).thenReturn(session);
-        Cart c= new Cart();
+        when(request.getSession()).thenReturn(session);
         when((Cart)request.getSession().getAttribute("cart")).thenReturn(c);
         when(request.getParameter("act")).thenReturn("addC");
         when(request.getParameter("id")).thenReturn("3");
@@ -63,7 +68,6 @@ public class TC_ProductControl{
         StringWriter stringWriter = new StringWriter();
         PrintWriter writer = new PrintWriter(stringWriter);
         when(response.getWriter()).thenReturn(writer);
-        ProductBean b= new ProductBean();
         when(productDao.doRetrieveByKey(3, true)).thenReturn(b);
 
         servlet.doGet(request, response);
@@ -75,9 +79,6 @@ public class TC_ProductControl{
 
     @Test //TCS
     public void testView() throws Exception {
-        ProductBean b= new ProductBean();
-        Cart c= new Cart();
-
         when(request.getSession()).thenReturn(session);
         when((Cart)request.getSession().getAttribute("cart")).thenReturn(c);
         when(request.getParameter("act")).thenReturn("view");
@@ -94,9 +95,6 @@ public class TC_ProductControl{
 
     @Test //TCS
     public void testDelete() throws Exception {
-        ProductBean b= new ProductBean();
-        Cart c= new Cart();
-
         when(request.getSession()).thenReturn(session);
         when((Cart)request.getSession().getAttribute("cart")).thenReturn(c);
         when(request.getParameter("act")).thenReturn("delete");

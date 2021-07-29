@@ -49,7 +49,16 @@ public class TC_UserManager  {
     FatturaModel fatturaDao;
 
     @Mock
+    List<FatturaBean> list;
+
+    @Mock
     RequestDispatcher rd;
+
+    @Mock
+    FatturaBean f;
+
+    @Mock
+    Registered userBean;
 
     @InjectMocks
     coreServlets.UserManager servlet;
@@ -61,7 +70,6 @@ public class TC_UserManager  {
 
     @Test //TCS5
     public void test1() throws Exception {
-        Registered userBean = new Registered("rosalia", "capozzolo","rosalia@libero.it" ,"rosalia" );
         when(request.getSession()).thenReturn(session);
         when(request.getParameter("op")).thenReturn("modCred");
         when(request.getSession().getAttribute("user")).thenReturn(userBean);
@@ -78,17 +86,12 @@ public class TC_UserManager  {
 
     @Test
     public void test2() throws Exception {
-        Registered userBean = new Registered("rosalia", "capozzolo","rosalia@libero.it" ,"rosalia" );
         when(request.getSession()).thenReturn(session);
         when(request.getParameter("op")).thenReturn("viewFatture");
         when(request.getParameter("pg")).thenReturn("1");
-
-        FatturaBean f=new FatturaBean();
-        List<FatturaBean> list= new ArrayList<>();
-        list.add(f);
         when(fatturaDao.retrieveInvoices(userBean, null, null)).thenReturn(list);
-       when(response.encodeURL("/OrdiniUtente.jsp")).thenReturn("/OrdiniUtente.jsp");
-       when(request.getRequestDispatcher("/OrdiniUtente.jsp")).thenReturn(rd);
+        when(response.encodeURL("/OrdiniUtente.jsp")).thenReturn("/OrdiniUtente.jsp");
+        when(request.getRequestDispatcher("/OrdiniUtente.jsp")).thenReturn(rd);
 
         ArgumentCaptor<String> captor= ArgumentCaptor.forClass(String.class);
         servlet.doGet(request, response);

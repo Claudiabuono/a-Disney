@@ -39,6 +39,9 @@ public class TC_Login{
     @Mock
     RequestDispatcher rd;
 
+    @Mock
+    UserBean userBean;
+
     @InjectMocks
     coreServlets.Login servlet;
 
@@ -52,8 +55,6 @@ public class TC_Login{
         when(request.getParameter("username")).thenReturn("rosa@libero.it");
         when(request.getParameter("password")).thenReturn("rosa1234");
         when(request.getSession()).thenReturn(session);
-
-        UserBean userBean = new Registered("rosa", "capo","rosa@libero.it" ,"rosa1234" );
         when(userDao.login("rosa@libero.it","rosa")).thenReturn(userBean);
 
         assertThrows(Exception.class, ()->servlet.doPost(request, response));
@@ -63,7 +64,6 @@ public class TC_Login{
         when(request.getParameter("username")).thenReturn("");
         when(request.getParameter("password")).thenReturn("rosa1234");
         when(request.getSession()).thenReturn(session);
-        UserBean userBean = new Registered("rosa", "capo","rosa@libero.it" ,"rosa1234" );
         when(userDao.login("","rosa")).thenReturn(userBean);
 
         assertThrows(Exception.class, ()->servlet.doPost(request, response));
@@ -73,7 +73,6 @@ public class TC_Login{
         when(request.getParameter("username")).thenReturn("rosa@libero.it");
         when(request.getParameter("password")).thenReturn("");
         when(request.getSession()).thenReturn(session);
-        UserBean userBean = new Registered("rosa", "capo","rosa@libero.it" ,"" );
         when(userDao.login("rosa@libero.it","")).thenReturn(userBean);
         when(response.encodeURL("/Login.jsp")).thenReturn("/Login.jsp");
         when(request.getRequestDispatcher("/Login.jsp")).thenReturn(rd);
@@ -90,8 +89,6 @@ public class TC_Login{
         when(request.getParameter("password")).thenReturn("rosalia");
         when(request.getSession()).thenReturn(session);
         when(response.encodeURL("/Login.jsp")).thenReturn("/Login.jsp");
-
-        when(response.encodeURL("/Login.jsp")).thenReturn("/Login.jsp");
         when(request.getRequestDispatcher("/Login.jsp")).thenReturn(rd);
 
         ArgumentCaptor<String> captor= ArgumentCaptor.forClass(String.class);
@@ -105,8 +102,6 @@ public class TC_Login{
         when(request.getParameter("username")).thenReturn("rosalia@libero.it");
         when(request.getParameter("password")).thenReturn("rosalia");
         when(request.getSession()).thenReturn(session);
-
-        UserBean userBean = new Registered("rosalia", "capozzolo","rosalia@libero.it" ,"rosalia" );
         when(userDao.login("rosalia@libero.it","rosalia")).thenReturn(userBean);
 
         ArgumentCaptor<String> captor= ArgumentCaptor.forClass(String.class);

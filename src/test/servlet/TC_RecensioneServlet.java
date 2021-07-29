@@ -46,6 +46,18 @@ public class TC_RecensioneServlet {
     @Mock
     UserModel userDao;
 
+    @Mock
+    Registered r;
+
+    @Mock
+    ProductBean b;
+
+    @Mock
+    List<RecensioneBean> list;
+
+    @Mock
+    RecensioneBean recensioneBean;
+
     @InjectMocks
     RecensioneServlet servlet;
 
@@ -58,32 +70,19 @@ public class TC_RecensioneServlet {
     public void testRecensioneView() throws Exception {
         when(request.getSession()).thenReturn(session);
         when(request.getParameter("act")).thenReturn("view");
-        ProductBean b= new ProductBean ("prova", " prova", "prova ", "prova", "prova", 0, 6, 10, 20,8);
-        b.setPrice(45);
         when(request.getAttribute("product")).thenReturn(b);
-        Registered r= new Registered();
         when(request.getSession().getAttribute("user")).thenReturn(r);
-
-        List<RecensioneBean> list= new ArrayList<>();
-        RecensioneBean recensioneBean= new RecensioneBean();
-        list.add(recensioneBean);
         when(recensioneDao.getComments(b)).thenReturn(list);
         when(recensioneDao.userComment(r, b)).thenReturn(recensioneBean);
         when(fatturaDao.hasPurchased(b, r)).thenReturn(true);
         when(recensioneDao.mediumVote(b)).thenReturn(4.5);
+
         servlet.doGet(request,response);
-
-        boolean l= (boolean) request.getAttribute("payed");
-        assertEquals(true,l);
-
+        verify(request).setAttribute("payed", false);
     }
 
     @Test
     public void testRecensione2() throws Exception {
-        ProductBean b= new ProductBean (3);
-        b.setPrice(45);
-        Registered r= new Registered();
-        r.setLogin("bleo@gmail.com");
         when(request.getSession()).thenReturn(session);
         when(request.getParameter("act")).thenReturn("insert");
         when(request.getAttribute("product")).thenReturn(b);
@@ -91,18 +90,10 @@ public class TC_RecensioneServlet {
         when(request.getParameter("vote")).thenReturn("2");
         when(request.getParameter("comment")).thenReturn("Prodotto curato nei minimi dettagli");
         when(request.getParameter("id")).thenReturn("3");
-
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter writer = new PrintWriter(stringWriter);
-        when(response.getWriter()).thenReturn(writer);
-        ArgumentCaptor<ProductBean> captor= ArgumentCaptor.forClass(ProductBean.class);
+        when(r.getLogin()).thenReturn("giulia@libero.com");
 
         servlet.doPost(request, response);
-        verify(recensioneDao).newComment(r,captor.capture(), "Prodotto curato nei minimi dettagli",3);
-        assertEquals(b,captor.getValue());
-
-
+        verify(recensioneDao).newComment(r,b, "Prodotto curato nei minimi dettagli",3);
     }
-
 
 }

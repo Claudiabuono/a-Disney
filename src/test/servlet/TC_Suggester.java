@@ -38,7 +38,10 @@ public class TC_Suggester  {
     HttpSession session;
 
     @Mock
-    ProductModel productDao;
+    List<ProductBean> list;
+
+    @Mock
+    ProductModel model;
 
     @InjectMocks
     coreServlets.Suggester servlet;
@@ -50,21 +53,16 @@ public class TC_Suggester  {
 
     @Test //TCS
     public void testSuggester() throws Exception {
-        when(request.getParameter("srch")).thenReturn("peluche");
-        when(request.getSession()).thenReturn(session);
+        when(request.getParameter("srch")).thenReturn("rosalia@libero.com");
+        when(model.doRetrieveBySearch("rosalia@libero.com", true)).thenReturn(list);
 
         StringWriter stringWriter = new StringWriter();
         PrintWriter writer = new PrintWriter(stringWriter);
         when(response.getWriter()).thenReturn(writer);
 
-        List<ProductBean> list= new ArrayList<>();
-        ProductBean b= new ProductBean ("prova", " prova", "prova ", "prova", "prova", 0, 6, 10, 20,8);
-        b.setPrice(45);
-        list.add(b);
-        when(productDao.doRetrieveBySearch("peluche", true)).thenReturn(list);
-
         servlet.service(request, response);
         String result = stringWriter.getBuffer().toString().trim();
-        assertEquals("[{\"id\":0,\"name\":\"prova\",\"img\":\"prova\",\"isinDicount\":true,\"price\":\"54.00\",\"priceDisc\":\"49.68\",\"discount\":8.0,\"qty\":6,\"iva\":20.0,\"character\":\"prova \",\"category\":\"Articoli per la casa\"}]",result);
+        assertEquals("[{\"name\":\"rosalia\",\"cognome\":\"capozzolo\",\"login\":\"rosalia@libero.it\",\"password\":\"rosalia\"}]",result);
+
     }
 }

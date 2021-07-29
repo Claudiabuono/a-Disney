@@ -41,6 +41,9 @@ public class TC_IndexServlet{
     @Mock
     RequestDispatcher rd;
 
+    @Mock
+    List<ProductBean> list;
+
     @InjectMocks
     coreServlets.IndexServlet servlet;
 
@@ -54,8 +57,6 @@ public class TC_IndexServlet{
     @Test //TCS
     public void testIndexServlet() throws Exception {
         when(request.getSession()).thenReturn(session);
-
-        List<ProductBean> list= new ArrayList<>();
         when(productDao.doRetrieveByDiscount(30, true)).thenReturn(list);
 
         assertThrows(Exception.class, ()->servlet.doPost(request, response));
@@ -63,8 +64,6 @@ public class TC_IndexServlet{
     @Test //TCS
     public void testIndexServlet2() throws Exception {
         when(request.getSession()).thenReturn(session);
-
-        List<ProductBean> list= new ArrayList<>();
         when(productDao.doRetrieveByDiscount(30, true)).thenReturn(list);
         when(request.getRequestDispatcher("/contentJSP/ProductCard.jsp")).thenReturn(rd);
 

@@ -35,6 +35,9 @@ public class TC_ConsumerCatalog {
     RequestDispatcher rd;
 
     @Mock
+    List<ProductBean> lista;
+
+    @Mock
     ProductModel prodottoDao;
 
     @Mock
@@ -53,10 +56,6 @@ public class TC_ConsumerCatalog {
         when(request.getParameter("ctgy")).thenReturn("0");
         when(request.getParameter("srch")).thenReturn("");
         when(request.getParameter("pg")).thenReturn("1");
-
-        List<ProductBean> lista=new ArrayList<>();
-        ProductBean b= new ProductBean ("prova", "prova", "prova", "prova", "prova", 0, 6, 10, 20,8);
-        lista.add(b);
         when(prodottoDao.doRetrieveByCategory(0)).thenReturn(lista);
         when(p.paginate(lista)).thenReturn(pair);
         when(response.encodeURL("Catalogo.jsp")).thenReturn("Catalogo.jsp");
@@ -75,15 +74,9 @@ public class TC_ConsumerCatalog {
         when(request.getParameter("ctgy")).thenReturn("");
         when(request.getParameter("srch")).thenReturn("Alice");
         when(request.getParameter("pg")).thenReturn("1");
-
-        List<ProductBean> lista=new ArrayList<>();
-        ProductBean b= new ProductBean ("prova", "prova", "Alice", "prova", "prova", 0, 6, 10, 20,8);
-        lista.add(b);
-
         when(prodottoDao.doRetrieveBySearch("Alice",true)).thenReturn(lista);
         when(p.paginate(lista)).thenReturn(pair);
         when(response.encodeURL("Catalogo.jsp")).thenReturn("Catalogo.jsp");
-
         when(request.getRequestDispatcher("Catalogo.jsp")).thenReturn(rd);
         ArgumentCaptor<String> captor= ArgumentCaptor.forClass(String.class);
         servlet.init(sc);
@@ -99,15 +92,9 @@ public class TC_ConsumerCatalog {
         when(request.getParameter("ctgy")).thenReturn("");
         when(request.getParameter("srch")).thenReturn("");
         when(request.getParameter("pg")).thenReturn("1");
-
-        List<ProductBean> lista=new ArrayList<>();
-        ProductBean b= new ProductBean ("prova", "prova", "Alice", "prova", "prova", 0, 6, 10, 20,8);
-        lista.add(b);
-
         when(prodottoDao.doRetrieveAll(true)).thenReturn(lista);
         when(p.paginate(lista)).thenReturn(pair);
         when(response.encodeURL("Catalogo.jsp")).thenReturn("Catalogo.jsp");
-
         when(request.getRequestDispatcher("Catalogo.jsp")).thenReturn(rd);
         ArgumentCaptor<String> captor= ArgumentCaptor.forClass(String.class);
         servlet.init(sc);

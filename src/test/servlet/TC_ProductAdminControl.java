@@ -18,8 +18,7 @@ import java.io.StringWriter;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class TC_ProductAdminControl {
 
@@ -33,7 +32,7 @@ public class TC_ProductAdminControl {
     HttpSession session;
 
     @Mock
-    ProductModel productDao;
+    ProductModel model;
 
     @InjectMocks
     coreServlets.ProductAdminControl servlet;
@@ -84,7 +83,7 @@ public class TC_ProductAdminControl {
         ProductBean prodotto= new ProductBean("Cuscino","Cuscino Aurora", "Aurora","images/auroraCuscino.PNG","cuscino", 0, 3, 7, 5, 35);
 
         servlet.doPost(request, response);
-        verify(productDao).doSave(prodotto);
+        verify(model).doSave(prodotto);
 
     }
 
@@ -138,9 +137,9 @@ public class TC_ProductAdminControl {
         PrintWriter writer = new PrintWriter(stringWriter);
         when(response.getWriter()).thenReturn(writer);
 
-        servlet.doPost(request, response);
+        servlet.doGet(request, response);
 
-        verify(productDao).doDelete(1);
+        verify(model).doDelete(1);
     }
 
 }

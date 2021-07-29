@@ -38,6 +38,18 @@ public class TC_AddressOperations {
     @Mock
     Address a;
 
+    @Mock
+    Adress bean;
+
+    @Mock
+    Map<Integer,Adress> ad;
+
+    @Mock
+    Registered user;
+
+    @Mock
+    Registered r;
+
     @InjectMocks
     coreServlets.AddressOperations servlet;
 
@@ -50,26 +62,17 @@ public class TC_AddressOperations {
     public void testAddressOperation0() throws Exception {
         when(request.getParameter("operation")).thenReturn("0");
         when(request.getSession()).thenReturn(session);
-
-        Registered r= new Registered("rosalia", "capozzolo", "rosalia@libero.it", "rosalia");
-        Map<Integer,Adress> ad= new HashMap<>();
         when(request.getSession().getAttribute("user")).thenReturn(r);
         when(request.getSession().getAttribute("addresses")).thenReturn(ad);
-        ad.put(1,new Adress("via roma", 6,89098, "Roma", "Roma"));
         when(addressDao.doRetrieveAll("rosalia@libero.it")).thenReturn(ad);
         servlet.doGet(request, response);
 
-        Map<Integer,Adress> oracolo= new HashMap<>();
-        oracolo.put(1,new Adress("via roma", 6,89098, "Roma", "Roma"));
         Map<Integer,Adress> valoreReale= (Map<Integer,Adress>) request.getSession().getAttribute("addresses");
-        assertEquals(oracolo.toString(), valoreReale.toString());
+        assertEquals(ad.toString(), valoreReale.toString());
  }
     @Test //Op1 TCS18
     public void testAddressOperation1_TCS18() throws Exception {
-        Registered r= new Registered("rosalia", "capozzolo", "rosalia@libero.it", "rosalia");
-        Map<Integer,Adress> ad= new HashMap<>();
         when(request.getSession()).thenReturn(session);
-
         when(request.getParameter("operation")).thenReturn("1");
         when(session.getAttribute("user")).thenReturn(r);
         when(session.getAttribute("addresses")).thenReturn(ad);
@@ -79,13 +82,6 @@ public class TC_AddressOperations {
         when(request.getParameter("ncv")).thenReturn("7");
         when(request.getParameter("provincia")).thenReturn("Salerno");
         when(request.getParameter("via")).thenReturn("via tommasini");
-
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter writer = new PrintWriter(stringWriter);
-        when(response.getWriter()).thenReturn(writer);
-
-        Adress bean = new Adress ("via tommasini", 7,84, "Salerno","Felitto");
-        Registered user = new Registered("rosalia", "capozzolo","rosalia@libero.it" ,"rosalia" );
         when(addressDao.doSave(bean,  user)).thenReturn(1);
 
         ArgumentCaptor<String> captor= ArgumentCaptor.forClass(String.class);
@@ -103,13 +99,6 @@ public class TC_AddressOperations {
         when(request.getParameter("provincia")).thenReturn("Salerno6");
         when(request.getParameter("via")).thenReturn("via tommasini@");
         when(request.getSession()).thenReturn(session);
-
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter writer = new PrintWriter(stringWriter);
-        when(response.getWriter()).thenReturn(writer);
-
-        Adress bean = new Adress ("via tommasini@", 7,84061, "Salerno6","Felitto6");
-        Registered user = new Registered("rosalia", "capozzolo","rosalia@libero.it" ,"rosalia" );
         when(addressDao.doSave(bean,  user));
 
         ArgumentCaptor<String> captor= ArgumentCaptor.forClass(String.class);
@@ -127,13 +116,6 @@ public class TC_AddressOperations {
         when(request.getParameter("provincia")).thenReturn("");
         when(request.getParameter("via")).thenReturn("");
         when(request.getSession()).thenReturn(session);
-
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter writer = new PrintWriter(stringWriter);
-        when(response.getWriter()).thenReturn(writer);
-
-        Adress bean = new Adress ("", 7,84061, "","");
-        Registered user = new Registered("rosalia", "capozzolo","rosalia@libero.it" ,"rosalia" );
         when(addressDao.doSave(bean,  user));
 
         ArgumentCaptor<String> captor= ArgumentCaptor.forClass(String.class);
@@ -156,8 +138,6 @@ public class TC_AddressOperations {
         PrintWriter writer = new PrintWriter(stringWriter);
         when(response.getWriter()).thenReturn(writer);
 
-        Adress bean = new Adress ("via tommasini", 7,84061, "Salerno","Felitto");
-        Registered user = new Registered("rosalia", "capozzolo","rosalia@libero.it" ,"rosalia" );
         when(addressDao.doSave(bean,  user));
         servlet.doGet(request, response);
 
