@@ -195,4 +195,11 @@ public class ProductBean implements Serializable {
 				+ description + ", character=" + character + ", tipo=" + tipo + ", category=" + category + ", iva="
 				+ iva + ", discount=" + discount + ", price=" + price + "]";
 	}
+
+
+	public String toStringSenzaCodice() {
+		return "ProductBean [qty=" + qty + ", photo=" + photo + ", name=" + name + ", description="
+				+ description + ", character=" + character + ", tipo=" + tipo + ", category=" + category + ", iva="
+				+ iva + ", discount=" + discount + ", price=" + price + "]";
+	}
 }

@@ -103,15 +103,14 @@ public class TC_FatturaModel {
         assertEquals(true, b);
     }
 
-    @Test
+  /*  @Test
     void retrieveOrders () throws java.sql.SQLException {
-        //sospeso
         Date date = new Date(2019, 06, 20);
         Date date2= new Date(2021, 07, 19);
         List<Order> o= fatturaModel.retrieveOrders(getUtente(), date, date2);
         assertNotNull(o);
     }
-
+*/
     @Test
     void  retrieveInvoiceOrders () throws java.sql.SQLException {
        List<Order> o= fatturaModel.retrieveInvoiceOrders(1, fatturaModel.getConnection());

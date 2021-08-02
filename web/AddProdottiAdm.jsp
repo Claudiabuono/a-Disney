@@ -20,7 +20,7 @@ if(admin == null ? true : !admin.booleanValue()) {
 	<title>Nuovi prodotti</title>
 </head>
 <body style="background-image: url('images/areg.gif');">
-	<div class="field2">
+	<div class="field2"><a href="Logout">Logout</a>
 		<%--@declare id="fname"--%><%--@declare id="personaggio"--%><h3>Aggiungi un nuovo prodotto </h3><br>
  		<label  class="myLabel" for="fname"> Nome prodotto</label>
     	<input class="myInput1" type="text" id="nome" name="nome" placeholder="Cuscino Aurora" >

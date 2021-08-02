@@ -15,8 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.List;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
@@ -72,7 +73,7 @@ public class TC_ProductAdminControl {
         when(request.getParameter("name")).thenReturn("Cuscino");
         when(request.getParameter("description")).thenReturn("Cuscino Aurora");
         when(request.getParameter("personaggio")).thenReturn("Aurora");
-        when(request.getParameter("url")).thenReturn("images/auroraCuscino.PNG");
+        when(request.getParameter("url")).thenReturn("images/auroraCuscino3.PNG");
         when(request.getParameter("tipo")).thenReturn("cuscino");
         when(request.getParameter("categoria")).thenReturn("0");
         when(request.getParameter("qty")).thenReturn("3");
@@ -80,10 +81,17 @@ public class TC_ProductAdminControl {
         when(request.getParameter("iva")).thenReturn("5");
         when(request.getParameter("sconto")).thenReturn("35");
 
-        ProductBean prodotto= new ProductBean("Cuscino","Cuscino Aurora", "Aurora","images/auroraCuscino.PNG","cuscino", 0, 3, 7, 5, 35);
-
         servlet.doPost(request, response);
-        verify(model).doSave(prodotto);
+        String oracolo= "ProductBean [qty=3, photo=images/auroraCuscino3.PNG, name=Cuscino, description=Cuscino Aurora, " +
+                "character=Aurora, tipo=cuscino, category=0, iva=5.0, discount=35.0, price=7.00]";
+        List<ProductBean> list= model.doRetrieveByCategory(0);
+        for (ProductBean e:list) {
+            if(e.getPhoto().equals("images/auroraCuscino3.PNG"))
+            {
+                assertEquals(oracolo,e.toStringSenzaCodice());
+            }
+        }
+
 
     }
 
@@ -136,9 +144,11 @@ public class TC_ProductAdminControl {
         PrintWriter writer = new PrintWriter(stringWriter);
         when(response.getWriter()).thenReturn(writer);
 
-
         servlet.doGet(request, response);
 
-        verify(model).doDelete(1);
+        List<ProductBean> list= model.doRetrieveAll(true);
+        for (ProductBean e:list) {
+            assertNotEquals(1,e.getCode());
+        }
     }
 }

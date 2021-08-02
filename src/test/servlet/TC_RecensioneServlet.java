@@ -4,7 +4,9 @@ import coreModels.beans.ProductBean;
 import coreModels.beans.RecensioneBean;
 import coreModels.beans.Registered;
 import coreModels.model.*;
+import coreModels.model.DM.RecensioneModelDM;
 import coreServlets.RecensioneServlet;
+import coreServlets.Registration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -83,7 +85,7 @@ public class TC_RecensioneServlet {
     }
 
     @Test
-    public void testRecensione2() throws Exception {
+    public void testRecensioneInsert() throws Exception {
         when(request.getSession()).thenReturn(session);
         when(request.getParameter("act")).thenReturn("insert");
         when(request.getAttribute("product")).thenReturn(b);
@@ -91,13 +93,18 @@ public class TC_RecensioneServlet {
         when(request.getParameter("vote")).thenReturn("2");
         when(request.getParameter("comment")).thenReturn("Prodotto curato nei minimi dettagli");
         when(request.getParameter("id")).thenReturn("3");
-        when(r.getLogin()).thenReturn("annacuore1@ciao.it");
+        when(r.getLogin()).thenReturn("andrea@libero.it");
 
         servlet.doPost(request, response);
-
-        //verify(recensioneDao).newComment(r,b, "Prodotto curato nei minimi dettagli",3);
-
-        assertTrue(recensioneDao.newComment(r,b, "Prodotto curato nei minimi dettagli",3));
+        String oracolo="RecenzioneBean [description=Prodotto curato nei minimi dettagli, valutazione=2.0, name=caputo andrea]";
+        Registered registered= new Registered();
+        registered.setLogin("andrea@libero.it");
+        registered.setName("andrea");
+        registered.setCognome("caputo");
+        ProductBean productBean= new ProductBean(3);
+        RecensioneModel recensioneDao2= new RecensioneModelDM();
+        RecensioneBean recensione=  recensioneDao2.userComment(registered,productBean);
+        assertEquals(oracolo, recensione.toString());
     }
 
 }

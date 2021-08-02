@@ -19,6 +19,7 @@ import coreModels.beans.FatturaBean;
 import coreModels.beans.Registered;
 import coreModels.beans.UserBean;
 import coreModels.model.AdressModel;
+import coreModels.model.DM.RegisteredModelDM;
 import coreModels.model.FatturaModel;
 import coreModels.model.RegisteredModel;
 import coreServlets.AddressOperations;
@@ -66,14 +67,21 @@ public class TC_UserManagerIntegration {
         when(request.getParameter("pass")).thenReturn("rosalia");
 
         servlet.doPost(request, response);
-        //aggiungere verifica
+        RegisteredModel registeredDao2= new RegisteredModelDM();
+        Registered registrato= registeredDao2.doRetrieveByKey("rosalia@libero.it");
+        assertEquals("rosalia",registrato.getName());
+        assertEquals("rosalia",registrato.getPassword());
+        assertEquals("capozzolo",registrato.getCognome());
     }
 
     @Test
     public void test2() throws Exception {
+        Registered userBean= new Registered();
+
         when(request.getSession()).thenReturn(session);
         when(request.getParameter("op")).thenReturn("viewFatture");
         when(request.getParameter("pg")).thenReturn("1");
+        when(session.getAttribute("user")).thenReturn(userBean);
         when(response.encodeURL("/OrdiniUtente.jsp")).thenReturn("/OrdiniUtente.jsp");
         when(request.getRequestDispatcher("/OrdiniUtente.jsp")).thenReturn(rd);
 
