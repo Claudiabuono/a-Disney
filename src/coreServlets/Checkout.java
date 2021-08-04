@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import coreModels.model.FatturaModel;
-import coreModels.model.DM.FatturaModelDM;
-import coreModels.model.DS.FatturaModelDS;
 
 /**
  * Servlet implementation class Checkout
@@ -20,15 +18,10 @@ import coreModels.model.DS.FatturaModelDS;
 public class Checkout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
-	static boolean isDataSource = false;
 	static FatturaModel model;
 	
 	static {
-		if (isDataSource) {
-			model = new FatturaModelDS();
-		} else {
-			model = new FatturaModelDM();
-		}
+		model = new FatturaModel();
 	}
     /**
      * @see HttpServlet#HttpServlet()

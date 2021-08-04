@@ -8,8 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import coreModels.beans.ProductBean;
+import coreModels.connector.DriverManagerConnectionPool;
 
-public abstract class ProductModel {
+public class ProductModel {
 	
 	private void setBean (ResultSet rs, ProductBean item) throws SQLException {
 		item.setCode(rs.getInt("codice"));
@@ -64,7 +65,7 @@ public abstract class ProductModel {
 		PreparedStatement preparedStatement = null;
 		int result = 0;
 		try {
-			connection = getConnection();
+			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(insertSQL);
 			prepareInsertStatement(preparedStatement, product);
 
@@ -77,7 +78,7 @@ public abstract class ProductModel {
 				}
 			} finally {
 				if (connection != null)
-					closeConnection(connection);
+					DriverManagerConnectionPool.releaseConnection(connection);
 
 			}
 		}return (result != 0);
@@ -91,7 +92,7 @@ public abstract class ProductModel {
 
 		try {
 			String selectSql = acquistabile == null ? selectSQL : selectSQL + " AND acquistabile = ?";
-			connection = getConnection();
+			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(selectSql);
 			preparedStatement.setInt(1, code);
 			if (acquistabile) preparedStatement.setBoolean(2, acquistabile);
@@ -105,7 +106,7 @@ public abstract class ProductModel {
 				if (preparedStatement != null)
 					preparedStatement.close();
 			} finally {
-				closeConnection(connection);
+				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
 		return bean;
@@ -118,7 +119,7 @@ public abstract class ProductModel {
 		int result = 0;
 
 		try {
-			connection = getConnection();
+			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(deleteSQL);
 			preparedStatement.setInt(1, code);
 
@@ -130,7 +131,7 @@ public abstract class ProductModel {
 					preparedStatement.close();
 			} finally {
 				if (connection != null)
-					closeConnection(connection);
+					DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
 		return (result != 0);
@@ -145,7 +146,7 @@ public abstract class ProductModel {
 		String selectSQL = acquistabile == null ? selectAllSQL : selectAllSQL + " WHERE acquistabile = ? ORDER BY nome";
 		
 		try {
-			connection = getConnection();
+			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setBoolean(1, acquistabile.booleanValue());
 			ResultSet rs = preparedStatement.executeQuery();
@@ -162,7 +163,7 @@ public abstract class ProductModel {
 					preparedStatement.close();
 			} finally {
 				if (connection != null)
-					closeConnection(connection);
+					DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
 		return products;
@@ -179,7 +180,7 @@ public abstract class ProductModel {
 		String selectSQL = categorySQL + order;
 
 		try {
-			connection = getConnection();
+			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setInt(1, ctgy);
 			ResultSet rs = preparedStatement.executeQuery();
@@ -197,7 +198,7 @@ public abstract class ProductModel {
 					preparedStatement.close();
 			} finally {
 				if (connection != null)
-					closeConnection(connection);
+					DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
 		return products;
@@ -212,7 +213,7 @@ public abstract class ProductModel {
 		String acquist = acquistabile == null ? "" : " AND acquistabile = ?"; 
 		String selectSQL = searchSQL +acquist + order;
 		try {
-			connection = getConnection();
+			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setString(1, "%"+search+"%");
 			preparedStatement.setString(2, "%"+search+"%");
@@ -232,7 +233,7 @@ public abstract class ProductModel {
 					preparedStatement.close();
 			} finally {
 				if (connection != null)
-					closeConnection(connection);
+					DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
 		return products;
@@ -245,7 +246,7 @@ public abstract class ProductModel {
 		List<ProductBean> list = new ArrayList<ProductBean>();
 		String selectSQL = acquista == null ? selectDiscountSQL : selectDiscountSQL + " AND acquistabile = ?";
 		try {
-			connection = getConnection();
+			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setDouble(1, amount);
 			if (acquista) preparedStatement.setBoolean(2, acquista);
@@ -269,7 +270,7 @@ public abstract class ProductModel {
 					preparedStatement.close();
 			} finally {
 				if (connection != null)
-					closeConnection(connection);
+					DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
 		return list;
@@ -282,7 +283,7 @@ public abstract class ProductModel {
 		int result = 0;
 
 		try {
-			connection = getConnection();
+			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(updateSQL);
 			
 			preparedStatement.setBigDecimal(1, item.getPrice());
@@ -299,7 +300,7 @@ public abstract class ProductModel {
 					preparedStatement.close();
 			} finally {
 				if (connection != null)
-					closeConnection(connection);
+					DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
 		return (result != 0);
@@ -313,7 +314,7 @@ public abstract class ProductModel {
 		java.util.List <ProductBean> list = new java.util.ArrayList <ProductBean> ();
 
 		try {
-			connection = getConnection();
+			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(query);
 			prepareSQLlist(preparedStatement, codes);
 			if (acquista) preparedStatement.setBoolean(codes.length + 1, acquista);
@@ -331,17 +332,14 @@ public abstract class ProductModel {
 					preparedStatement.close();
 			} finally {
 				if (connection != null)
-					closeConnection(connection);
+					DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
 		return list;
 	}
 
 	
-	protected abstract void closeConnection(Connection connector) throws SQLException;
-	protected abstract Connection getConnection () throws SQLException;
-
-	protected static final String TABLE_NAME = "prodotto";
+    protected static final String TABLE_NAME = "prodotto";
 	protected static final String selectSQL = "SELECT * FROM " +TABLE_NAME + " WHERE codice = ?";
 	protected static final String selectAllSQL = "SELECT * FROM " + TABLE_NAME;
 	protected static final String selectDiscountSQL = "SELECT * FROM store.prodotto WHERE sconto >= ?";

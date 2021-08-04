@@ -2,8 +2,6 @@ package coreServlets;
 
 import com.google.gson.Gson;
 import coreModels.beans.Adress;
-import coreModels.model.DM.AddressModelDM;
-import coreModels.model.DS.AddressModelDS;
 import coreModels.model.AdressModel;
 
 import javax.servlet.ServletException;
@@ -20,15 +18,11 @@ import java.io.IOException;
 public class AddressOperations extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	static boolean isDataSource = false;
+
 	static AdressModel model;
 	
 	static {
-		if (isDataSource) {
-			model = new AddressModelDS();
-		} else {
-			model = new AddressModelDM();
-		}
+		model = new AdressModel();
 	}
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)

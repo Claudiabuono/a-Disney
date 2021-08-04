@@ -10,10 +10,9 @@ import coreModels.beans.FatturaBean;
 import coreModels.beans.Order;
 import coreModels.beans.ProductBean;
 import coreModels.beans.Registered;
-import coreModels.model.DM.AddressModelDM;
-import coreModels.model.DM.RegisteredModelDM;
+import coreModels.connector.DriverManagerConnectionPool;
 
-public abstract class FatturaModel {
+public class FatturaModel {
 	
 	private void setOrder (ResultSet rs, Order bean) throws SQLException{
 		//fattura, prodotto, prezzoAp, quantita, ivaAp, scontoAp
@@ -45,7 +44,7 @@ public abstract class FatturaModel {
 		java.util.Date da = new java.util.Date();
 
 		try {
-			connection = getConnection();
+			connection = DriverManagerConnectionPool.getConnection();
 			if(updateQtyProducts (f.getProdotti(), connection)) {
 				preparedStatement = connection.prepareStatement(newFattura, java.sql.Statement.RETURN_GENERATED_KEYS);
 	
@@ -82,7 +81,7 @@ public abstract class FatturaModel {
 					preparedStatement.close();
 			} finally {
 				if (connection != null)
-					closeConnection(connection);
+					DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}return(result !=0);
 	}
@@ -129,7 +128,7 @@ public abstract class FatturaModel {
 		String sql= "select * from ordine join fattura on fattura = codiceFattura where registrato = ? and prodotto = ?";
 		
 		try {
-			connection = getConnection();
+			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, e.getLogin());
 			preparedStatement.setInt(2, product.getCode());
@@ -146,7 +145,7 @@ public abstract class FatturaModel {
 					preparedStatement.close();
 			} finally {
 				if (connection != null)
-					closeConnection(connection);
+					DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
 		return false;
@@ -163,7 +162,7 @@ public abstract class FatturaModel {
 		java.util.ArrayList<Order> products = new java.util.ArrayList<Order>();
 
 		try {
-			connection = getConnection();
+			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL + " ORDER BY fattura");
 			preparedStatement.setString(1, e.getLogin());
 			ResultSet rs = preparedStatement.executeQuery();
@@ -181,7 +180,7 @@ public abstract class FatturaModel {
 					preparedStatement.close();
 			} finally {
 				if (connection != null)
-					closeConnection(connection);
+					DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
 		return products;
@@ -214,7 +213,7 @@ public abstract class FatturaModel {
 		FatturaBean f = new FatturaBean ();
 		
 		try {
-			connection = getConnection();
+			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(retrieveInvoice);
 			preparedStatement.setString(1, user.getLogin());
 			preparedStatement.setInt(2, code);
@@ -227,8 +226,8 @@ public abstract class FatturaModel {
 				
 				f.setCod(rs.getInt("codiceFattura"));
 				f.setProdotti(this.retrieveInvoiceOrders(f.getCod(), connection));
-				f.setUser(new RegisteredModelDM().doRetrieveByKey(user.getLogin()));
-				f.setShipping(new AddressModelDM().doRetrieve(rs.getInt("Indirizzo")));
+				f.setUser(new RegisteredModel().doRetrieveByKey(user.getLogin()));
+				f.setShipping(new AdressModel().doRetrieve(rs.getInt("Indirizzo")));
 				f.setDate(cl);
 			}
 
@@ -238,7 +237,7 @@ public abstract class FatturaModel {
 					preparedStatement.close();
 			} finally {
 				if (connection != null)
-					closeConnection(connection);
+					DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
 
@@ -254,7 +253,7 @@ public abstract class FatturaModel {
 		java.util.List<FatturaBean> list = new java.util.ArrayList<FatturaBean> ();
 
 		try {
-			connection = getConnection();
+			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			
 			if (date != null && date2 != null) {
@@ -290,7 +289,7 @@ public abstract class FatturaModel {
 				
 				f.setCod(rs.getInt("codiceFattura"));
 				f.setProdotti(this.retrieveInvoiceOrders(f.getCod(), connection));
-				f.setShipping(new AddressModelDM().doRetrieve(rs.getInt("Indirizzo")));
+				f.setShipping(new AdressModel().doRetrieve(rs.getInt("Indirizzo")));
 				f.setDate(cl);
 				f.setUser(e);
 				
@@ -303,7 +302,7 @@ public abstract class FatturaModel {
 					preparedStatement.close();
 			} finally {
 				if (connection != null)
-					closeConnection(connection);
+					DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
 		return list;
@@ -318,7 +317,7 @@ public abstract class FatturaModel {
 		java.util.List<FatturaBean> list = new java.util.ArrayList<FatturaBean> ();
 
 		try {
-			connection = getConnection();
+			connection =DriverManagerConnectionPool.getConnection();
 			
 			if (date != null && date2 != null) {
 				selectSQL = selectSQL + " WHERE dataFattura BETWEEN ? AND ?";
@@ -346,7 +345,7 @@ public abstract class FatturaModel {
 				RegisteredModel.setBean(rs, bean);
 				f.setCod(rs.getInt("codiceFattura"));
 				f.setProdotti(retrieveInvoiceOrders(f.getCod(), connection));
-				f.setShipping(new AddressModelDM().doRetrieve(rs.getInt("Indirizzo")));
+				f.setShipping(new AdressModel().doRetrieve(rs.getInt("Indirizzo")));
 				f.setDate(cl);
 				f.setUser(bean);
 				
@@ -359,16 +358,13 @@ public abstract class FatturaModel {
 					preparedStatement.close();
 			} finally {
 				if (connection != null)
-					closeConnection(connection);
+					DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
 		return list;
 	}
 	
-	public abstract void closeConnection(Connection connector) throws SQLException;
-	public abstract Connection getConnection () throws SQLException;
-	
-	private static final String ORDER_TABLE = "ordine";
+    private static final String ORDER_TABLE = "ordine";
 	private static final String PROD_TABLE = "prodotto";
 	private static final String FATT_TABLE = "fattura";
 	private static final String newFattura = "INSERT INTO " +FATT_TABLE +" (registrato, dataFattura, Indirizzo) VALUES (?,?,?)";

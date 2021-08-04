@@ -1,29 +1,13 @@
 package test.integration;
 
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.mail.Address;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import coreModels.beans.Adress;
-import coreModels.beans.FatturaBean;
 import coreModels.beans.Registered;
-import coreModels.beans.UserBean;
-import coreModels.model.AdressModel;
-import coreModels.model.DM.RegisteredModelDM;
-import coreModels.model.FatturaModel;
 import coreModels.model.RegisteredModel;
-import coreServlets.AddressOperations;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
@@ -67,7 +51,7 @@ public class TC_UserManagerIntegration {
         when(request.getParameter("pass")).thenReturn("rosalia");
 
         servlet.doPost(request, response);
-        RegisteredModel registeredDao2= new RegisteredModelDM();
+        RegisteredModel registeredDao2= new RegisteredModel();
         Registered registrato= registeredDao2.doRetrieveByKey("rosalia@libero.it");
         assertEquals("rosalia",registrato.getName());
         assertEquals("rosalia",registrato.getPassword());

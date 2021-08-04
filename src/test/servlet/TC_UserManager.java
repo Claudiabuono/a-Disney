@@ -3,7 +3,6 @@ package test.servlet;
 
 import coreModels.beans.FatturaBean;
 import coreModels.beans.Registered;
-import coreModels.model.DM.RegisteredModelDM;
 import coreModels.model.FatturaModel;
 import coreModels.model.RegisteredModel;
 import org.junit.jupiter.api.BeforeEach;
@@ -76,7 +75,7 @@ public class TC_UserManager  {
 
 
         servlet.doPost(request, response);
-        RegisteredModel registeredDao2= new RegisteredModelDM();
+        RegisteredModel registeredDao2= new RegisteredModel();
         Registered registrato= registeredDao2.doRetrieveByKey("rosalia@libero.it");
         assertEquals("rosalia",registrato.getName());
         assertEquals("rosalia",registrato.getPassword());

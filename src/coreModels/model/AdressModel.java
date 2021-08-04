@@ -6,9 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import coreModels.beans.Adress;
-import coreModels.connector.DriverMaagerConnectionPool;
+import coreModels.connector.DriverManagerConnectionPool;
 
-public abstract class AdressModel {
+public class AdressModel {
 
 	protected void setBean (ResultSet rs, Adress bean) throws SQLException {
 		bean.setCodice(rs.getInt("codiceIndirizzo"));
@@ -53,7 +53,7 @@ public abstract class AdressModel {
 		//registrato, via, cap,  nCivico, citta, provincia, stato
 		
 		try {
-			connection = getConnection();
+			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(insertSQL);
 			prepareInsertStatement(preparedStatement, user, address);
 			
@@ -66,7 +66,7 @@ public abstract class AdressModel {
 				if (preparedStatement != null)
 					preparedStatement.close();
 			} finally {
-				closeConnection(connection);
+				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
 
@@ -80,7 +80,7 @@ public abstract class AdressModel {
 		int result = 0;
 
 		try {
-			connection = DriverMaagerConnectionPool.getConnection();
+			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(deleteSQL);
 			preparedStatement.setString(1, code);
 
@@ -91,7 +91,7 @@ public abstract class AdressModel {
 				if (preparedStatement != null)
 					preparedStatement.close();
 			} finally {
-				DriverMaagerConnectionPool.releaseConnection(connection);
+				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
 		return (result != 0);
@@ -104,7 +104,7 @@ public abstract class AdressModel {
 		java.util.HashMap<Integer, Adress> products = new java.util.HashMap<Integer, Adress>();
 		System.out.println(nomeUtente);
 		try {
-			connection = getConnection();
+			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(selectAllSQL);
 			preparedStatement.setString(1, nomeUtente);
 
@@ -122,7 +122,7 @@ public abstract class AdressModel {
 				if (preparedStatement != null)
 					preparedStatement.close();
 			} finally {
-				closeConnection(connection);
+				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
 		return products;
@@ -136,7 +136,7 @@ public abstract class AdressModel {
 		int result = 0;
 
 		try {
-			connection = DriverMaagerConnectionPool.getConnection();
+			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(updateSQL);
 			
 			preparedStatement.setString(1, nw.getStreet());
@@ -154,7 +154,7 @@ public abstract class AdressModel {
 				if (preparedStatement != null)
 					preparedStatement.close();
 			} finally {
-				DriverMaagerConnectionPool.releaseConnection(connection);
+				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
 		return (result != 0);
@@ -169,7 +169,7 @@ public abstract class AdressModel {
 		Adress address = null;
 
 		try {
-			connection = getConnection();
+			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setInt(1, code);
 
@@ -187,17 +187,13 @@ public abstract class AdressModel {
 				if (preparedStatement != null)
 					preparedStatement.close();
 			} finally {
-				closeConnection(connection);
+				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
 		return address;
 
 	}
 
-	
-	public abstract void closeConnection(Connection connector) throws SQLException;
-	public abstract Connection getConnection () throws SQLException;
-	
 	protected static final String TABLE_NAME = "indirizzo";
 	protected static final String selectAllSQL = "SELECT * FROM " + TABLE_NAME +" WHERE registrato = ?";
 	protected static final String deleteSQL = "UPDATE "+TABLE_NAME+" SET registrato = null WHERE registrato = ?";

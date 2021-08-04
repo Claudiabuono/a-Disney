@@ -3,7 +3,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import coreModels.beans.ProductBean;
-import coreModels.model.DM.ProductModelDM;
 import coreModels.model.ProductModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +14,7 @@ public class TC_ProductModel {
 
     @BeforeEach
     void setUp() throws Exception{
-        product = new ProductModelDM();
+        product = new ProductModel();
     }
 
     private ProductBean getprodotto(){

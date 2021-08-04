@@ -11,9 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import coreModels.beans.ProductBean;
 import coreModels.model.ProductModel;
-import coreModels.model.DM.ProductModelDM;
-import coreModels.model.DS.ProductModelDS;
-import coreModels.model.UserModel;
 
 /**
  * Servlet implementation class IndexServlet
@@ -22,15 +19,10 @@ import coreModels.model.UserModel;
 public class IndexServlet extends HttpServlet {
 	private static final long serialVersionUID = 300L;
 	
-	static boolean isDataSource = false;
 	static ProductModel model;
 	
 	static {
-		if (isDataSource) {
-			model = new ProductModelDS();
-		} else {
-			model = new ProductModelDM();
-		}
+		model = new ProductModel();
 	}
 
 	/**

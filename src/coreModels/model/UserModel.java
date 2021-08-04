@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import coreModels.beans.UserBean;
+import coreModels.connector.DriverManagerConnectionPool;
 
 public abstract class UserModel {
 	
@@ -16,7 +17,7 @@ public abstract class UserModel {
 
 		try
 		{
-			connection = getConnection();
+			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setString(1, user.getLogin());
 			ResultSet rs = preparedStatement.executeQuery();
@@ -30,7 +31,7 @@ public abstract class UserModel {
 					preparedStatement.close();
 			} finally {
 				if (connection != null)
-					closeConnection(connection);
+					DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
 	}
@@ -44,6 +45,5 @@ public abstract class UserModel {
 	}
 	
 	protected abstract UserBean doRetrieveByKey (String username) throws SQLException;
-	protected abstract Connection getConnection () throws SQLException;
-	protected abstract void closeConnection (Connection connector) throws SQLException;
+
 }

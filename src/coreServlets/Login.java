@@ -11,28 +11,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import coreModels.beans.UserBean;
-import coreModels.model.DM.AdminModelDM;
-import coreModels.model.DS.AdminModelDS;
-import coreModels.model.DM.RegisteredModelDM;
-import coreModels.model.DS.RegisteredModelDS;
+import coreModels.model.AdminModel;
+import coreModels.model.RegisteredModel;
 import coreModels.model.UserModel;
 
 @WebServlet("/Login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	static boolean isDataSource = false;
 	static UserModel utente;
 	static UserModel admin;
 	static
 	{
-		if (isDataSource) {
-			utente = new RegisteredModelDS();
-			admin = new AdminModelDS();
-		} else {
-			utente = new RegisteredModelDM();
-			admin = new AdminModelDM();
-		}
+		utente = new RegisteredModel();
+		admin = new AdminModel();
+
 	}
     /**
      * @see HttpServlet#HttpServlet()

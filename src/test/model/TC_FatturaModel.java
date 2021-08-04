@@ -1,14 +1,11 @@
 package test.model;
 
 import coreModels.beans.*;
-import coreModels.model.AdminModel;
-import coreModels.model.DM.AdminModelDM;
-import coreModels.model.DM.FatturaModelDM;
+import coreModels.connector.DriverManagerConnectionPool;
 import coreModels.model.FatturaModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,7 +21,7 @@ public class TC_FatturaModel {
 
     @BeforeEach
     void setUp() throws Exception{
-        fatturaModel = new FatturaModelDM();
+        fatturaModel = new FatturaModel();
 
     }
 
@@ -93,7 +90,7 @@ public class TC_FatturaModel {
 
     @Test
     void updateQtyProducts() throws java.sql.SQLException {
-        Boolean b=fatturaModel.updateQtyProducts(getOrder(), fatturaModel.getConnection());
+        Boolean b=fatturaModel.updateQtyProducts(getOrder(), DriverManagerConnectionPool.getConnection());
         assertEquals(true, b);
     }
 
@@ -113,7 +110,7 @@ public class TC_FatturaModel {
 */
     @Test
     void  retrieveInvoiceOrders () throws java.sql.SQLException {
-       List<Order> o= fatturaModel.retrieveInvoiceOrders(1, fatturaModel.getConnection());
+       List<Order> o= fatturaModel.retrieveInvoiceOrders(1, DriverManagerConnectionPool.getConnection());
         assertNotNull(o);
     }
 

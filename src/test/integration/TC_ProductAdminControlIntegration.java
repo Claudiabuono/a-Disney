@@ -2,7 +2,6 @@ package test.integration;
 
 
 import coreModels.beans.ProductBean;
-import coreModels.model.DM.ProductModelDM;
 import coreModels.model.ProductModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 public class TC_ProductAdminControlIntegration {
-    private ProductModel model= new ProductModelDM();
+    private ProductModel model= new ProductModel();
     @Mock
     HttpServletRequest request;
 

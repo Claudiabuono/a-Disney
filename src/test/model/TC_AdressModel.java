@@ -1,16 +1,12 @@
 package test.model;
 
-import coreModels.beans.Admin;
 import coreModels.beans.Adress;
 import coreModels.beans.Registered;
 import coreModels.model.AdressModel;
-import coreModels.model.DM.AddressModelDM;
-import coreModels.model.DM.AdminModelDM;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,7 +17,7 @@ public class TC_AdressModel {
 
     @BeforeEach
     void setUp() throws Exception{
-        address = new AddressModelDM();
+        address = new AdressModel();
     }
 
     private Adress newAddress(){

@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import coreModels.beans.ProductBean;
 import coreModels.beans.RecensioneBean;
 import coreModels.beans.Registered;
-import coreModels.model.DM.RecensioneModelDM;
 import coreModels.model.RecensioneModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,7 +18,7 @@ public class TC_RecensioneModel {
 
     @BeforeEach
     void setUp() throws Exception{
-        recensione = new RecensioneModelDM();
+        recensione = new RecensioneModel();
     }
 
     private ProductBean getprodotto(){

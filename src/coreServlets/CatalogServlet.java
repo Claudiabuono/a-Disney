@@ -11,11 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.GsonBuilder;
 
 import coreModels.beans.ProductBean;
-import coreModels.model.Paginator;
 import coreModels.model.Pair;
 import coreModels.model.ProductModel;
-import coreModels.model.DM.ProductModelDM;
-import coreModels.model.DS.ProductModelDS;
 
 /**
  * Servlet implementation class CatalogServlet
@@ -29,15 +26,10 @@ public abstract class CatalogServlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-	static boolean isDataSource = false;
 	static ProductModel model;
 	
 	static {
-		if (isDataSource) {
-			model = new ProductModelDS();
-		} else {
-			model = new ProductModelDM();
-		}
+		model = new ProductModel();
 	}
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)

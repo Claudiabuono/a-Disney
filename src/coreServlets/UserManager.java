@@ -11,9 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import coreModels.beans.FatturaBean;
 import coreModels.model.FatturaModel;
-import coreModels.model.DM.FatturaModelDM;
 import coreModels.model.RegisteredModel;
-import coreModels.model.DM.RegisteredModelDM;
 
 /**
  * Servlet implementation class UserManager
@@ -22,18 +20,12 @@ import coreModels.model.DM.RegisteredModelDM;
 public class UserManager extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
-	static boolean isDataSource = false;
 	static RegisteredModel model;
 	static FatturaModel fatt;
 	static
 	{
-	//	if (isDataSource) {
-	//		model = new RegisteredModelDS();
-	//		fatt = new FatturaModelDS();
-	//	} else {
-			model = new RegisteredModelDM();
-			fatt = new FatturaModelDM();
-	//	}
+			model = new RegisteredModel();
+			fatt = new FatturaModel();
 	}
 	
     /**

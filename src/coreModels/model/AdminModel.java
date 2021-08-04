@@ -7,8 +7,9 @@ import java.sql.SQLException;
 
 import coreModels.beans.Admin;
 import coreModels.beans.UserBean;
+import coreModels.connector.DriverManagerConnectionPool;
 
-public abstract class AdminModel extends UserModel{
+public class AdminModel extends UserModel{
 
 	@Override
 	public UserBean doRetrieveByKey(String user) throws SQLException {
@@ -19,7 +20,7 @@ public abstract class AdminModel extends UserModel{
 
 		try
 		{
-			connection = getConnection();
+			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setString(1, user);
 			ResultSet rs = preparedStatement.executeQuery();
@@ -39,7 +40,7 @@ public abstract class AdminModel extends UserModel{
 					preparedStatement.close();
 			} finally {
 				if (connection != null)
-					closeConnection(connection);
+					DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
 		

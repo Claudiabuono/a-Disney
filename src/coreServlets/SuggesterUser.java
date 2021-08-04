@@ -15,10 +15,7 @@ import com.google.gson.GsonBuilder;
 
 import coreModels.beans.ProductBean;
 import coreModels.beans.Registered;
-import coreModels.model.ProductModel;
 import coreModels.model.RegisteredModel;
-import coreModels.model.DM.RegisteredModelDM;
-import coreModels.model.DS.RegisteredModelDS;
 
 /**
  * Servlet implementation class SuggesterUser
@@ -33,7 +30,7 @@ public class SuggesterUser extends HttpServlet {
      */
 	@Override
 	public void init() {
-			model= new RegisteredModelDM();
+			model= new RegisteredModel();
 			parser = new GsonBuilder().registerTypeAdapter(ProductBean.class, new json.JsonBuilderProd()).create();
 	}
 

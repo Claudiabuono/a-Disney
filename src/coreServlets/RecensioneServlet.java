@@ -11,11 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import coreModels.beans.ProductBean;
 import coreModels.beans.RecensioneBean;
-import coreModels.model.DM.FatturaModelDM;
+import coreModels.model.FatturaModel;
 import coreModels.model.RecensioneModel;
-import coreModels.model.DM.RecensioneModelDM;
-import coreModels.model.DS.RecensioneModelDS;
-import coreModels.model.UserModel;
 
 /**
  * Servlet implementation class RecenzioneServlet
@@ -24,15 +21,10 @@ import coreModels.model.UserModel;
 public class RecensioneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
-	static boolean isDataSource = false;
 	static RecensioneModel recenzione;
 	
 	static {
-		if (isDataSource) {
-			recenzione = new RecensioneModelDS();
-		} else {
-			recenzione = new RecensioneModelDM();
-		}
+		recenzione = new RecensioneModel();
 	}
 
 	/**
@@ -48,7 +40,7 @@ public class RecensioneServlet extends HttpServlet {
 			
 				java.util.List<RecensioneBean> list = recenzione.getComments(bean);
 				RecensioneBean userComment = user == null ? null : recenzione.userComment(user, bean);
-				boolean payed = userComment == null ? user == null ? false : new FatturaModelDM().hasPurchased(bean, user) :false;
+				boolean payed = userComment == null ? user == null ? false : new FatturaModel().hasPurchased(bean, user) :false;
 				list.remove(userComment);
 				
 				request.setAttribute("voto", recenzione.mediumVote(bean));

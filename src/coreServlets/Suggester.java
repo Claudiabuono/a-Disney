@@ -15,8 +15,6 @@ import com.google.gson.GsonBuilder;
 
 import coreModels.beans.ProductBean;
 import coreModels.model.ProductModel;
-import coreModels.model.DM.ProductModelDM;
-import coreModels.model.DS.ProductModelDS;
 
 /**
  * Servlet implementation class Suggester
@@ -31,7 +29,7 @@ public class Suggester extends HttpServlet {
      */
 	@Override
 	public void init() {
-			model= new ProductModelDM();
+			model= new ProductModel();
 			parser = new GsonBuilder().registerTypeAdapter(ProductBean.class, new json.JsonBuilderProd()).create();
 	}
 

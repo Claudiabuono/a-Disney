@@ -3,7 +3,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import coreModels.beans.Admin;
 import coreModels.beans.UserBean;
 import coreModels.model.AdminModel;
-import coreModels.model.DM.AdminModelDM;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.sql.SQLException;
@@ -14,7 +13,7 @@ public class TC_AdminModel {
 
     @BeforeEach
     void setUp() throws Exception{
-        adminModel = new AdminModelDM();
+        adminModel = new AdminModel();
 
     }
 

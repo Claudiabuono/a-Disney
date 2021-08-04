@@ -15,8 +15,7 @@ import coreModels.beans.Cart;
 import coreModels.beans.Order;
 import coreModels.beans.ProductBean;
 import coreModels.model.ProductModel;
-import coreModels.model.DM.ProductModelDM;
-import coreModels.model.DS.ProductModelDS;
+
 /**
  * Servlet implementation class ProductControl
  */
@@ -28,15 +27,11 @@ import coreModels.model.DS.ProductModelDS;
 public class ProductControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	static boolean isDataSource = false;
 	Gson parser = new GsonBuilder().registerTypeAdapter(Cart.class, new json.JsonBuilderCart()).create();
 	static ProductModel model;
 	
 	static {
-		if (isDataSource) 
-			model = new ProductModelDS();
-		 else 
-			model = new ProductModelDM();
+		model = new ProductModel();
 	}
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

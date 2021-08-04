@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import coreModels.beans.Registered;
 import coreModels.model.RegisteredModel;
-import coreModels.model.DM.RegisteredModelDM;
-import coreModels.model.DS.RegisteredModelDS;
 
 /**
  * Servlet implementation class Registration
@@ -20,15 +18,10 @@ import coreModels.model.DS.RegisteredModelDS;
 public class Registration extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	static boolean isDataSource = false;
 	static RegisteredModel model;
 	static
 	{
-		if (isDataSource) {
-			model = new RegisteredModelDS();
-		} else {
-			model = new RegisteredModelDM();
-		}
+		model = new RegisteredModel();
 	}
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)

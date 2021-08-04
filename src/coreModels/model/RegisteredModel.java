@@ -7,8 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import coreModels.beans.Registered;
+import coreModels.connector.DriverManagerConnectionPool;
 
-public abstract class RegisteredModel extends UserModel {
+public class RegisteredModel extends UserModel {
 	/*
 	public synchronized boolean hasPurchased (beans.ProductBean prod, UserBean user) throws SQLException {
 		
@@ -30,7 +31,7 @@ public abstract class RegisteredModel extends UserModel {
 
 		try
 		{
-			connection = getConnection();
+			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setString(1, user);
 			ResultSet rs = preparedStatement.executeQuery();
@@ -52,7 +53,7 @@ public abstract class RegisteredModel extends UserModel {
 					preparedStatement.close();
 			} finally {
 				if (connection != null)
-					closeConnection(connection);
+					DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
 		
@@ -66,7 +67,7 @@ public abstract class RegisteredModel extends UserModel {
 		int result = 0;
 		try
 		{
-			connection = getConnection();
+			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(insertSQL);
 
 			preparedStatement.setString(1, e.getLogin());
@@ -85,7 +86,7 @@ public abstract class RegisteredModel extends UserModel {
 				}
 			} finally {
 				if (connection != null)
-					closeConnection(connection);
+					DriverManagerConnectionPool.releaseConnection(connection);
 
 			}
 		}
@@ -98,7 +99,7 @@ public abstract class RegisteredModel extends UserModel {
 		int result = 0;
 		try
 		{
-			connection = getConnection();
+			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(updateSQL);
 			
 			preparedStatement.setString(1, login);
@@ -117,7 +118,7 @@ public abstract class RegisteredModel extends UserModel {
 					preparedStatement.close();
 			} finally {
 				if (connection != null)
-					closeConnection(connection);
+					DriverManagerConnectionPool.releaseConnection(connection);
 
 			}
 		}
@@ -134,7 +135,7 @@ public abstract class RegisteredModel extends UserModel {
 		String selectSQL = searchSQL + "ORDER BY nome";
 
 		try {
-			connection = getConnection();
+			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setString(1, "%"+search+"%");
 
@@ -153,7 +154,7 @@ public abstract class RegisteredModel extends UserModel {
 					preparedStatement.close();
 			} finally {
 				if (connection != null)
-					closeConnection(connection);
+					DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
 		return list;

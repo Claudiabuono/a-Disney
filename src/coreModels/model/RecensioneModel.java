@@ -6,8 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import coreModels.beans.RecensioneBean;
+import coreModels.connector.DriverManagerConnectionPool;
 
-public abstract class RecensioneModel {
+public class RecensioneModel {
 
 	public synchronized double mediumVote (coreModels.beans.ProductBean e) throws SQLException {
 		Connection connection = null;
@@ -15,7 +16,7 @@ public abstract class RecensioneModel {
 		double vote = 0;
 		
 		try {
-			connection = getConnection();
+			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(voto);
 			preparedStatement.setInt(1, e.getCode());
 			
@@ -29,7 +30,7 @@ public abstract class RecensioneModel {
 					preparedStatement.close();
 			} finally {
 				if (connection != null)
-					closeConnection(connection);
+					DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
 		return vote;
@@ -41,7 +42,7 @@ public abstract class RecensioneModel {
 		RecensioneBean bean = null;
 		
 		try {
-			connection = getConnection();
+			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(verify);
 			preparedStatement.setString(1, e.getLogin());
 			preparedStatement.setInt(2, p.getCode());
@@ -62,7 +63,7 @@ public abstract class RecensioneModel {
 					preparedStatement.close();
 			} finally {
 				if (connection != null)
-					closeConnection(connection);
+					DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
 		return bean;
@@ -75,7 +76,7 @@ public abstract class RecensioneModel {
 		java.util.ArrayList<RecensioneBean> comments = new java.util.ArrayList<RecensioneBean>();
 
 		try {
-			connection = getConnection();
+			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setInt(1, e.getCode());
 
@@ -96,7 +97,7 @@ public abstract class RecensioneModel {
 					preparedStatement.close();
 			} finally {
 				if (connection != null)
-					closeConnection(connection);
+					DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
 		return comments;
@@ -108,7 +109,7 @@ public abstract class RecensioneModel {
 		PreparedStatement preparedStatement = null;
 		int result=0;
 		try {
-			connection = getConnection();
+			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(insertSQL);
 			preparedStatement.setInt(1, p.getCode());
 			preparedStatement.setString(2, e.getLogin());
@@ -124,16 +125,12 @@ public abstract class RecensioneModel {
 					preparedStatement.close();
 			} finally {
 				if (connection != null)
-					closeConnection(connection);
+					DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
 		return (result!= 0);
 	}
 
-	
-	protected abstract void closeConnection(Connection connector) throws SQLException;
-	protected abstract Connection getConnection () throws SQLException;
-	
 	private static final String voto = "SELECT AVG(valutazione) FROM recenzione WHERE prodottoR = ?";
 	private static final String insertSQL = "INSERT INTO recenzione values (?, ?, ?, ?)";
 	private static final String verify = "SELECT * FROM recenzione JOIN registrato on utente = loginA WHERE utente = ? AND prodottoR = ?";

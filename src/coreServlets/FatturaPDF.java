@@ -29,8 +29,6 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 import coreModels.beans.FatturaBean;
 import coreModels.model.FatturaModel;
-import coreModels.model.DM.FatturaModelDM;
-import coreModels.model.DS.FatturaModelDS;
 
 /**
  * Servlet implementation class FatturaPDF
@@ -39,15 +37,10 @@ import coreModels.model.DS.FatturaModelDS;
 public class FatturaPDF extends HttpServlet {
 	private static final long serialVersionUID = 1L;
       
-	static boolean isDataSource = false;
 	static FatturaModel model;
 	
 	static {
-		if (isDataSource) {
-			model = new FatturaModelDS();
-		} else {
-			model = new FatturaModelDM();
-		}
+		model = new FatturaModel();
 	}
 	
 	 private static Font bigFont  = new Font(Font.FontFamily.TIMES_ROMAN, 18,  Font.BOLD);
@@ -256,7 +249,4 @@ public class FatturaPDF extends HttpServlet {
 		doGet(request, response);
 	}
 
-	public void setFatturaModel(FatturaModel fatturaDao) {
-		this.model= fatturaDao;
-	}
 }

@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import coreModels.beans.Cart;
 import coreModels.beans.Order;
 import coreModels.model.ProductModel;
-import coreModels.model.DM.ProductModelDM;
-import coreModels.model.DS.ProductModelDS;
 
 /**
  * Servlet implementation class CartServlet
@@ -21,17 +19,11 @@ import coreModels.model.DS.ProductModelDS;
 @WebServlet("/myCart")
 public class CartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	static boolean isDataSource = false;
-	
+
 	static ProductModel model;
 	
 	static {
-		if (isDataSource) {
-			model = new ProductModelDS();
-		} else {
-			model = new ProductModelDM();
-		}
+		model = new ProductModel();
 	}
        
     /**

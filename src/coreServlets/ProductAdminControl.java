@@ -13,8 +13,6 @@ import com.google.gson.JsonObject;
 
 import coreModels.beans.ProductBean;
 import coreModels.model.ProductModel;
-import coreModels.model.DM.ProductModelDM;
-import coreModels.model.DS.ProductModelDS;
 
 /**
  * Servlet implementation class ProductAdminControl
@@ -23,16 +21,10 @@ import coreModels.model.DS.ProductModelDS;
 public class ProductAdminControl extends HttpServlet {
 	private static final long serialVersionUID = 1000L;
     
-	static boolean isDataSource = false;
-	
 	static ProductModel model;
 	
 	static {
-		if (isDataSource) {
-			model = new ProductModelDS();
-		} else {
-			model = new ProductModelDM();
-		}
+		model = new ProductModel();
 	}
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
