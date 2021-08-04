@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    
-    
+
+
 <%@ page import = "coreModels.beans.ProductBean" %>
 <%@ page import = "java.util.List,java.util.ArrayList, coreModels.beans.RecensioneBean, java.util.Random"%>
-    
+
 <section class="card"  style="padding-bottom:90px;">
 	<div style="float:left; padding:20px " >
      	<%@include file = "zoom.jsp" %>	

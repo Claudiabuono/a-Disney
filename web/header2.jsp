@@ -4,7 +4,10 @@
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 </head>
-	
+<%
+    Boolean isAdmin = session.getAttribute("isAdmin") == null ? false : (Boolean) session.getAttribute("isAdmin");
+    Boolean isUser = session.getAttribute("isUser") == null ? false : (Boolean) session.getAttribute("isUser");
+%>
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -13,12 +16,22 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="index.jsp">DisneyStore</a>
+        <% if(isAdmin){ %>
+            <a class="navbar-brand" href="amministratore.jsp">DisneyStore</a>
+        <% } else{ %>
+            <a class="navbar-brand" href="index.jsp">DisneyStore</a>
+        <% } %>
+
     </div>
-    <div>
+
+          <div>
+
       <div class="collapse navbar-collapse" id="myNavbar">
+          <% if(!isAdmin){ %>
         <ul class="nav navbar-nav">
-          <li><a href="carrello.jsp">Carrello</a></li>
+
+                 <li><a href="carrello.jsp">Carrello</a></li>
+
            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Prodotti <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a href="catalogo?ctgy=0&pg=1">Casa</a></li>
@@ -27,23 +40,26 @@
               <li><a href="catalogo?ctgy=3&pg=1">Giochi</a></li>
             </ul>
           </li>
-        </ul>
+        </ul> <% } %>
         <ul class="nav navbar-nav navbar-right">
-        <%
-        Boolean isAdmin = session.getAttribute("isAdmin") == null ? false : (Boolean) session.getAttribute("isAdmin");
-        Boolean isUser = session.getAttribute("isUser") == null ? false : (Boolean) session.getAttribute("isUser");
-        
+            <%
         if (isUser) {%>
             <li><%@ include file="contentJSP/ricerca.jsp" %></li>
-        	<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span>Welcome ${user.name}</span><span class="caret"></span></a>
+        	<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span> ${user.name}</span><span class="caret"></span></a>
             	<ul class="dropdown-menu">
             	<li><a href="protected-page.jsp">Area Personale</a>
             	<li><a href="UserManager?op=viewFatture">Visualizza Ordini</a></li>
         		<li><a href="Logout">Logout</a></li>
         		</ul>
         <%} else if (isAdmin) {%>
-        	<li><a href="#"><span>Welcome </span>${user.name}</a></li>
-        <% }
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span> amministratore</span><span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="admin">Ordini clienti</a> </li>
+                <li><a href="admincat">Revisiona catalogo</a> </li>
+                <li><a href="AddProdottiAdm.jsp">Aggiungi prodotti</a> </li>
+                <li><a href="Logout">Logout</a></li>
+            </ul>
+            <% }
         else { %>
         	<li><%@ include file="contentJSP/ricerca.jsp" %></li>
       		<li class="loginClear"><a href="Login.jsp"><span class="glyphicon glyphicon-log-in"></span>&#160 Login</a></li>

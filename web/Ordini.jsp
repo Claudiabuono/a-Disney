@@ -17,11 +17,15 @@ if(admin == null ? true : !admin.booleanValue()) {
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     	<link rel="stylesheet" href="css/stile.css" type = "text/css">
+		<link rel="stylesheet" href="css/bootstrap.css" type = "text/css">
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Ordini</title>
+
 </head>
 <body style="background-image: url('images/areg.gif');" data-spy="scroll" data-target=".navbar" data-offset="50">
+<%@include file = "header2.jsp" %>
 <%@ include file = "contentJSP/contentOrdiniAdmin.jsp" %>
+<%@include file = "footer.jsp" %>
 <script type = "text/javascript" src = "js/ordiniAdmin.js"></script>
 </body>
 </html>

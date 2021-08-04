@@ -12,15 +12,19 @@ if(admin == null ? true : !admin.booleanValue()) {
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="utf-8">
 	<link rel="stylesheet" href="css/stile.css" type = "text/css">
+	<link rel="stylesheet" href="css/bootstrap.css" type = "text/css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
- 		
-	<title>Nuovi prodotti</title>
+ 	<title>Nuovi prodotti</title>
+
 </head>
 <body style="background-image: url('images/areg.gif');">
-	<div class="field2"><a href="Logout">Logout</a>
+<%@include file = "header2.jsp" %>
+	<div class="field2">
 		<%--@declare id="fname"--%><%--@declare id="personaggio"--%><h3>Aggiungi un nuovo prodotto </h3><br>
  		<label  class="myLabel" for="fname"> Nome prodotto</label>
     	<input class="myInput1" type="text" id="nome" name="nome" placeholder="Cuscino Aurora" >
@@ -62,6 +66,7 @@ if(admin == null ? true : !admin.booleanValue()) {
     	<div id="esito"></div>
    	    <hr>
 	</div>
+<%@include file = "footer.jsp" %>
 <script type="text/javascript" src= "js/addProdotti.js"></script>
 
 </body>

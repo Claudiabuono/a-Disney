@@ -12,7 +12,6 @@
 	<div class="row ">
     	<div class="card x">
     	<div class="cart-list">
-			<a href="Logout">Logout</a>
     	<h1>Catalogo</h1>
 	    	<table class="table">
 	     <thead class="thead-primary">
