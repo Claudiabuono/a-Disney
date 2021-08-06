@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<form class = "validation" id = "val" action = "Registration" method = "POST">
+<form class = "validation" id = "val" action = "Registration" method = "POST" name="modulo" onsubmit="return testpass(this)">
 	<div class="field">
 	<%
 	Boolean error = (Boolean) request.getAttribute("error");
@@ -26,10 +26,26 @@
    
    <input type="password"  class="myInput1"  id = "password" size="20" name = "password" placeholder="Password tra i 5 e i 10 caratteri" autocomplete="off">
    <div id= "passwordWarning" class="alert"><span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> <strong>Errore!</strong>la password non è valida, deve essere tra 8 e 25 caratteri</div>
-  
+
+	<input type="password"  class="myInput1"  id = "password_2" size="20" name = "password_2" placeholder="Conferma password" autocomplete="off">
+
     <br> 
       <button class="button button2 submitter" type = "submit" >Crea Account</button> 
        <a href= "../../WebContent/Login.jsp"> Sono registrato</a>
   </div>
+
+	<script language="Javascript" type="text/javascript">
+		function testpass(modulo){
+			// Verifico che le due password siano uguali, in caso contrario avverto
+			// dell'errore con un Alert
+			if (modulo.password.value != modulo.password_2.value) {
+				alert("La password inserita non coincide con la prima!")
+				modulo.password.focus()
+				modulo.password.select()
+				return false
+			}
+			return true
+		}
+	</script>
  	
 </form>
