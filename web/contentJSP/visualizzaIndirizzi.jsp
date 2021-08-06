@@ -3,7 +3,6 @@
          pageEncoding="ISO-8859-1"%>
 
 <%
-    java.util.List<Adress> list = (List<Adress>) request.getAttribute("list");
 
     java.util.Map<Integer, coreModels.beans.Adress> map = (java.util.Map<Integer, coreModels.beans.Adress>) session.getAttribute("addresses");
     java.util.List <coreModels.beans.Adress> addresses = map == null ? new java.util.ArrayList<coreModels.beans.Adress>() : new java.util.ArrayList (map.values());
@@ -27,6 +26,7 @@
                     <tr>
                         <td colspan = "8" style = "text-align: center">non ci sono indirizzi</td>
                     </tr>
+                    <tr>
                     <%
                     } else {
                         for(Adress address : addresses){%>
@@ -35,6 +35,7 @@
                         <td><%=address%></td>
                     <%}
                     }%>
+                    </tr>
                     </tbody>
                 </table>
 </div><br>

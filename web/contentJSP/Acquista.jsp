@@ -7,6 +7,7 @@
 	
 	Cart cart= (Cart) session.getAttribute("cart");
 	if(cart == null ? true : cart.size() == 0 ){%>
+
 	  <div class="acquista">
       <h4 id = "size">Carrello <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b>0</b></span></h4>
       <p id="noIva">Totale (IVA escl.)<span class="price">0.00 &#8364</span></p>

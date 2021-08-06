@@ -87,7 +87,6 @@ $(document).ready(function(){
   			  var newIva = $("."+up+' [role="iva"] input').val();
   			  
   			  console.log(newPrice);
-  			  
   			  if (isEmpty(newPrice) || isEmpty(newQty) || isEmpty(newSconto) || isEmpty(newIva)) {
   				    alert ("Uno dei campi di input non e' stato riempito");
   				  
@@ -101,7 +100,17 @@ $(document).ready(function(){
   					$(button).click(prova);
   					
   					return;					
-  			  }else {
+  			  }else if((newPrice!='[0-9]*.[0-9]*') || (newSconto!='[0-9]*.[0-9]*') || (newIva!='[0-9]*.[0-9]*')){
+				  alert ("i campi devono essere numerali");
+
+				  $("."+up+' [role="price"]').html(price);
+				  $("."+up+' [role="qty"]').html(qty);
+				  $("."+up+' [role="discount"]').html(sconto);
+				  $("."+up+' [role="iva"]').html(iva);
+				  $(button).unbind();
+				  $(button).html('Modifica');
+				  $(button).click(prova);
+			  }else {
   				  $(button).unbind();
   				  $.post ("ProductAdminControl", {act: "modify" ,code : code, iva: newIva, price: newPrice, qty: newQty, discount: newSconto})
   				  	.done(function (json) {

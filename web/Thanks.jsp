@@ -7,11 +7,12 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/stile.css" type = "text/css">
+	<link rel="stylesheet" href="css/bootstrap.css" type = "text/css">
 	<script type = "text/javascript" src = "js/jquery.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
 </head>
 <body style="background-image: url('images/areg.gif');" data-spy="scroll" data-target=".navbar" data-offset="50">
 	<%@include file = "header2.jsp" %><br><br>
@@ -25,7 +26,8 @@
 		o della fabbricazione durante questo periodo di garanzia, Disney disporr&agrave la riparazione o la
 		sostituzione del prodotto a proprie spese. In caso di sostituzione del prodotto, la data di inizio
 		della garanzia resta la data di acquisto del prodotto originale</h2>
-	<a class="button button2" href= "index.jsp"> Home</a>		
+	<a class="button button2" style="width: 100%; text-decoration: none;" href= "index.jsp"> Home</a>
 	</div>
+	<%@include file = "footer.jsp" %>
 </body>
 </html>
