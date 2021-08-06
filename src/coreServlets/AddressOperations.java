@@ -101,7 +101,5 @@ public class AddressOperations extends HttpServlet {
 		doGet(request, response);
 	}
 
-	public void setAdressModel(AdressModel addressDao) {
-		this.model= addressDao;
-	}
+
 }

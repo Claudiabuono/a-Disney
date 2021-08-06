@@ -30,6 +30,13 @@
 		<div id= "alert2" class="alert"><span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> <strong>Errore!</strong> Errore durante l aggiornamento</div>
 		<div id= "alert3" class="alert"><span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> <strong>Errore!</strong> La password non corrisponde a quella digitata</div>
 	<hr>
-		<h3>Aggiungi nuovo indirizzo</h3>
-		 <%@ include file = "newAddress.jsp" %> 
+
+	<h3>Aggiungi nuovo indirizzo</h3>
+	<%@ include file = "newAddress.jsp" %>
+
+
+	<hr>
+
+	<h3>Visualizza i tuoi indirizzi</h3>
+	<%@ include file = "visualizzaIndirizzi.jsp" %>
 </div>
