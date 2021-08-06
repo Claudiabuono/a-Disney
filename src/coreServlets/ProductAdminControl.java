@@ -59,9 +59,9 @@ public class ProductAdminControl extends HttpServlet {
 					
 						ProductBean bean = new ProductBean ();
 						bean.setCode(Integer.parseInt(request.getParameter("code")));
-						bean.setIva(Integer.parseInt(request.getParameter("iva")));
+						bean.setIva(Double.parseDouble(request.getParameter("iva")));
 						bean.setPrice(Double.parseDouble(request.getParameter("price")));
-						bean.setDiscount(Integer.parseInt(request.getParameter("discount")));
+						bean.setDiscount(Double.parseDouble(request.getParameter("discount")));
 						bean.setQty(Integer.parseInt(request.getParameter("qty")));
 						
 						
@@ -71,10 +71,10 @@ public class ProductAdminControl extends HttpServlet {
 							response.setContentType("application/json");
 							JsonObject obj = new JsonObject ();
 							
-							obj.addProperty("newPrice", bean.getPrice()+"&#8364;");
+							obj.addProperty("newPrice", bean.getPrice());
 							obj.addProperty("newQty", bean.getQty());
-							obj.addProperty("newSconto", bean.getDiscount() +"%");
-							obj.addProperty("newIva", bean.getIva() +"%");
+							obj.addProperty("newSconto", bean.getDiscount());
+							obj.addProperty("newIva", bean.getIva());
 							
 							response.getWriter().write(new com.google.gson.Gson().toJson(obj));
 						}

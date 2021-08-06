@@ -26,9 +26,9 @@
 Cart cart = (Cart) session.getAttribute("cart");
 
 if (cart == null) {
-	%><tr><td style ="text-align: center"  colspan = "7">no Data</td></tr><% 
+	%><tr><td style ="text-align: center"  colspan = "7">Attualmente non ci sono prodotti nel carrello</td></tr><%
 } else if (cart.size() == 0) {
-	%><tr><td style ="text-align: center" colspan = "7">no Data</td></tr><% 
+	%><tr><td style ="text-align: center" colspan = "7">Attualmente non ci sono prodotti nel carrello</td></tr><%
 } else {
 	Collection<Order> list = cart.getOrders();
 	java.util.Iterator<Order> it = list.iterator();
@@ -50,7 +50,7 @@ if (cart == null) {
 	
 	%>
 					<tr id="<%=code%>" class="text-center">
-						<td class="product-remove"><button class="removeX" style="background-image: url('/images/x.png')"></button>
+						<td class="product-remove"><button class="removeX"> <span style="color: red;" class="glyphicon glyphicon-trash"></span></button>
 						<td class="image-prod"><div id="img" style="background-image: url('<%=urlImage%>');"></div> </td>
 						<td class="product-name"><%=name%></td>
 						<td><%=priceUnit%></td>

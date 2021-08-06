@@ -19,10 +19,10 @@
 				<th>&nbsp;</th>
 				<th>&nbsp;</th>
 				<th>Foto</th>
-		     	<th>Prezzo</th>
+		     	<th>Prezzo &#8364;</th>
 				<th>Quantit&#224;</th>
-				<th>Sconto</th>
-				<th>Iva</th>
+				<th>Sconto %</th>
+				<th>Iva %</th>
 				<th>Personaggio</th>
 				<th>Categoria</th>
 				
@@ -32,7 +32,7 @@
 	<%	if (list == null) {
 		%>
 		<tr>
-		<td colspan = "8" style = "text-align: center">no products selected</td>
+		<td colspan = "8" style = "text-align: center">non ci sono prodotti selezionati</td>
 		</tr>
 		<% 
 	} else {
@@ -46,16 +46,16 @@
   			if("3".equals(ctgy+c)){ c="Giochi";}
 	 %> 
 		<tr id = "<%=bean.getCode()%>" class="text-center">
-				<td class="product-remove"><button class="removeX" style="background-image: url('/images/x.png')"></button></td>
+				<td class="product-remove"><button class="removeX" ><span style="color: red;" class="glyphicon glyphicon-trash"></span></button></td>
 				<td class="product-name">
 					<h4>Prodotto: <%=bean.getName()%><span></span></h4>
 					<button  class="button button2 submitter" type="submit">Modifica</button>
 				</td>
 				<td><div id="img" style="background-image: url('<%=bean.getPhoto()%>');"></div></td>
-				<td role = "price"><%=bean.getPrice()%>&#8364;</td>
+				<td role = "price"><%=bean.getPrice()%></td>
 				<td role = "qty"><%=bean.getQty()%></td>
-				<td role = "discount"><%=bean.getDiscount()%>%</td>
-				<td role = "iva"><%=bean.getIva()%>%</td>
+				<td role = "discount"><%=bean.getDiscount()%></td>
+				<td role = "iva"><%=bean.getIva()%></td>
 				<td role = "character"><%=bean.getCharacter()%></td>
 				<td role = "category"><%=c %></td>
 				
@@ -68,3 +68,25 @@
 	</div>
 </div>
  </section>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header" style="padding:35px 50px;">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4><span class="glyphicon glyphicon-lock"></span> Attenzione</h4>
+			</div>
+			<div class="modal-body" style="padding:40px 50px;">
+					Sei sicuro di voler eliminare il prodotto?
+					<button id="clacla" class="btn btn-success btn-block"> Si, elimina</button>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"> No, torna indietro</button>
+			</div>
+		</div>
+
+	</div>
+</div>

@@ -25,7 +25,7 @@
 
 <div class="leftcolumn"></div>
 <div class="rightcolumn"> <%@ include file = "contentJSP/Acquista.jsp" %> <hr>
-      		<fieldset><a style = "text-align: center" href="Billing" class="chck">Checkout</a></fieldset>
+      		<fieldset><a style = "text-align: center; width: 100%; border-radius:15px;" href="Billing" class="chck">Acquista</a></fieldset>
 </div>
  </section>
  

@@ -37,8 +37,16 @@ $(document).ready(function(){
 		});
 		
 		//funzionante
-		$(".removeX").click (remove);
-		
+		$(".removeX").click (() => $("#myModal").modal());
+
+	//	$("#clacla").click(() => {remove()});
+
+	//	$('#myModal').on('hidden.bs.modal', function (e) {
+	//		if (e.target().id == 'clacla')
+	//			console.log('funziona')
+	//		e.preventDefault()
+	//	})
+
 		function remove () {
 			var row = $(this).parents().filter("tr");
 			var code = $(row).attr("id");
@@ -63,12 +71,12 @@ $(document).ready(function(){
   		  var sconto = $("."+up+' [role="discount"]').html();
   		  var iva = $("."+up+' [role="iva"]').html();
 
-  		  $("."+up+' [role="price"]').html('<input type = "number" size = "2">');
-  		  $("."+up+' [role="qty"]').html('<input type = "number" size = "2">');
-  		  $("."+up+' [role="discount"]').html('<input type = "number" size = "2">');
-  		  $("."+up+' [role="iva"]').html('<input type = "number" size = "2">');
+  		  $("."+up+' [role="price"]').html('<input type = "text" size = "2" value='+price+'>');
+  		  $("."+up+' [role="qty"]').html('<input type = "number" size = "2" value='+qty+'>');
+  		  $("."+up+' [role="discount"]').html('<input type = "text" size = "2" value='+sconto+'>');
+  		  $("."+up+' [role="iva"]').html('<input type = "text" size = "2" value='+iva+'>');
   		  var button = $("."+up+' .button');
-  		  $(button).html('Update');
+  		  $(button).html('Conferma Modifiche');
   		  $(button).unbind();
   		  $(button).click(function () {
   			  
@@ -93,8 +101,7 @@ $(document).ready(function(){
   					$(button).click(prova);
   					
   					return;					
-  			  }
-  			  else {
+  			  }else {
   				  $(button).unbind();
   				  $.post ("ProductAdminControl", {act: "modify" ,code : code, iva: newIva, price: newPrice, qty: newQty, discount: newSconto})
   				  	.done(function (json) {
