@@ -35,30 +35,7 @@ $(document).ready(function(){
 					alert("fail");
 				});
 		});
-		
-		//funzionante
-		$(".removeX").click (() => $("#myModal").modal());
 
-	//	$("#clacla").click(() => {remove()});
-
-	//	$('#myModal').on('hidden.bs.modal', function (e) {
-	//		if (e.target().id == 'clacla')
-	//			console.log('funziona')
-	//		e.preventDefault()
-	//	})
-
-		function remove () {
-			var row = $(this).parents().filter("tr");
-			var code = $(row).attr("id");
-
-			$.post("ProductAdminControl", {act: "delete", id : code})
-				.done(function () {
-					$(row).remove();
-				})
-				.fail(function () {
-					alert("Non e' stato possibile rimuovere il prodotto");
-				})
-		}
 		
   		$(".button").click(prova);
   		
@@ -71,10 +48,10 @@ $(document).ready(function(){
   		  var sconto = $("."+up+' [role="discount"]').html();
   		  var iva = $("."+up+' [role="iva"]').html();
 
-  		  $("."+up+' [role="price"]').html('<input type = "text" size = "2" value='+price+'>');
-  		  $("."+up+' [role="qty"]').html('<input type = "number" size = "2" value='+qty+'>');
-  		  $("."+up+' [role="discount"]').html('<input type = "text" size = "2" value='+sconto+'>');
-  		  $("."+up+' [role="iva"]').html('<input type = "text" size = "2" value='+iva+'>');
+		  $("."+up+' [role="price"]').html('<input type="number"  min="0" step=".01" size = "2" value='+price+'>');
+  		  $("."+up+' [role="qty"]').html('<input type = "number" min="0" size = "2" value='+qty+'>');
+  		  $("."+up+' [role="discount"]').html('<input type="number"  min="0" step=".01" size = "2" value='+sconto+'>');
+  		  $("."+up+' [role="iva"]').html('<input type="number"  min="0" step=".01" size = "2" value='+iva+'>');
   		  var button = $("."+up+' .button');
   		  $(button).html('Conferma Modifiche');
   		  $(button).unbind();
@@ -100,17 +77,7 @@ $(document).ready(function(){
   					$(button).click(prova);
   					
   					return;					
-  			  }else if((newPrice!='[0-9]*.[0-9]*') || (newSconto!='[0-9]*.[0-9]*') || (newIva!='[0-9]*.[0-9]*')){
-				  alert ("i campi devono essere numerali");
-
-				  $("."+up+' [role="price"]').html(price);
-				  $("."+up+' [role="qty"]').html(qty);
-				  $("."+up+' [role="discount"]').html(sconto);
-				  $("."+up+' [role="iva"]').html(iva);
-				  $(button).unbind();
-				  $(button).html('Modifica');
-				  $(button).click(prova);
-			  }else {
+  			  }else {
   				  $(button).unbind();
   				  $.post ("ProductAdminControl", {act: "modify" ,code : code, iva: newIva, price: newPrice, qty: newQty, discount: newSconto})
   				  	.done(function (json) {

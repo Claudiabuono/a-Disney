@@ -46,7 +46,9 @@
   			if("3".equals(ctgy+c)){ c="Giochi";}
 	 %> 
 		<tr id = "<%=bean.getCode()%>" class="text-center">
-				<td class="product-remove"><button class="removeX" ><span style="color: red;" class="glyphicon glyphicon-trash"></span></button></td>
+				<td class="product-remove"><!--<button class="removeX" ></button></td>-->
+					<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" data-product="<%=bean.getCode()%>"><span style="color: red;" class="glyphicon glyphicon-trash"></span></button>
+				</td>
 				<td class="product-name">
 					<h4>Prodotto: <%=bean.getName()%><span></span></h4>
 					<button  class="button button2 submitter" type="submit" style="border-radius:15px;">Modifica</button>
@@ -58,8 +60,9 @@
 				<td role = "iva"><%=bean.getIva()%></td>
 				<td role = "character"><%=bean.getCharacter()%></td>
 				<td role = "category"><%=c %></td>
-				
-			</tr><%} 
+
+			</tr><%}
+
 		}%>
 		</tbody>
 		</table>
@@ -70,23 +73,58 @@
  </section>
 
 <!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog">
+<div id="myModal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
 
 		<!-- Modal content-->
 		<div class="modal-content">
-			<div class="modal-header" style="padding:35px 50px;">
+			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4><span class="glyphicon glyphicon-lock"></span> Attenzione</h4>
+				<h4 class="modal-title">Modal Header</h4>
 			</div>
-			<div class="modal-body" style="padding:40px 50px;">
-					Sei sicuro di voler eliminare il prodotto?
-					<button id="clacla" class="btn btn-success btn-block"> Si, elimina</button>
+			<div class="modal-body">
+				<p>Sei sicuro di voler eliminare il prodotto?</p>
 			</div>
 			<div class="modal-footer">
-				<button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"> No, torna indietro</button>
+				<form id="ciao">
+					<input id="id" type="hidden"/>
+					<button id = "save"  form="ciao" type="submit" class="btn btn-primary">Si, elimina prodotto</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Chiudi</button>
+				</form>
 			</div>
 		</div>
 
 	</div>
 </div>
+<script>
+	$(document).ready(() => {
+		$('#myModal').on('show.bs.modal', function (event) {
+			let button = $(event.relatedTarget) // Bottone che triggera la modal
+			let prod = button.data('product') // Estrai info dal data-product
+			let modal = $(this)
+
+			modal.find(".modal-footer form #id").val(prod)
+		})
+
+		$('#myModal .modal-footer form').submit((e) => {
+			e.preventDefault()
+			let id= $('#id').val()
+			let row= $('tbody #' +id)
+			$.post("ProductAdminControl", {act: "delete", id : id})
+				.done(function () {
+					row.remove();
+				})
+				.fail(function () {
+					alert("Non e' stato possibile rimuovere il prodotto");
+				})
+			$('#myModal').modal('hide')
+		})
+
+		//scratch this shit let's go with form and use input type hidden solution
+		$("#myModal").on("hidden.bs.modal", () => {
+			let modal = $(this)
+			let btn = modal.find(".modal-footer .btn-primary")
+			modal.find("#myModal #id").val('')
+		})
+	})
+</script>
