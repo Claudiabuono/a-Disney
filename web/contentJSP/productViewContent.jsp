@@ -18,9 +18,9 @@
     			
 		<form method = "post" action="ProductControl?id=${product.code}&act=addC">
  		<%--@declare id="fname"--%><label  class="myLabel" for="fname">Quantit&#224 desiderata</label>
-   		<input id="inputN" type="number" name="qty" value = "1" min="1" max="${product.getQty()}">
+   		<input class="myInput1" id="inputN" type="number" name="qty" value = "1" min="1" max="${product.getQty()}">
   			<br><button  type = "submit" class="button button2" >Acquista</button>
-  			<a href="../../WebContent/Catalogo.jsp" class="button button2">Indietro</a>
+  			<a href="../../web/Catalogo.jsp" class="button button2">Indietro</a>
   		</form>
 		</div><br>
 </section>

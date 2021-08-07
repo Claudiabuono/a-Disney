@@ -61,8 +61,7 @@ if(admin == null ? true : !admin.booleanValue()) {
     	<label  class="myLabel" for="tipo">Descrizione</label>
     	<textarea class="myInput1" type="text" id="des" name="des"  placeholder="Inserire descrizione prodotto" rows="9"></textarea>
     	
-    	<button id="but1" class=" button button2">Aggiungi</button>
-    	<button id="but2" class=" button button2" href="amministratore.jsp">Indietro</button>
+    	<button id="but1" class=" button button2" style="width: 100%; border-radius:15px;">Aggiungi</button>
     	<div id="esito"></div>
    	    <hr>
 	</div>

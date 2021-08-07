@@ -30,7 +30,7 @@
 		
 			 <tr class="text-center tr1">
 				<td rowspan="<%=size%> " class="product-name">
-				 <a href="FatturaPDF?id=<%=fatt.getCod()%>&search=<%=fatt.getUser().getLogin()%>"><button  class="button button2 submitter" type="submit">Fattura</button></a>
+				 <a href="FatturaPDF?id=<%=fatt.getCod()%>&search=<%=fatt.getUser().getLogin()%>"><button  class="button button2 submitter" type="submit" style="border-radius:15px;">Fattura</button></a>
 				</td>
 				<td id="td1" rowspan="<%=size%> "><%=fatt.getUser().getLogin()%></td>
 				<td rowspan="<%=size%> "><%=format.format(fatt.getDate().getTime()) %></td>

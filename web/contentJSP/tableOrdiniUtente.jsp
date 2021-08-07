@@ -38,13 +38,13 @@
 			<tr class="text-center">
 				<td rowspan="<%=size%> " class="product-name">
 				<p><%= format.format(fatt.getDate().getTime())%></p>
-			<a href="FatturaPDF?id=<%=fatt.getCod()%>">	<button  class="button button2 submitter" type="submit">Fattura</button></a>
+			<a href="FatturaPDF?id=<%=fatt.getCod()%>">	<button  class="button button2 submitter" type="submit" style="border-radius:15px;">Fattura</button></a>
 				</td>
 				<%
 				for(Order o : orders){
 				 	ProductBean bean = o.getProduct();
 				%>
-				<td><a  class="button button2" href="ProductControl?id=<%=bean.getCode()%>&act=view">Aggiungi</a></td>
+				<td><a  class="button button2" href="ProductControl?id=<%=bean.getCode()%>&act=view" style="border-radius:15px; text-decoration: none;">Aggiungi</a></td>
 				<td><div id="img" style="background-image: url('<%=bean.getPhoto()%>');"></div></td>
 				<td><%=bean.getName()%></td>
 				<td><%=bean.getPriceSenzaIva()%></td>

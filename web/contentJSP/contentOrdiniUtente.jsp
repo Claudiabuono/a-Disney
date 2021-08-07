@@ -7,7 +7,7 @@
     	<div>
     			<input type="date" class="ricerca"  name="da" placeholder="da data..." style="background-image: url('/images/dateFrom.png')">
  	    		<input type="date" class="ricerca" name="a" placeholder="a data..." style="background-image: url('/images/dateTo.png')">
-    			<button id = "selector" class="button button2">Cerca</button>
+    			<button id = "selector" class="button button2" style="border-radius:15px;">Cerca</button>
     		
     	</div>
     	<div class="cart-list">

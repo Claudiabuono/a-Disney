@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-  <br> <button id="toggle" class="button button2">Aggiungi indirizzo</button><br>
+  <br> <button id="toggle" class="button button2" style="width: 100%;border-radius:15px;">Aggiungi indirizzo</button><br>
 	         <div id="AddIndirizzo"><br>
 	        	  <label  class="myLabel" for="adr"><i class="fa fa-address-card-o"></i> Indirizzo</label>
             	  <input class="myInput1" type="text"  id="adr" name="address" placeholder="via della repubblica">
@@ -25,7 +25,7 @@
                   <input class="myInput1" type="text" id="state" name="state"  placeholder="Italia">
                   <div id= "statoWarning" class="alert"><span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> <strong>Errore!</strong> Lo stato non può contenere spazi bianchi, numeri o caratteri speciali</div>
             	  
-                  <button id="butt" class="button button2">Aggiungi</button>
+                  <button id="butt" class="button button2" style="width: 100%;border-radius:15px;">Aggiungi</button>
                   
                   <div id= "successAddr" class="alert success"><span class="closebtn">&times;</span><strong>Successo!</strong> Indirizzo inserito correttamente</div>
 			      <div id= "alertAddr" class="alert"><span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span><strong>Errore!</strong> Errore durante l inserimento</div>

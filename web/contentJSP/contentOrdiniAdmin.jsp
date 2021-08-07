@@ -8,11 +8,10 @@
     
    <%@ include file = "UserSuggester.jsp" %>
  	 	
-        <input type="date" class="ricerca"  name="da" placeholder="da data..." style="background-image: url('/images/dateFrom.png')">
- 	    <input type="date" class="ricerca" name="a" placeholder="a data..." style="background-image: url('/images/dateTo.png')">
-		<button class="button button2" id="search">Cerca</button>
-	 	<a class="button button2"  href= "../../WebContent/amministratore.jsp"> Indietro</a>
-		
+        <input type="date" class="ricerca"  name="da" placeholder="da data...">
+ 	    <input type="date" class="ricerca" name="a" placeholder="a data..." >
+		<button class="button button2" id="search" style="border-radius:15px;">Cerca</button>
+
     	<div class="cart-list">
     	<h1>Ordini clienti</h1>
 	    <%@ include file= "tableOrdersadmin.jsp" %>

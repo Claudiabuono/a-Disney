@@ -11,7 +11,7 @@
     	<input class="myInput1" type="text" id="surname" name="firstname" value="${user.cognome}" placeholder="${user.cognome}" >
     	<div id= "surnameWarning" class="alert"><span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span><strong>Errore!</strong> Cognome non valido, deve essere costituito da soli caratteri e senza spazi bianchi</div>
   
-    	<button id="but1" class=" button button2">Modifica</button>
+    	<button id="but1" class=" button button2" style="width: 100%;border-radius:15px;">Modifica</button>
     	
     	<div id= "success1" class="alert success" ><span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span><strong>Successo!</strong> Nome e/o Cognome aggiornati correttamente</div>
 		<div id= "alert1" class="alert"><span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span><strong>Errore!</strong> Errore durante l aggiornamento</div>
@@ -25,18 +25,13 @@
     	<input class="myInput1" type="text" id="password" name="firstname">
     	<div id= "passwordWarning" class="alert"><span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span><strong>Errore!</strong> Password non valida, deve essere tra 8 e 25 caratteri</div>
   
-    	<button id="but2" class="but2 button button2">Modifica Password</button>
+    	<button id="but2" class="but2 button button2" style="width: 100%;border-radius:15px;">Modifica Password</button>
     	<div id= "success2" class="alert success"><span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span><strong>Successo!</strong> Password aggiornata correttamente</div>
 		<div id= "alert2" class="alert"><span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> <strong>Errore!</strong> Errore durante l aggiornamento</div>
 		<div id= "alert3" class="alert"><span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> <strong>Errore!</strong> La password non corrisponde a quella digitata</div>
 	<hr>
 
-	<h3>Aggiungi nuovo indirizzo</h3>
+	<h3>Indirizzi</h3>
 	<%@ include file = "newAddress.jsp" %>
-
-
-	<hr>
-
-	<h3>Visualizza i tuoi indirizzi</h3>
 	<%@ include file = "visualizzaIndirizzi.jsp" %>
 </div>

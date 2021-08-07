@@ -11,13 +11,11 @@
 %>
 
 <div id="visualizzaIndirizzi">
-                <table class="table">
+                <table id="myIndirizzi">
                     <thead class="thead-primary">
                     <tr class="text-center">
-
                         <th> </th>
-                        <th>Via</th>
-
+                        <th style="padding-left: 5px;padding-top: 10px;padding-bottom: 10px;text-align: left;background-color: #1E90FF; color: white;">Indirizzi</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -26,16 +24,17 @@
                     <tr>
                         <td colspan = "8" style = "text-align: center">non ci sono indirizzi</td>
                     </tr>
-                    <tr>
+
                     <%
                     } else {
                         for(Adress address : addresses){%>
-
+                    <tr>
                         <td> </td>
                         <td><%=address%></td>
+                    </tr>
                     <%}
                     }%>
-                    </tr>
+
                     </tbody>
                 </table>
 </div><br>

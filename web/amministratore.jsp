@@ -33,10 +33,10 @@ if(admin == null ? true : !admin.booleanValue()) {
 
 		<div class="card">
 			<h1> Bentornato admin </h1>
-			<a class= "button button2" style="width: 100%; text-decoration: none" href="admin">Visualizzare ordini dei clienti</a> <br>
-			<a class= "button button2" style="width: 100%; text-decoration: none" href="admincat">Revisionare il catalogo</a> <br>
-			<a class= "button button2" style="width: 100%; text-decoration: none" href="AddProdottiAdm.jsp">Aggiungi nuovi prodotti</a> <br>
-            <a class= "button button2" style="width: 100%; text-decoration: none" href="Logout">Logout</a><br>
+			<a class= "button button2" style="width: 100%; text-decoration: none; border-radius:15px;" href="admin">Visualizzare ordini dei clienti</a> <br>
+			<a class= "button button2" style="width: 100%; text-decoration: none; border-radius:15px;" href="admincat">Revisionare il catalogo</a> <br>
+			<a class= "button button2" style="width: 100%; text-decoration: none; border-radius:15px;" href="AddProdottiAdm.jsp">Aggiungi nuovi prodotti</a> <br>
+            <a class= "button button2" style="width: 100%; text-decoration: none; border-radius:15px;" href="Logout">Logout</a><br>
      </div>
 	</section>
 </section>

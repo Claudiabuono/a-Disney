@@ -49,7 +49,7 @@
 				<td class="product-remove"><button class="removeX" ><span style="color: red;" class="glyphicon glyphicon-trash"></span></button></td>
 				<td class="product-name">
 					<h4>Prodotto: <%=bean.getName()%><span></span></h4>
-					<button  class="button button2 submitter" type="submit">Modifica</button>
+					<button  class="button button2 submitter" type="submit" style="border-radius:15px;">Modifica</button>
 				</td>
 				<td><div id="img" style="background-image: url('<%=bean.getPhoto()%>');"></div></td>
 				<td role = "price"><%=bean.getPrice()%></td>

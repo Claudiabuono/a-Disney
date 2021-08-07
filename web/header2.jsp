@@ -47,19 +47,16 @@
             <li><%@ include file="contentJSP/ricerca.jsp" %></li>
         	<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span> ${user.name}</span><span class="caret"></span></a>
             	<ul class="dropdown-menu">
-            	<li><a href="protected-page.jsp">Area Personale</a>
+            	<li><a href="visIndirizzi">Area Personale</a>
             	<li><a href="UserManager?op=viewFatture">Visualizza Ordini</a></li>
         		<li><a href="Logout">Logout</a></li>
         		</ul>
         <%} else if (isAdmin) {%>
-            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span> amministratore</span><span class="caret"></span></a>
-            <ul class="dropdown-menu">
                 <li><a href="admin">Ordini clienti</a> </li>
                 <li><a href="admincat">Revisiona catalogo</a> </li>
                 <li><a href="AddProdottiAdm.jsp">Aggiungi prodotti</a> </li>
                 <li><a href="Logout">Logout</a></li>
-            </ul>
-            <% }
+             <% }
         else { %>
         	<li><%@ include file="contentJSP/ricerca.jsp" %></li>
       		<li class="loginClear"><a href="Login.jsp"><span class="glyphicon glyphicon-log-in"></span>&#160 Login</a></li>

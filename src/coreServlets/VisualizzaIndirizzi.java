@@ -12,7 +12,7 @@ import java.io.IOException;
 /**
  * Servlet implementation class UserManager
  */
-@WebServlet("/VisualizzaIndirizzi")
+@WebServlet("/visIndirizzi")
 public class VisualizzaIndirizzi extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
