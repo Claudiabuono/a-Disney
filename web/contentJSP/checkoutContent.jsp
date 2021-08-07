@@ -28,6 +28,8 @@
 					<%}
 					}%>
 				</select>
+
+				 <%@ include file = "pagamento.jsp" %>
 				<%@ include file = "Acquista.jsp" %>
 
 				<input type="submit" value="Acquista" class="btn">
