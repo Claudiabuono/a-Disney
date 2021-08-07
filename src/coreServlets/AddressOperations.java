@@ -81,8 +81,7 @@ public class AddressOperations extends HttpServlet {
 				request.getSession().setAttribute("flagModifica", flag);
 
 			} else if (op == 3 && user != null) {
-				//operazione di cancellazione (cambiare con string e stringa deve essere l'email di registrato)
-				//model.doDelete(Integer.parseInt(request.getParameter("code")));
+				model.doDelete(Integer.parseInt(request.getParameter("code")));
 			} 
 		} catch (java.sql.SQLException e) {
 			e.printStackTrace();

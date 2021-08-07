@@ -30,8 +30,8 @@
 	<input type="password"  class="myInput1"  id = "password_2" size="20" name = "password_2" placeholder="Conferma password" autocomplete="off">
 
     <br> 
-      <button class="button button2 submitter" type = "submit" >Crea Account</button> 
-       <a href= "../../WebContent/Login.jsp"> Sono registrato</a>
+      <button class="button button2 submitter" type = "submit" style="width: 100%; text-decoration: none; border-radius:15px;">Crea Account</button>
+       <a href= "Login.jsp" style="width: 100%; text-decoration: none; border-radius:15px;"> Sono registrato</a>
   </div>
 
 	<script language="Javascript" type="text/javascript">

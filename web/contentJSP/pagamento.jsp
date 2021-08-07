@@ -145,13 +145,7 @@
     </div>
 </div>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/imask/3.4.0/imask.min.js'></script>
-
-
-
 <script  src="js/pagamento.js"></script>
-
-
-
 
 </body>
 

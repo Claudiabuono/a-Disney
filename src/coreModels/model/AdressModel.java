@@ -73,7 +73,7 @@ public class AdressModel {
 		
 	}
 
-	public boolean doDelete(String code) throws SQLException {
+	public boolean doDelete(int code) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -82,7 +82,7 @@ public class AdressModel {
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(deleteSQL);
-			preparedStatement.setString(1, code);
+			preparedStatement.setInt(1, code);
 
 			result = preparedStatement.executeUpdate();
 
@@ -196,7 +196,7 @@ public class AdressModel {
 
 	protected static final String TABLE_NAME = "indirizzo";
 	protected static final String selectAllSQL = "SELECT * FROM " + TABLE_NAME +" WHERE registrato = ?";
-	protected static final String deleteSQL = "UPDATE "+TABLE_NAME+" SET registrato = null WHERE registrato = ?";
+	protected static final String deleteSQL = "UPDATE "+TABLE_NAME+" SET registrato = null WHERE codiceIndirizzo = ?";
 	protected static final String insertSQL = "INSERT INTO indirizzo " 
 			+ "(registrato, via, cap,  nCivico, citta, provincia, stato)"
 			+ " VALUES (?, ?, ?, ?, ?, ?, ?)";
