@@ -15,7 +15,7 @@
     	<div class="cart-list">
     	<h1>Ordini clienti</h1>
 	    <%@ include file= "tableOrdersadmin.jsp" %>
-		<p id = "pager" style = "text-align: center">pg <input class = "pageof" type = "number" value = "1" min="1" max="<%= request.getAttribute("maxPg") %>"> of <%= request.getAttribute("maxPg") %> <button id = "submit">Invia</button></p>
+		<p id = "pager" style = "text-align: center">pagina<input class = "pageof" type = "number" value = "1" min="1" max="<%= request.getAttribute("maxPg") %>"> di <%= request.getAttribute("maxPg") %> <button id = "submit" style="background-color: #1E90FF;border: none;color: white;border-radius:15px; width: 80px;height: 30px;">Invia</button></p>
 	</div>
 	</div>
 	</div>

@@ -67,6 +67,7 @@ public class ProductModel {
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(insertSQL);
+			System.out.println(product);
 			prepareInsertStatement(preparedStatement, product);
 
 			result =preparedStatement.executeUpdate();

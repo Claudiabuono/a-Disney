@@ -32,7 +32,7 @@
 				 <%@ include file = "pagamento.jsp" %>
 				<%@ include file = "Acquista.jsp" %>
 
-				<input type="submit" value="Acquista" class="btn">
+				<input type="submit" value="Acquista" class="btn" style="width: 100%;">
 			</form>
 
      </div>

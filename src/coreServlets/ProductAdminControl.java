@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.JsonObject;
 
+import com.sun.source.tree.SynchronizedTree;
 import coreModels.beans.ProductBean;
 import coreModels.model.ProductModel;
 
@@ -51,9 +52,11 @@ public class ProductAdminControl extends HttpServlet {
 						bean.setCategory(Integer.parseInt(request.getParameter("categoria")));
 						bean.setQty(Integer.parseInt(request.getParameter("qty")));
 						bean.setPrice(Double.parseDouble(request.getParameter("price")));
-						bean.setIva(Integer.parseInt(request.getParameter("iva")));
-						bean.setDiscount(Integer.parseInt(request.getParameter("sconto")));
-						
+						bean.setIva(Double.parseDouble(request.getParameter("iva")));
+						bean.setDiscount(Double.parseDouble(request.getParameter("sconto")));
+						System.out.println(bean.getDiscount());
+						System.out.println(bean.getPrice());
+						System.out.println(bean.getIva());
 						model.doSave(bean);
 					} else if (action.equalsIgnoreCase("modify")) {
 					

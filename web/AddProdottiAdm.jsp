@@ -30,8 +30,8 @@ if(admin == null ? true : !admin.booleanValue()) {
     	<input class="myInput1" type="text" id="nome" name="nome" placeholder="Cuscino Aurora" >
     	     	 
     	<label  class="myLabel" for="prezzo"> Prezzo</label>
-    	<input class="myInput1" type="number" id="prezzo" name="prezzo"  placeholder="17.90" >
-    	
+    	<input class="myInput1" type="number" min="0" step=".01" id="prezzo" name="prezzo"  placeholder="17,90" >
+
     	<label  class="myLabel" for="quantita"> Quantità</label>
     	<input class="myInput1" type="number" id="quantita" name="quantita"  min="1">
     	
@@ -42,10 +42,10 @@ if(admin == null ? true : !admin.booleanValue()) {
     	<input class="myInput1" type="url" id="url" name="url"  placeholder="images/auroraCuscino.PNG">
     	
  		<label  class="myLabel" for="iva">Iva</label>
-    	<input class="myInput1" type="number" id="iva" name="iva"  placeholder="5">
+    	<input class="myInput1" type="number" min="0" step=".01" id="iva" name="iva"  placeholder="5,00">
     	
     	<label  class="myLabel" for="sconto">Sconto</label>
-    	<input class="myInput1" type="number" id="sconto" name="sconto"  placeholder="10, in mancanza inserire 0">
+    	<input class="myInput1" type="number" min="0" step=".01" id="sconto" name="sconto"  placeholder="10,00 ... in mancanza inserire 0">
     	
     	<label  class="myLabel" for="tipo">Tipo</label>
     	<input class="myInput1" type="text" id="tipo" name="tipo"  placeholder="cuscino">

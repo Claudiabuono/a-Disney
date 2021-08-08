@@ -20,8 +20,8 @@
                   <label  class="myLabel" for="adr"><i class="fa fa-address-card-o"></i> CAP</label>
             	  <input class="myInput1" type="text" id="CAP"  name="CAP" placeholder="80890">
             	  <div id= "capWarning" class="alert"><span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> <strong>Errore!</strong> Il CAP deve essere composto da 5 numeri</div>
-            	  
-                  <label  class="myLabel" for="state">Stato</label>
+
+                  <label  class="myLabel" for="state"><i class="fa fa-globe"></i> Stato</label>
                   <input class="myInput1" type="text" id="state" name="state"  placeholder="Italia">
                   <div id= "statoWarning" class="alert"><span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> <strong>Errore!</strong> Lo stato non può contenere spazi bianchi, numeri o caratteri speciali</div>
             	  
