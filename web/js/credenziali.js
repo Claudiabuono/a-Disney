@@ -95,7 +95,6 @@ this.style.backgroundColor = "";
 			$("#successAddr").slideDown();
 		})
 		.fail(function() {
-			
 			$("#alertAddr").slideDown();
 		});
 		}
