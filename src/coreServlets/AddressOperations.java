@@ -66,20 +66,6 @@ public class AddressOperations extends HttpServlet {
 					response.setContentType("application/json");
 					response.getWriter().write(new Gson().toJson(bean));
 				}
-			} else if (op == 2 && user != null) {
-				//operazione di modifica
-				Adress bean = new Adress ();
-				
-				bean.setCAP(Integer.parseInt(request.getParameter("cap")));
-				bean.setCitta(request.getParameter("citta"));
-				bean.setNation(request.getParameter("stato"));
-				bean.setnCv(Integer.parseInt(request.getParameter("ncv")));
-				bean.setProvince(request.getParameter("provincia"));
-				bean.setStreet(request.getParameter("via"));
-				
-				Boolean flag= model.doModify(Integer.parseInt(request.getParameter("code")), bean);
-				request.getSession().setAttribute("flagModifica", flag);
-
 			} else if (op == 3 && user != null) {
 				model.doDelete(Integer.parseInt(request.getParameter("code")));
 			} 

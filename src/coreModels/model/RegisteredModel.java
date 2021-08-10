@@ -159,11 +159,36 @@ public class RegisteredModel extends UserModel {
 		}
 		return list;
 	}
+
+	public synchronized void deleteRegistrato(String login) throws SQLException {
+
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			preparedStatement = connection.prepareStatement(deleteSQL);
+			preparedStatement.setString(1, login);
+
+			preparedStatement.executeUpdate();
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+
+	}
 		
 	
 	protected static final String TABLE = "registrato";
 	protected static final String insertSQL = "INSERT INTO " + TABLE + "(loginA, pass, nome, cognome) values (?, ?, ?, ?)";
 	protected static final String updateSQL = "UPDATE " + TABLE + " set loginA = ?, pass = ?, nome = ?, cognome = ? where loginA = ?";
 	protected static final String searchSQL = "SELECT * FROM "+TABLE+ " WHERE loginA LIKE ?";
-	
+	protected static final String deleteSQL = "DELETE FROM " + TABLE + " WHERE loginA = ?";
+
 }

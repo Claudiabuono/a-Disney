@@ -98,33 +98,15 @@ public class TC_AddressOperationsIntegration {
         String result = stringWriter.getBuffer().toString().trim();
         assertNotNull(result);
     }
-    /*@Test //Op2
-    public void testAddressOperation2() throws Exception {
-        HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
-        HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
-        AdressModel addressDao= Mockito.mock(AdressModel.class);
-        Adress a= new Adress("via tommasini", 7,84061, "Salerno", "Felitto");
-        a.setNation("italia");
-        a.setCodice(3);
-        when(request.getParameter("operation")).thenReturn("2");
-        when(request.getParameter("cap")).thenReturn("84061");
-        when(request.getParameter("citta")).thenReturn("Felitto");
-        when(request.getParameter("stato")).thenReturn("italia");
-        when(request.getParameter("ncv")).thenReturn("7");
-        when(request.getParameter("provincia")).thenReturn("Salerno");
-        when(request.getParameter("via")).thenReturn("via tommasinSalernoi");
-        when(request.getParameter("code")).thenReturn("3");
-         HttpSession session = Mockito.mock(HttpSession.class);
+    @Test //Op1 TCS21
+    public void testAddressOperationDelete() throws Exception {
+        when(request.getParameter("operation")).thenReturn("3");
         when(request.getSession()).thenReturn(session);
-        when(addressDao.doModify(3, a)).thenReturn(true);
 
-        servlet.setAdressModel(addressDao);
-
-
-        ArgumentCaptor<String> captor= ArgumentCaptor.forClass(String.class);
-        servlet.doGet(request,response);
-        Boolean flag= (Boolean) session.getAttribute("flagModifica");
-        assertEquals(true,flag);
-    }*/
+        servlet.doGet(request, response);
+        AdressModel address= new AdressModel();
+        Adress indirizzo= address.doRetrieve(3);
+        assertEquals(null,indirizzo.getRegistrato());
+    }
 }
 

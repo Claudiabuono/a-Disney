@@ -128,38 +128,7 @@ public class AdressModel {
 		return products;
 
 	}
-	
-	public boolean doModify(int code, Adress nw) throws SQLException {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
 
-		int result = 0;
-
-		try {
-			connection = DriverManagerConnectionPool.getConnection();
-			preparedStatement = connection.prepareStatement(updateSQL);
-			
-			preparedStatement.setString(1, nw.getStreet());
-			preparedStatement.setInt(2, nw.getCAP());
-			preparedStatement.setInt(3, nw.getnCv());
-			preparedStatement.setString(4, nw.getCitta());
-			preparedStatement.setString(5, nw.getProvince());
-			preparedStatement.setString(6, nw.getNation());
-			preparedStatement.setInt(7, code);
-			
-			result = preparedStatement.executeUpdate();
-
-		} finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} finally {
-				DriverManagerConnectionPool.releaseConnection(connection);
-			}
-		}
-		return (result != 0);
-	}
-	
 
 	public Adress doRetrieve(int code) throws SQLException {
 		// TODO Auto-generated method stub
@@ -200,8 +169,6 @@ public class AdressModel {
 	protected static final String insertSQL = "INSERT INTO indirizzo " 
 			+ "(registrato, via, cap,  nCivico, citta, provincia, stato)"
 			+ " VALUES (?, ?, ?, ?, ?, ?, ?)";
-	protected static final String updateSQL = "UPDATE indirizzo SET via = ?, cap = ?, nCivico = ?, citta = ?, provincia = ?, stato = ? "
-			+ "WHERE codiceIndirizzo = ?";
 	private static final String selectSQL = "SELECT * FROM " + TABLE_NAME +" WHERE codiceIndirizzo = ?";
 	
 }

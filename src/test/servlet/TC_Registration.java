@@ -2,6 +2,7 @@ package test.servlet;
 
 import coreModels.beans.Registered;
 import coreModels.beans.UserBean;
+import coreModels.model.RegisteredModel;
 import coreModels.model.UserModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -55,10 +56,10 @@ public class TC_Registration  {
 
     @Test
     public void testRegistration6() throws Exception {
-        when(request.getParameter("surname")).thenReturn("chicco");
-        when(request.getParameter("email")).thenReturn("chicco1@alice.it");
-        when(request.getParameter("name")).thenReturn("chicco");
-        when(request.getParameter("password")).thenReturn("chicco");
+        when(request.getParameter("surname")).thenReturn("Lamberti");
+        when(request.getParameter("email")).thenReturn("francescaLamberti@alice.it");
+        when(request.getParameter("name")).thenReturn("francesca");
+        when(request.getParameter("password")).thenReturn("francescaLamberti");
         when(request.getSession()).thenReturn(session);
 
         StringWriter stringWriter = new StringWriter();
@@ -69,6 +70,9 @@ public class TC_Registration  {
         servlet.doPost(request, response);
         verify(response).sendRedirect(captor.capture());
         assertEquals("index.jsp",captor.getValue());
+
+        RegisteredModel registred= new RegisteredModel();
+        registred.deleteRegistrato("francescaLamberti@alice.it");
 
     }
 }

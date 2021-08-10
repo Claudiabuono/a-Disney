@@ -70,12 +70,6 @@ public class TC_AdressModel {
     }
 
     @Test
-    void doModify() throws SQLException {
-       boolean b= address.doModify(1, getAddress());
-        assertEquals(true, b);
-    }
-
-    @Test
     void doRetrieve() throws SQLException {
         Adress a= address.doRetrieve(1);
         assertEquals(getAddress().toString(), a.toString());
