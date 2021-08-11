@@ -35,8 +35,8 @@
                 <strong>Numero della Carta di Credito</strong>
             </div>
             <div class="col-md-12">
-                <input type="number" class="form-control" name="numero_carta"
-                       value="" min="0000000000000000" max="9999999999999999"/>
+                <input type="text" class="form-control" name="numero_carta"
+                       value="" minlength="16" maxlength="16"  onkeypress="return soloNumeri(event);"/>
             </div>
         </div>
         <div class="form-group">
@@ -44,8 +44,8 @@
                 <strong>CVV</strong>
             </div>
             <div class="col-md-12">
-                <input type="number" class="form-control" name="ccv_carta"
-                       value="" min="000" max="999"/>
+                <input type="text" class="form-control" name="ccv_carta"
+                       value="" minlength="3" maxlength="3" onkeypress="return soloNumeri(event);"/>
             </div>
         </div>
         <div class="form-group">
@@ -53,7 +53,7 @@
                 <strong>Data di Scadenza</strong>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <select class="form-control" name="mese_scadenza_carta">
+                <select class="form-control" name="mese_scadenza_carta" required>
                     <option value="">Mese</option>
                     <option value="01">01</option>
                     <option value="02">02</option>
@@ -71,7 +71,7 @@
             </div>
 
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <select class="form-control" name="mese_scadenza_carta">
+                <select class="form-control" name="mese_scadenza_carta" required>
                     <option value="">Anno</option>
                     <option value="2021">2021</option>
                     <option value="2022">2022</option>
@@ -88,6 +88,14 @@
     </div>
 </div>
 
-
+<script type="text/javascript">
+    function soloNumeri(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
+    }
+</script>
 <!--CREDIT CART PAYMENT END-->
 
