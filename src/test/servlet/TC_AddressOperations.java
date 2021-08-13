@@ -1,19 +1,15 @@
 package test.servlet;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.HashMap;
 import java.util.Map;
 
-import javax.mail.Address;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import coreModels.beans.Adress;
+import coreModels.beans.Address;
 import coreModels.beans.Registered;
-import coreModels.model.AdressModel;
-import coreServlets.AddressOperations;
-import org.junit.jupiter.api.BeforeAll;
+import coreModels.model.AddressModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
@@ -33,16 +29,16 @@ public class TC_AddressOperations {
     HttpSession session;
 
     @Mock
-    AdressModel addressDao;
+    AddressModel addressDao;
 
     @Mock
-    Address a;
+    javax.mail.Address a;
 
     @Mock
-    Adress bean;
+    Address bean;
 
     @Mock
-    Map<Integer,Adress> ad;
+    Map<Integer, Address> ad;
 
     @Mock
     Registered user;
@@ -62,12 +58,12 @@ public class TC_AddressOperations {
     public void testAddressOperation0() throws Exception {
         when(request.getParameter("operation")).thenReturn("0");
         when(request.getSession()).thenReturn(session);
-        when(request.getSession().getAttribute("user")).thenReturn(r);
-        when(request.getSession().getAttribute("addresses")).thenReturn(ad);
+        when(session.getAttribute("user")).thenReturn(r);
+        when(session.getAttribute("addresses")).thenReturn(ad);
         when(addressDao.doRetrieveAll("rosalia@libero.it")).thenReturn(ad);
         servlet.doGet(request, response);
 
-        Map<Integer,Adress> valoreReale= (Map<Integer,Adress>) request.getSession().getAttribute("addresses");
+        Map<Integer, Address> valoreReale= (Map<Integer, Address>) request.getSession().getAttribute("addresses");
         assertEquals(ad.toString(), valoreReale.toString());
  }
     @Test //Op1 TCS18
@@ -100,6 +96,8 @@ public class TC_AddressOperations {
         when(request.getParameter("provincia")).thenReturn("Salerno");
         when(request.getParameter("via")).thenReturn("via tommasini");
         when(request.getSession()).thenReturn(session);
+        when(session.getAttribute("user")).thenReturn(r);
+        when(session.getAttribute("addresses")).thenReturn(ad);
 
         StringWriter stringWriter = new StringWriter();
         PrintWriter writer = new PrintWriter(stringWriter);
@@ -111,32 +109,17 @@ public class TC_AddressOperations {
         String result = stringWriter.getBuffer().toString().trim();
         assertNotNull(result);
     }
-    /*@Test //Op2
-    public void testAddressOperation2() throws Exception {
-        HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
-        HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
-        AdressModel addressDao= Mockito.mock(AdressModel.class);
-        Adress a= new Adress("via tommasini", 7,84061, "Salerno", "Felitto");
-        a.setNation("italia");
-        a.setCodice(3);
-        when(request.getParameter("operation")).thenReturn("2");
-        when(request.getParameter("cap")).thenReturn("84061");
-        when(request.getParameter("citta")).thenReturn("Felitto");
-        when(request.getParameter("stato")).thenReturn("italia");
-        when(request.getParameter("ncv")).thenReturn("7");
-        when(request.getParameter("provincia")).thenReturn("Salerno");
-        when(request.getParameter("via")).thenReturn("via tommasinSalernoi");
-        when(request.getParameter("code")).thenReturn("3");
-         HttpSession session = Mockito.mock(HttpSession.class);
+
+    @Test //Op1 TCS21
+    public void testAddressOperationDelete() throws Exception {
+        when(request.getParameter("operation")).thenReturn("3");
         when(request.getSession()).thenReturn(session);
-        when(addressDao.doModify(3, a)).thenReturn(true);
+        when(session.getAttribute("user")).thenReturn(r);
+        when(session.getAttribute("addresses")).thenReturn(ad);
 
-        servlet.setAdressModel(addressDao);
+        servlet.doGet(request, response);
 
+        verify(addressDao).doDelete(3);
+     }
 
-        ArgumentCaptor<String> captor= ArgumentCaptor.forClass(String.class);
-        servlet.doGet(request,response);
-        Boolean flag= (Boolean) session.getAttribute("flagModifica");
-        assertEquals(true,flag);
-    }*/
 }

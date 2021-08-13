@@ -46,7 +46,7 @@
   			if("3".equals(ctgy+c)){ c="Giochi";}
 	 %> 
 		<tr id = "<%=bean.getCode()%>" class="text-center">
-				<td class="product-remove"><!--<button class="removeX" ></button></td>-->
+				<td class="product-remove">
 					<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" data-product="<%=bean.getCode()%>"><span style="color: red;" class="glyphicon glyphicon-trash"></span></button>
 				</td>
 				<td class="product-name">
@@ -66,7 +66,7 @@
 		}%>
 		</tbody>
 		</table>
-		<p style = "text-align: center">pagina <input class = "pageof" type = "number" value = "1" min="1" max="<%= request.getAttribute("maxPg") %>"> di <%= request.getAttribute("maxPg") %> <button id = "submit" style="background-color: #1E90FF;border: none;color: white;border-radius:15px; width: 80px;height: 30px;">Invia</button></p>
+	  		<p style = "text-align: center">pagina <input class = "pageof" type = "number" value = "1" min="1" max="<%= request.getAttribute("maxPg") %>"> di <%= request.getAttribute("maxPg") %> <button id = "submit" style="background-color: #1E90FF;border: none;color: white;border-radius:15px; width: 80px;height: 30px;">Invia</button></p>
 		</div>
 	</div>
 </div>
@@ -80,7 +80,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Modal Header</h4>
+				<h4 class="modal-title">Attenzione!</h4>
 			</div>
 			<div class="modal-body">
 				<p>Sei sicuro di voler eliminare il prodotto?</p>

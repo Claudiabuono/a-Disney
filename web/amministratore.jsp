@@ -25,9 +25,9 @@ if(admin == null ? true : !admin.booleanValue()) {
 <%@include file = "header2.jsp" %>
 <section class="row" style="padding-top: 30px;">
 	<section class="leftcolumn">
-		<div class="card">
-			<img src="images/admin.jpg">
-		</div>
+
+			<img src="images/disney.png">
+
 	</section>
 	<section class="rightcolumn" style="background-image: url('/images/areg.gif');">
 
@@ -41,6 +41,6 @@ if(admin == null ? true : !admin.booleanValue()) {
 	</section>
 </section>
 
-<%@include file = "footer.jsp" %>
+<%@include file = "footer2.jsp" %>
 </body>
 </html>

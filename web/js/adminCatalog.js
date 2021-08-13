@@ -12,23 +12,22 @@ $(document).ready(function(){
 					$("tbody tr").remove();
 					
 					$.each(json, function () {
-						
+
 						var row = '<tr id ="'+this.id+'" class = "text-center">'
-						+ '<td class="product-remove"><button class="removeX" style="background-image: url(/images/x.png)"></button></td>'
-						+ '<td class="product-name"> <h4>Prodotto: '+this.name+'<span></span></h4><button  class="button button2 submitter" type="submit">Modifica</button></td>'
+						+ '<td class="product-remove"><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" data-product="<%=bean.getCode()%>"><span style="color: red;" class="glyphicon glyphicon-trash"></span></button></td>'
+						+ '<td class="product-name"> <h4>Prodotto: '+this.name+'<span></span></h4><button  class="button button2 submitter" type="submit" style="border-radius:15px;">Modifica</button></td>'
 						+ '<td><div id="img" style="background-image: url('+this.img+');"></div></td>'
-						+ '<td role = "price">'+this.price+'&#8364;</td>'
+						+ '<td role = "price">'+this.price+'</td>'
 						+ '<td role = "qty">'+this.qty+'</td>'
-						+ '<td role = "discount">'+this.discount+'%</td>'
-						+ '<td role = "iva">'+this.iva+'%</td>'
+						+ '<td role = "discount">'+this.discount+'</td>'
+						+ '<td role = "iva">'+this.iva+'</td>'
 						+ '<td role = "character">'+this.character+'</td>'
 						+ '<td role = "category">'+this.category+'</td>'
 						+' </tr>';
 						
 						$("tbody").append(row);
 					});
-					
-					$(".removeX").click(remove);
+
 					$(".button").click(prova);
 				})
 				.fail (function () {
@@ -38,6 +37,8 @@ $(document).ready(function(){
 
 		
   		$(".button").click(prova);
+
+
   		
   		function prova (){
     		  i++;

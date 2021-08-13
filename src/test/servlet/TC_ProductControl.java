@@ -98,7 +98,7 @@ public class TC_ProductControl{
         when(request.getSession()).thenReturn(session);
         when((Cart)request.getSession().getAttribute("cart")).thenReturn(c);
         when(request.getParameter("act")).thenReturn("delete");
-        when(request.getParameter("id")).thenReturn("3");
+        when(request.getParameter("id")).thenReturn("5");
         StringWriter stringWriter = new StringWriter();
         PrintWriter writer = new PrintWriter(stringWriter);
         when(response.getWriter()).thenReturn(writer);

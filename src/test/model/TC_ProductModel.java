@@ -20,6 +20,7 @@ public class TC_ProductModel {
     private ProductBean getprodotto(){
         //name, description,personaggio, url, tipo,categoria,quantity,price,iva,sconto
         ProductBean prodotto= new ProductBean ("prova", "prova", "prova", "prova", "prova", 0, 6, 20, 20,8);
+        prodotto.setPrice(12.99);
         return prodotto;
     }
 
@@ -63,7 +64,7 @@ public class TC_ProductModel {
 
     @Test
     void testDoUpdate() throws SQLException{
-        ProductBean prodotto= new ProductBean(60);
+        ProductBean prodotto= new ProductBean(93);
         prodotto.setDiscount(99.99);
         prodotto.setIva(99.99);
         prodotto.setPrice(99.99);
@@ -82,7 +83,7 @@ public class TC_ProductModel {
 
     @Test
     void testDoDelete() throws SQLException{
-      Boolean flag= product.doDelete(60);
+      Boolean flag= product.doDelete(93);
       assertEquals(true, flag);
     }
 }

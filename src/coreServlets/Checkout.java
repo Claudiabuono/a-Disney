@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import coreModels.beans.Address;
 import coreModels.model.FatturaModel;
 
 /**
@@ -44,8 +45,8 @@ public class Checkout extends HttpServlet {
 		
 		try {
 			@SuppressWarnings("unchecked")
-			java.util.Map<Integer,coreModels.beans.Adress> addresses = (java.util.Map<Integer,coreModels.beans.Adress>) request.getSession().getAttribute("addresses");
-			coreModels.beans.Adress shipping = addresses.get(Integer.parseInt(request.getParameter("address")));
+			java.util.Map<Integer, Address> addresses = (java.util.Map<Integer, Address>) request.getSession().getAttribute("addresses");
+			Address shipping = addresses.get(Integer.parseInt(request.getParameter("address")));
 			coreModels.beans.Cart cart = (coreModels.beans.Cart) request.getSession().getAttribute("cart");
 			coreModels.beans.FatturaBean invoice = new coreModels.beans.FatturaBean();
 			

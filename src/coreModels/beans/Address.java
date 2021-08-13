@@ -1,10 +1,10 @@
 package coreModels.beans;
 
-public class Adress implements java.io.Serializable {
+public class Address implements java.io.Serializable {
 
-	public Adress(){}
+	public Address(){}
 
-	public Adress(String street, int nCv,int CAP, String province, String citta ){
+	public Address(String street, int nCv, int CAP, String province, String citta ){
 		this.street=street;
 		this.nCv=nCv;
 		this.CAP=CAP;
@@ -21,6 +21,7 @@ public class Adress implements java.io.Serializable {
 	private String province;
 	private String citta;
 	private int codice;
+	private String registrato;
 
 
 	public String getNation() {
@@ -64,6 +65,12 @@ public class Adress implements java.io.Serializable {
 	}
 	public void setCodice(int codice) {
 		this.codice = codice;
+	}
+	public String getRegistrato() {
+		return registrato;
+	}
+	public void setRegistrato(String registrato) {
+		this.registrato = registrato;
 	}
 
 

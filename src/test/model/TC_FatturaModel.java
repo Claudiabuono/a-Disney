@@ -44,13 +44,13 @@ public class TC_FatturaModel {
         return fattura;
     }
 
-    private Adress getAddress(){
+    private Address getAddress(){
         String street= "via parmenide";
         int nCv= 1;
         int CAP= 84069;
         String province= "Salerno";
         String citta= "Roscigno";
-        Adress address= new Adress(street, nCv, CAP, province, citta);
+        Address address= new Address(street, nCv, CAP, province, citta);
         return address;
     }
 

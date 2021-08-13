@@ -1,7 +1,6 @@
 package coreModels.beans;
 
 import java.math.RoundingMode;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class FatturaBean implements java.io.Serializable{
@@ -16,7 +15,7 @@ public class FatturaBean implements java.io.Serializable{
 	private java.util.List <coreModels.beans.Order> prodotti;
 	private int cod;
 	private java.util.GregorianCalendar date;
-	private coreModels.beans.Adress shipping;
+	private Address shipping;
 	private Registered user;
 	
 	public java.util.List<coreModels.beans.Order> getProdotti() {
@@ -37,10 +36,10 @@ public class FatturaBean implements java.io.Serializable{
 	public void setDate(java.util.GregorianCalendar date) {
 		this.date = date;
 	}
-	public coreModels.beans.Adress getShipping() {
+	public Address getShipping() {
 		return shipping;
 	}
-	public void setShipping(coreModels.beans.Adress shipping) {
+	public void setShipping(Address shipping) {
 		this.shipping = shipping;
 	}
 	public Registered getUser() {

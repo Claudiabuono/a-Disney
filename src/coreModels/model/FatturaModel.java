@@ -227,7 +227,7 @@ public class FatturaModel {
 				f.setCod(rs.getInt("codiceFattura"));
 				f.setProdotti(this.retrieveInvoiceOrders(f.getCod(), connection));
 				f.setUser(new RegisteredModel().doRetrieveByKey(user.getLogin()));
-				f.setShipping(new AdressModel().doRetrieve(rs.getInt("Indirizzo")));
+				f.setShipping(new AddressModel().doRetrieve(rs.getInt("Indirizzo")));
 				f.setDate(cl);
 			}
 
@@ -289,7 +289,7 @@ public class FatturaModel {
 				
 				f.setCod(rs.getInt("codiceFattura"));
 				f.setProdotti(this.retrieveInvoiceOrders(f.getCod(), connection));
-				f.setShipping(new AdressModel().doRetrieve(rs.getInt("Indirizzo")));
+				f.setShipping(new AddressModel().doRetrieve(rs.getInt("Indirizzo")));
 				f.setDate(cl);
 				f.setUser(e);
 				
@@ -345,7 +345,7 @@ public class FatturaModel {
 				RegisteredModel.setBean(rs, bean);
 				f.setCod(rs.getInt("codiceFattura"));
 				f.setProdotti(retrieveInvoiceOrders(f.getCod(), connection));
-				f.setShipping(new AdressModel().doRetrieve(rs.getInt("Indirizzo")));
+				f.setShipping(new AddressModel().doRetrieve(rs.getInt("Indirizzo")));
 				f.setDate(cl);
 				f.setUser(bean);
 				

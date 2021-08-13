@@ -19,7 +19,7 @@ public class TC_RegisteredModel {
     }
 
     Registered getUtente(){
-        Registered registrato= new Registered("Leo", "Fulgione", "aleo8@gmail.com","leofulgione");
+        Registered registrato= new Registered("Leo", "Fulgione", "aleofanxxx2000@gmail.com","leofulgione");
         return registrato;
     }
     @Test
@@ -36,9 +36,11 @@ public class TC_RegisteredModel {
 
     @Test
     void testDoModify()throws SQLException{
-        Boolean flag= registrato.doModify(getUtente(),"leo", "fulgione", "bleo@gmail.com","leofulgione");
+        Boolean flag= registrato.doModify(getUtente(),"leo", "fulgione", "bleofax2000@gmail.com","leofulgione");
         assertEquals(true, flag);
+        registrato.deleteRegistrato("bleofax2000@gmail.com");
     }
+
     @Test
     void testDoRetrieveBySearch() throws SQLException{
         ArrayList<Registered> listaRegistrati= registrato.doRetrieveBySearch("anna@virgilio.it");
