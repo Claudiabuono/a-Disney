@@ -5,16 +5,13 @@ import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.mail.Address;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import coreModels.beans.Adress;
+import coreModels.beans.Address;
 import coreModels.beans.Registered;
-import coreModels.model.AdressModel;
-import coreServlets.AddressOperations;
-import org.junit.jupiter.api.BeforeAll;
+import coreModels.model.AddressModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
@@ -42,8 +39,8 @@ public class TC_AddressOperationsIntegration {
     }
     @Test //Op0
     public void testAddressOperation0() throws Exception {
-        Map<Integer,Adress> ad= new HashMap<>();
-        ad.put(1,new Adress("via roma", 5,67875,"Roma", "Roma"));
+        Map<Integer, Address> ad= new HashMap<>();
+        ad.put(1,new Address("via roma", 5,67875,"Roma", "Roma"));
         Registered r= new Registered();
 
         when(request.getParameter("operation")).thenReturn("0");
@@ -52,13 +49,13 @@ public class TC_AddressOperationsIntegration {
         when(request.getSession().getAttribute("addresses")).thenReturn(ad);
         servlet.doGet(request, response);
 
-        Map<Integer,Adress> valoreReale= (Map<Integer,Adress>) request.getSession().getAttribute("addresses");
+        Map<Integer, Address> valoreReale= (Map<Integer, Address>) request.getSession().getAttribute("addresses");
         assertEquals(ad.toString(), valoreReale.toString());
     }
     @Test //Op1 TCS18
     public void testAddressOperation1_TCS18() throws Exception {
-        Map<Integer,Adress> ad= new HashMap<>();
-        ad.put(1,new Adress("via roma", 5,67875,"Roma", "Roma"));
+        Map<Integer, Address> ad= new HashMap<>();
+        ad.put(1,new Address("via roma", 5,67875,"Roma", "Roma"));
         Registered r= new Registered();
 
         when(request.getSession()).thenReturn(session);
@@ -104,8 +101,8 @@ public class TC_AddressOperationsIntegration {
         when(request.getSession()).thenReturn(session);
 
         servlet.doGet(request, response);
-        AdressModel address= new AdressModel();
-        Adress indirizzo= address.doRetrieve(3);
+        AddressModel address= new AddressModel();
+        Address indirizzo= address.doRetrieve(3);
         assertEquals(null,indirizzo.getRegistrato());
     }
 }

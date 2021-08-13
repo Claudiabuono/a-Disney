@@ -2,9 +2,6 @@ package test.servlet;
 
 import coreModels.beans.*;
 import coreModels.model.FatturaModel;
-import coreModels.model.Paginator;
-import coreModels.model.Pair;
-import coreModels.model.ProductModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -13,13 +10,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -49,10 +42,10 @@ public class TC_Checkout {
     Cart c;
 
     @Mock
-    Map<Integer, Adress> addresses;
+    Map<Integer, Address> addresses;
 
     @Mock
-    Adress a;
+    Address a;
 
     @Mock
     Registered e;

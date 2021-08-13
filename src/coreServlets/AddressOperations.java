@@ -1,8 +1,8 @@
 package coreServlets;
 
 import com.google.gson.Gson;
-import coreModels.beans.Adress;
-import coreModels.model.AdressModel;
+import coreModels.beans.Address;
+import coreModels.model.AddressModel;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,10 +19,10 @@ public class AddressOperations extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 
-	static AdressModel model;
+	static AddressModel model;
 	
 	static {
-		model = new AdressModel();
+		model = new AddressModel();
 	}
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -33,7 +33,7 @@ public class AddressOperations extends HttpServlet {
 		try {
 			int op = Integer.parseInt(request.getParameter("operation"));
 			coreModels.beans.Registered user = (coreModels.beans.Registered) request.getSession().getAttribute("user");
-			java.util.Map<Integer,coreModels.beans.Adress> ad = (java.util.Map<Integer,coreModels.beans.Adress>)request.getSession().getAttribute("addresses");
+			java.util.Map<Integer, Address> ad = (java.util.Map<Integer, Address>)request.getSession().getAttribute("addresses");
 			if (op == 0 && user != null) {
 				//operazione di visualizzazione
 				request.getSession().setAttribute("addresses", model.doRetrieveAll(user.getLogin()));
@@ -49,7 +49,7 @@ public class AddressOperations extends HttpServlet {
 					response.sendRedirect(response.encodeURL("error.jsp"));
 				}
 
-				Adress bean = new Adress ();
+				Address bean = new Address();
 				bean.setCAP(Integer.parseInt(cap));
 				bean.setCitta(citta);
 				bean.setNation(stato);

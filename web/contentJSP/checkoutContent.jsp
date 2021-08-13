@@ -14,8 +14,8 @@
 %>
        	<h3>Dati per l'acquisto</h3>
 		  <%
-        java.util.Map<Integer, coreModels.beans.Adress> map = (java.util.Map<Integer, coreModels.beans.Adress>) session.getAttribute("addresses");
-       	java.util.List <coreModels.beans.Adress> addresses = map == null ? new java.util.ArrayList<coreModels.beans.Adress>() : new java.util.ArrayList (map.values());
+        java.util.Map<Integer, Address> map = (java.util.Map<Integer, Address>) session.getAttribute("addresses");
+       	java.util.List <Address> addresses = map == null ? new java.util.ArrayList<Address>() : new java.util.ArrayList (map.values());
        %> <label class="myLabel" for="fname"><i class="fa fa-user"></i>Nome: ${user.name}  ${user.cognome} </label>
 		  <label class="myLabel" for="email"><i class="fa fa-envelope"></i> Email: ${user.login}</label>
 			<%@ include file = "newAddress.jsp" %>
@@ -23,7 +23,7 @@
 				<%--@declare id="adr"--%><label class="myLabel" for="adr"><i class="fa fa-address-card-o"></i> Indirizzo</label>
 				<select class="myInput1" name="address" id=address>
 					<% if (addresses.size() > 0) {
-						for(Adress address : addresses) {%>
+						for(Address address : addresses) {%>
 					<option value="<%=address.getCodice()%>"><%=address%></option>
 					<%}
 					}%>

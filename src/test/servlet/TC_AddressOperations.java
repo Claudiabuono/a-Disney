@@ -1,19 +1,15 @@
 package test.servlet;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.HashMap;
 import java.util.Map;
 
-import javax.mail.Address;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import coreModels.beans.Adress;
+import coreModels.beans.Address;
 import coreModels.beans.Registered;
-import coreModels.model.AdressModel;
-import coreServlets.AddressOperations;
-import org.junit.jupiter.api.BeforeAll;
+import coreModels.model.AddressModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
@@ -33,16 +29,16 @@ public class TC_AddressOperations {
     HttpSession session;
 
     @Mock
-    AdressModel addressDao;
+    AddressModel addressDao;
 
     @Mock
-    Address a;
+    javax.mail.Address a;
 
     @Mock
-    Adress bean;
+    Address bean;
 
     @Mock
-    Map<Integer,Adress> ad;
+    Map<Integer, Address> ad;
 
     @Mock
     Registered user;
@@ -67,7 +63,7 @@ public class TC_AddressOperations {
         when(addressDao.doRetrieveAll("rosalia@libero.it")).thenReturn(ad);
         servlet.doGet(request, response);
 
-        Map<Integer,Adress> valoreReale= (Map<Integer,Adress>) request.getSession().getAttribute("addresses");
+        Map<Integer, Address> valoreReale= (Map<Integer, Address>) request.getSession().getAttribute("addresses");
         assertEquals(ad.toString(), valoreReale.toString());
  }
     @Test //Op1 TCS18

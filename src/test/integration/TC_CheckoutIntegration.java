@@ -1,10 +1,6 @@
 package test.integration;
 
 import coreModels.beans.*;
-import coreModels.model.FatturaModel;
-import coreModels.model.Paginator;
-import coreModels.model.Pair;
-import coreModels.model.ProductModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -12,14 +8,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -48,7 +40,7 @@ public class TC_CheckoutIntegration {
     public void testCheckout1() throws Exception {
 
         Cart c= new Cart();
-        Map<Integer, Adress> addresses= new HashMap<>();
+        Map<Integer, Address> addresses= new HashMap<>();
         Registered e= new Registered();
 
         when(request.getSession()).thenReturn(session);
@@ -69,8 +61,8 @@ public class TC_CheckoutIntegration {
         ProductBean prodotto= new ProductBean();
         prodotto.setCode(3);
         c.addOrder(new Order(prodotto,4));
-        Map<Integer, Adress> addresses= new HashMap<>();
-       Adress a= new Adress();
+        Map<Integer, Address> addresses= new HashMap<>();
+       Address a= new Address();
         a.setCodice(2);
         Registered e= new Registered();
         addresses.put(0,a);

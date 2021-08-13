@@ -1,8 +1,8 @@
 package test.model;
 
-import coreModels.beans.Adress;
+import coreModels.beans.Address;
 import coreModels.beans.Registered;
-import coreModels.model.AdressModel;
+import coreModels.model.AddressModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,31 +12,31 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TC_AdressModel {
-    AdressModel address;
+    AddressModel address;
     Registered utente;
 
     @BeforeEach
     void setUp() throws Exception{
-        address = new AdressModel();
+        address = new AddressModel();
     }
 
-    private Adress newAddress(){
+    private Address newAddress(){
          String street= "via cioffi";
          int nCv= 2;
          int CAP= 84069;
          String province= "Salerno";
          String citta= "Eboli";
-        Adress address= new Adress(street, nCv, CAP, province, citta);
+        Address address= new Address(street, nCv, CAP, province, citta);
         return address;
     }
 
-    private Adress getAddress(){
+    private Address getAddress(){
         String street= "via parmenide";
         int nCv= 1;
         int CAP= 84069;
         String province= "Salerno";
         String citta= "Roscigno";
-        Adress address= new Adress(street, nCv, CAP, province, citta);
+        Address address= new Address(street, nCv, CAP, province, citta);
         return address;
     }
 
@@ -65,13 +65,13 @@ public class TC_AdressModel {
     @Test
     void doRetrieveAll() throws SQLException{
         address.doRetrieveAll("matteo@alice.it");
-        Map<Integer, Adress> list= address.doRetrieveAll("matteo@alice.it");
+        Map<Integer, Address> list= address.doRetrieveAll("matteo@alice.it");
         assertNotNull(list);
     }
 
     @Test
     void doRetrieve() throws SQLException {
-        Adress a= address.doRetrieve(1);
+        Address a= address.doRetrieve(1);
         assertEquals(getAddress().toString(), a.toString());
     }
 }

@@ -4,8 +4,8 @@
 
 <%
 
-    java.util.Map<Integer, coreModels.beans.Adress> map = (java.util.Map<Integer, coreModels.beans.Adress>) session.getAttribute("addresses");
-    java.util.List <coreModels.beans.Adress> addresses = map == null ? new java.util.ArrayList<coreModels.beans.Adress>() : new java.util.ArrayList (map.values());
+    java.util.Map<Integer, Address> map = (java.util.Map<Integer, Address>) session.getAttribute("addresses");
+    java.util.List <Address> addresses = map == null ? new java.util.ArrayList<Address>() : new java.util.ArrayList (map.values());
 
 
 %>
@@ -27,7 +27,7 @@
 
                     <%
                     } else {
-                        for(Adress address : addresses){%>
+                        for(Address address : addresses){%>
                     <tr id=<%=address.getCodice()%>>
                         <td class="product-remove"><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" data-product="<%=address.getCodice()%>"><span style="color: red;" class="glyphicon glyphicon-trash"></span></button> </td>
                         <td><%=address%></td>

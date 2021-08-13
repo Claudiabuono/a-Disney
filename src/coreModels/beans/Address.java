@@ -1,10 +1,10 @@
 package coreModels.beans;
 
-public class Adress implements java.io.Serializable {
+public class Address implements java.io.Serializable {
 
-	public Adress(){}
+	public Address(){}
 
-	public Adress(String street, int nCv,int CAP, String province, String citta ){
+	public Address(String street, int nCv, int CAP, String province, String citta ){
 		this.street=street;
 		this.nCv=nCv;
 		this.CAP=CAP;

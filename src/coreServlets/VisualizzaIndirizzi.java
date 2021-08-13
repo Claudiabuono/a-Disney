@@ -1,6 +1,6 @@
 package coreServlets;
 
-import coreModels.model.AdressModel;
+import coreModels.model.AddressModel;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,10 +16,10 @@ import java.io.IOException;
 public class VisualizzaIndirizzi extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    static AdressModel model;
+    static AddressModel model;
 
     static {
-        model = new AdressModel();
+        model = new AddressModel();
     }
 
     /**
